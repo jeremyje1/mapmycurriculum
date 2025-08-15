@@ -1,0 +1,9 @@
+- id: TX_COURSE_CREDIT_RANGE
+  scope: course
+  severity: INFO
+  description: "Course credit range check (1–5 SCH typical)."
+  predicate:
+    "and":
+      - { ">=": [ { "var": "course.credits" }, 1 ] }
+      - { "<=": [ { "var": "course.credits" }, 5 ] }
+  remediation: "Verify course credit value aligns with state catalog norms."

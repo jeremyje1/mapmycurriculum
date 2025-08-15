@@ -1,0 +1,31 @@
+{
+  "name": "curriculum-map-tool",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@8.15.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "tsc -b",
+    "state:validate": "tsx scripts/state-validate.ts",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:generate": "prisma generate",
+    "prisma:seed": "tsx prisma/seed.ts",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.15.0",
+    "json-logic-js": "^2.0.2",
+    "prisma": "^5.15.0",
+    "yaml": "^2.4.2",
+    "zod": "^3.23.8"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "programVersionId": "demo-BUS-AA-TX-2025",
+  "metrics": {
+    "program": {"totalCredits": 63},
+    "core": {
+      "totalCredits": 42,
+      "areaCredits": {
+        "Communication": 6,
+        "Mathematics": 3,
+        "Life & Physical Sciences": 6,
+        "Language, Philosophy & Culture": 3,
+        "Creative Arts": 3,
+        "American History": 6,
+        "Government/Political Science": 6,
+        "Social & Behavioral Sciences": 3,
+        "Component Area Option": 6
+      }
+    },
+    "transfer": {"businessFOSC": {"missingCount": 0}},
+    "outcomes": {"ploMasteryCoveragePct": 100},
+    "termplan": {"maxTermCredits": 18}
+  }
+}

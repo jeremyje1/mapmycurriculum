@@ -1,0 +1,24 @@
+{
+  "frameworks": {
+    "BusinessFOSC": {
+      "title": "Business - Foundational Courses (Demo)",
+      "requiredCourses": [
+        { "subject": "ACCT", "number": "2301" },
+        { "subject": "ACCT", "number": "2302" },
+        { "subject": "ECON", "number": "2301" },
+        { "subject": "ECON", "number": "2302" }
+      ],
+      "mathOptions": [
+        [{ "subject": "MATH", "number": "1325" }],
+        [
+          { "subject": "MATH", "number": "1324" },
+          { "subject": "MATH", "number": "1325" }
+        ]
+      ],
+      "recommendedCourses": [
+        { "subject": "BUSI", "number": "2305" },
+        { "subject": "BCIS", "number": "1305" }
+      ]
+    }
+  }
+}

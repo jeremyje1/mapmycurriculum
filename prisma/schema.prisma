@@ -1,0 +1,192 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum DegreeType {
+  AA
+  AS
+  AAS
+  BA
+  BS
+  CERT
+}
+
+enum OutcomeLevel {
+  I
+  D
+  M
+}
+
+enum RulePackStatus {
+  ACTIVE
+  DEPRECATED
+  DRAFT
+}
+
+enum Severity {
+  ERROR
+  WARNING
+  INFO
+}
+
+model Institution {
+  id        String    @id @default(cuid())
+  name      String
+  state     String
+  programs  Program[]
+  users     User[]
+  createdAt DateTime  @default(now())
+}
+
+model Program {
+  id            String          @id @default(cuid())
+  institutionId String
+  institution   Institution     @relation(fields: [institutionId], references: [id])
+  code          String
+  name          String
+  degreeType    DegreeType
+  versions      ProgramVersion[]
+  @@index([institutionId, code])
+}
+
+model ProgramVersion {
+  id            String           @id @default(cuid())
+  programId     String
+  program       Program          @relation(fields: [programId], references: [id])
+  catalogYear   String
+  effectiveFrom DateTime
+  effectiveTo   DateTime?
+  termPlans     TermPlan[]
+  plos          ProgramOutcome[]
+  snapshots     ProgramSnapshot[]
+  ruleResults   RuleResult[]
+  impactItems   ImpactItem[]
+  exportArtifacts ExportArtifact[]
+}
+
+model Course {
+  id       String   @id @default(cuid())
+  subject  String
+  number   String
+  title    String
+  credits  Float
+  stateId  String?
+  tccnsId  String?
+  cipCode  String?
+  clos     CourseOutcome[]
+  termRefs TermCourse[]
+  @@index([subject, number])
+}
+
+model TermPlan {
+  id               String      @id @default(cuid())
+  programVersionId String
+  programVersion   ProgramVersion @relation(fields: [programVersionId], references: [id])
+  termNumber       Int
+  termCourses      TermCourse[]
+}
+
+model TermCourse {
+  id         String   @id @default(cuid())
+  termPlanId String
+  termPlan   TermPlan @relation(fields: [termPlanId], references: [id])
+  courseId   String
+  course     Course   @relation(fields: [courseId], references: [id])
+  required   Boolean  @default(true)
+}
+
+model ProgramOutcome {
+  id               String @id @default(cuid())
+  programVersionId String
+  programVersion   ProgramVersion @relation(fields: [programVersionId], references: [id])
+  code             String
+  description      String
+  alignments       Alignment[]
+}
+
+model CourseOutcome {
+  id          String @id @default(cuid())
+  courseId    String
+  course      Course @relation(fields: [courseId], references: [id])
+  code        String
+  level       OutcomeLevel
+  description String
+  alignments  Alignment[]
+}
+
+model Alignment {
+  id     String @id @default(cuid())
+  ploId  String?
+  plo    ProgramOutcome? @relation(fields: [ploId], references: [id])
+  cloId  String?
+  clo    CourseOutcome?  @relation(fields: [cloId], references: [id])
+  weight Float?
+}
+
+model RulePack {
+  id        String @id @default(cuid())
+  state     String
+  version   String
+  title     String
+  status    RulePackStatus @default(ACTIVE)
+  createdAt DateTime @default(now())
+  ruleResults RuleResult[]
+  impactItems ImpactItem[]
+}
+
+model RuleResult {
+  id               String @id @default(cuid())
+  programVersionId String
+  programVersion   ProgramVersion @relation(fields: [programVersionId], references: [id])
+  rulePackId       String
+  rulePack         RulePack @relation(fields: [rulePackId], references: [id])
+  ruleId           String
+  severity         Severity
+  passed           Boolean
+  message          String
+  details          Json
+  createdAt        DateTime @default(now())
+}
+
+model ImpactItem {
+  id               String @id @default(cuid())
+  programVersionId String
+  programVersion   ProgramVersion @relation(fields: [programVersionId], references: [id])
+  rulePackId       String
+  rulePack         RulePack @relation(fields: [rulePackId], references: [id])
+  kind             String
+  summary          String
+  payload          Json
+  createdAt        DateTime @default(now())
+}
+
+model ProgramSnapshot {
+  id               String @id @default(cuid())
+  programVersionId String
+  programVersion   ProgramVersion @relation(fields: [programVersionId], references: [id])
+  data             Json
+  createdAt        DateTime @default(now())
+}
+
+model ExportArtifact {
+  id               String @id @default(cuid())
+  programVersionId String
+  programVersion   ProgramVersion @relation(fields: [programVersionId], references: [id])
+  kind             String
+  url              String
+  createdAt        DateTime @default(now())
+}
+
+model User {
+  id             String @id @default(cuid())
+  institutionId  String
+  institution    Institution @relation(fields: [institutionId], references: [id])
+  email          String @unique
+  role           String
+  createdAt      DateTime @default(now())
+}
