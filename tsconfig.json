@@ -10,14 +10,14 @@
     "declarationMap": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "CommonJS",
-    "moduleResolution": "Node",
+  "module": "ESNext",
+  "moduleResolution": "NodeNext",
     "newLine": "lf",
     "outDir": "dist",
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
     "target": "ES2022",
-    "types": ["node"]
+  "types": ["node", "@types/react", "@types/react-dom"]
   }
 }
