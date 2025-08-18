@@ -3,8 +3,5 @@
   "framework": "nextjs",
   "buildCommand": "pnpm --filter @cmt/web build",
   "installCommand": "pnpm install",
-  "outputDirectory": "apps/web/.next",
-  "env": {
-    "DATABASE_URL": "file:./dev.db"
-  }
+  "outputDirectory": "apps/web/.next"
 }
