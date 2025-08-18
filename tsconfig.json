@@ -10,7 +10,7 @@
     "declarationMap": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-  "module": "ESNext",
+  "module": "NodeNext",
   "moduleResolution": "NodeNext",
     "newLine": "lf",
     "outDir": "dist",
