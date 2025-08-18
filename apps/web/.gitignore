@@ -1,0 +1,13 @@
+.vercel
+# Environment / secret snapshots (do NOT commit)
+.env
+.env.*
+!.env.example
+.env.vercel.*
+
+# Node / build artifacts (in case not covered globally)
+node_modules/
+.next/
+dist/
+coverage/
+*.log
