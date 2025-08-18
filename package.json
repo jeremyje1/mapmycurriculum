@@ -2,43 +2,13 @@
   "name": "curriculum-map-tool",
   "private": true,
   "version": "0.1.0",
-  "engines": {
-    "node": "18.20.x"
-  },
-  "packageManager": "pnpm@9.6.0",
-  "workspaces": [
-    "apps/web"
-  ],
+  "engines": { "node": "22.x" },
+  "packageManager": "npm@10.8.1",
   "scripts": {
-    "build": "tsc -b",
-    "state:validate": "tsx scripts/state-validate.ts",
-    "prisma:migrate": "prisma migrate dev",
-    "prisma:generate": "prisma generate",
-    "prisma:seed": "tsx prisma/seed.ts",
-    "stripe:setup": "tsx scripts/stripe-products.ts",
-    "test": "vitest run",
-    "dev": "pnpm --filter @cmt/web dev",
-    "db:up": "docker compose up -d",
-    "db:down": "docker compose down"
+    "build": "npm --prefix apps/web run build",
+    "dev": "npm --prefix apps/web run dev"
   },
   "devDependencies": {
-    "@types/node": "^20.11.30",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "tsx": "^4.7.0",
-    "typescript": "^5.4.0",
-    "vitest": "^1.6.0"
-  },
-  "dependencies": {
-    "@prisma/client": "^5.15.0",
-    "dotenv": "^17.2.1",
-    "json-logic-js": "^2.0.2",
-    "next": "14.2.5",
-    "prisma": "^5.15.0",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "stripe": "^14.25.0",
-    "yaml": "^2.4.2",
-    "zod": "^3.23.8"
+    "typescript": "^5.9.2"
   }
 }

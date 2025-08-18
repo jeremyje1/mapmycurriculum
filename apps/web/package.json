@@ -2,9 +2,9 @@
   "name": "curriculum-map-web",
   "private": true,
   "version": "0.1.0",
-  "packageManager": "pnpm@9.6.0",
+  "packageManager": "npm@10.8.1",
   "engines": {
-    "node": "18.20.x"
+    "node": "22.x"
   },
   "scripts": {
     "dev": "next dev",
@@ -24,6 +24,6 @@
     "@types/node": "20.11.30",
     "@types/react": "18.3.3",
     "@types/react-dom": "18.3.0",
-    "typescript": "5.4.0"
+  "typescript": "5.9.2"
   }
 }
