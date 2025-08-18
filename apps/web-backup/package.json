@@ -1,5 +1,5 @@
 {
-  "name": "curriculum-map-web",
+  "name": "@cmt/web",
   "private": true,
   "version": "0.1.0",
   "scripts": {
