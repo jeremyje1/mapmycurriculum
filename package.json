@@ -13,7 +13,8 @@
     "prisma:migrate": "prisma migrate dev",
     "prisma:generate": "prisma generate",
     "prisma:seed": "tsx prisma/seed.ts",
-    "test": "vitest run"
+  "test": "vitest run",
+  "dev": "pnpm --filter @cmt/web dev"
   },
   "devDependencies": {
     "@types/node": "^20.11.30",
@@ -24,7 +25,10 @@
   "dependencies": {
     "@prisma/client": "^5.15.0",
     "json-logic-js": "^2.0.2",
-    "prisma": "^5.15.0",
+  "prisma": "^5.15.0",
+  "next": "14.2.5",
+  "react": "18.3.1",
+  "react-dom": "18.3.1",
     "yaml": "^2.4.2",
     "zod": "^3.23.8"
   }
