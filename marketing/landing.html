@@ -26,9 +26,9 @@
   <meta name="twitter:image" content="https://platform.mapmycurriculum.com/og-cover.png" />
   <meta name="twitter:image:alt" content="Curriculum compliance dashboard screenshot" />
   <!-- Google Search Console verification meta can be inserted here when available -->
-  <link rel="icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <link rel="manifest" href="/site.webmanifest" />
+  <!-- Inline SVG favicon to avoid 404 when served standalone; replace with /favicon.ico in production -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Crect width='128' height='128' rx='24' fill='%231b4ae8'/%3E%3Ctext x='50%25' y='53%25' font-size='68' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='700' fill='white'%3EM%3C/text%3E%3C/svg%3E" />
+  <!-- Add apple-touch-icon and manifest links when hosting those assets to prevent 404s -->
   <link rel="preconnect" href="https://platform.mapmycurriculum.com" />
   <link rel="dns-prefetch" href="https://platform.mapmycurriculum.com" />
   <meta name="format-detection" content="telephone=no" />
