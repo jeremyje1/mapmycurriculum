@@ -7,8 +7,7 @@
   },
   "packageManager": "pnpm@9.6.0",
   "workspaces": [
-    "apps/*",
-    "packages/*"
+    "apps/web"
   ],
   "scripts": {
     "build": "tsc -b",
