@@ -143,42 +143,102 @@ export default function MarketingHome() {
       {/* Pricing */}
       <section id="pricing">
         <div className="container pricing">
-          <h2>Simple Tiering</h2>
-          <div className="pricing-grid">
+          <h2>Pricing</h2>
+          <h3 style={{marginTop:'1rem'}}>K‑12</h3>
+          <div className="pricing-grid" style={{marginBottom:'2.5rem'}}>
             <div className="price-card">
-              <h3>Essential</h3>
-              <p className="price-line">Entry</p>
+              <h3>School Starter</h3>
+              <p className="price-line">$1,500 / school / yr</p>
               <ul>
-                <li>1 State RulePack</li>
-                <li>Manual Upload</li>
-                <li>On‑Demand Evaluations</li>
-                <li>Evidence PDF</li>
+                <li>1 program map</li>
+                <li>3 users</li>
+                <li>Standards library (state + national)</li>
+                <li>Automated alignment & gap analysis</li>
+                <li>1 narrative export / yr</li>
+                <li>Email support</li>
               </ul>
-              <a className="btn outline full" href="https://platform.mapmycurriculum.com/signup">Start</a>
+              <a className="btn outline full" href="/signup">Get Started</a>
             </div>
             <div className="price-card highlight">
-              <h3>Growth</h3>
-              <p className="price-line">Most Popular</p>
+              <h3>School Pro</h3>
+              <p className="price-line">$3,500 / school / yr</p>
               <ul>
-                <li>All Essential +</li>
-                <li>Weekly Scans</li>
-                <li>Connectors</li>
-                <li>SSO / RBAC</li>
+                <li>5 program maps</li>
+                <li>10 users</li>
+                <li>Evidence pack builder</li>
+                <li>Unlimited standards imports</li>
+                <li>CSV / API export</li>
+                <li>Priority email</li>
               </ul>
-              <a className="btn primary full" href="https://platform.mapmycurriculum.com/signup">Upgrade</a>
+              <a className="btn primary full" href="/signup">Select</a>
             </div>
             <div className="price-card">
-              <h3>District / System</h3>
-              <p className="price-line">Custom</p>
+              <h3>District Pro</h3>
+              <p className="price-line">$9,500 / district / yr*</p>
               <ul>
-                <li>Multi‑College Aggregation</li>
-                <li>Unlimited Programs</li>
-                <li>Private Exports</li>
-                <li>Advanced Analytics</li>
+                <li>Up to 10 schools (+$700 each add'l)</li>
+                <li>50 program maps pooled</li>
+                <li>50 users pooled</li>
+                <li>Bulk import</li>
+                <li>SSO (Google / OIDC)</li>
+                <li>Connectors add‑on ready</li>
               </ul>
-              <a className="btn outline full" href="https://platform.mapmycurriculum.com/contact">Talk to Us</a>
+              <a className="btn outline full" href="/contact">Talk to Sales</a>
+            </div>
+            <div className="price-card">
+              <h3>District Enterprise</h3>
+              <p className="price-line">$18,000 / district / yr</p>
+              <ul>
+                <li>Unlimited program maps</li>
+                <li>Unlimited users</li>
+                <li>SSO (SAML / OIDC) included</li>
+                <li>Connectors bundle included</li>
+                <li>Quarterly success review</li>
+                <li>White‑glove onboarding (add-on)</li>
+              </ul>
+              <a className="btn outline full" href="/contact">Request Quote</a>
             </div>
           </div>
+          <h3>Higher‑Ed</h3>
+          <div className="pricing-grid">
+            <div className="price-card">
+              <h3>Department</h3>
+              <p className="price-line">$6,000 / dept / yr</p>
+              <ul>
+                <li>Up to 5 program maps</li>
+                <li>10 users</li>
+                <li>Accreditation framework packs</li>
+                <li>Narrative generator</li>
+                <li>API export</li>
+              </ul>
+              <a className="btn outline full" href="/signup">Get Started</a>
+            </div>
+            <div className="price-card highlight">
+              <h3>College</h3>
+              <p className="price-line">$18,000 / college / yr</p>
+              <ul>
+                <li>Up to 20 program maps</li>
+                <li>50 users</li>
+                <li>SSO (OIDC) included</li>
+                <li>LMS connector add‑on</li>
+                <li>Priority support</li>
+              </ul>
+              <a className="btn primary full" href="/signup">Select</a>
+            </div>
+            <div className="price-card">
+              <h3>Institution</h3>
+              <p className="price-line">$45,000 / institution / yr</p>
+              <ul>
+                <li>Unlimited programs & users</li>
+                <li>SSO (SAML / OIDC)</li>
+                <li>LMS + SIS connectors</li>
+                <li>Quarterly governance workshop</li>
+                <li>Custom reporting</li>
+              </ul>
+              <a className="btn outline full" href="/contact">Request Quote</a>
+            </div>
+          </div>
+          <p className="tiny muted" style={{marginTop:'1.25rem'}}>*+$700 each additional school. Consortia / equity discounts: 10% state co‑ops; 15% Title I (&gt;70% FRL).</p>
         </div>
       </section>
 

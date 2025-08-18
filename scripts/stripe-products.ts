@@ -3,6 +3,9 @@
  * Run: pnpm stripe:setup (ensure STRIPE_SECRET_KEY is set in environment).
  */
 import { config } from 'dotenv';
+// Node process typings (in case @types/node not globally available in this stripped config)
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+declare const process: any;
 import Stripe from 'stripe';
 
 // Load environment variables from .env file
@@ -16,11 +19,18 @@ if (!secret) {
 
 const stripe = new Stripe(secret, { apiVersion: '2023-10-16' });
 
-interface PlanDef { key: string; name: string; amount: number; interval: 'month'|'year'; description: string; }
+interface PlanDef { key: string; name: string; amount: number; interval: 'year'; description: string; }
+// Amounts are in cents (annual pricing)
 const plans: PlanDef[] = [
-  { key: 'essential', name: 'Essential', amount: 9900, interval: 'year', description: 'Essential annual subscription' },
-  { key: 'growth', name: 'Growth', amount: 24900, interval: 'year', description: 'Growth annual subscription' },
-  { key: 'district', name: 'District / System', amount: 0, interval: 'year', description: 'Custom enterprise subscription (manual quote)' }
+  // K-12
+  { key: 'school_starter', name: 'School Starter', amount: 150000, interval: 'year', description: 'K-12 School Starter annual subscription' },
+  { key: 'school_pro', name: 'School Pro', amount: 350000, interval: 'year', description: 'K-12 School Pro annual subscription' },
+  { key: 'district_pro', name: 'District Pro', amount: 950000, interval: 'year', description: 'District Pro (up to 10 schools, addl. schools billed separately)' },
+  { key: 'district_enterprise', name: 'District Enterprise', amount: 1800000, interval: 'year', description: 'District Enterprise annual subscription' },
+  // Higher-Ed
+  { key: 'department', name: 'Department', amount: 600000, interval: 'year', description: 'Higher-Ed Department annual subscription' },
+  { key: 'college', name: 'College', amount: 1800000, interval: 'year', description: 'Higher-Ed College annual subscription' },
+  { key: 'institution', name: 'Institution', amount: 4500000, interval: 'year', description: 'Higher-Ed Institution annual subscription' }
 ];
 
 async function ensureProduct(plan: PlanDef) {
@@ -54,9 +64,13 @@ async function main() {
   console.log('\nPrice IDs:');
   console.table(results);
   console.log('\nSet env variables:');
-  console.log('NEXT_PUBLIC_PRICE_ESSENTIAL=', results['essential']);
-  console.log('NEXT_PUBLIC_PRICE_GROWTH=', results['growth']);
-  console.log('NEXT_PUBLIC_PRICE_DISTRICT=', results['district']);
+  console.log('NEXT_PUBLIC_PRICE_SCHOOL_STARTER=', results['school_starter']);
+  console.log('NEXT_PUBLIC_PRICE_SCHOOL_PRO=', results['school_pro']);
+  console.log('NEXT_PUBLIC_PRICE_DISTRICT_PRO=', results['district_pro']);
+  console.log('NEXT_PUBLIC_PRICE_DISTRICT_ENTERPRISE=', results['district_enterprise']);
+  console.log('NEXT_PUBLIC_PRICE_DEPARTMENT=', results['department']);
+  console.log('NEXT_PUBLIC_PRICE_COLLEGE=', results['college']);
+  console.log('NEXT_PUBLIC_PRICE_INSTITUTION=', results['institution']);
 }
 
 main().catch(e => { console.error(e); process.exit(1); });
