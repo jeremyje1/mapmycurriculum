@@ -2,7 +2,7 @@
   "name": "curriculum-map-web",
   "private": true,
   "version": "0.1.0",
-  "packageManager": "pnpm@8.15.0",
+  "packageManager": "pnpm@9.6.0",
   "engines": {
     "node": ">=18.18.0 <21"
   },
