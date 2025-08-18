@@ -1,11 +1,19 @@
 "use client";
 import React, { useState } from 'react';
 
-type Plan = 'essential' | 'growth' | 'district';
-const planLabels: Record<Plan, string> = { essential: 'Essential', growth: 'Growth', district: 'District / System' };
+type Plan = 'school_starter' | 'school_pro' | 'district_pro' | 'district_enterprise' | 'department' | 'college' | 'institution';
+const planLabels: Record<Plan, string> = {
+  school_starter: 'School Starter',
+  school_pro: 'School Pro',
+  district_pro: 'District Pro',
+  district_enterprise: 'District Enterprise',
+  department: 'Department',
+  college: 'College',
+  institution: 'Institution'
+};
 
 export default function SignupPage() {
-  const [plan, setPlan] = useState<Plan>('essential');
+  const [plan, setPlan] = useState<Plan>('school_starter');
   const [email, setEmail] = useState('');
   const [institution, setInstitution] = useState('');
   const [stateCode, setStateCode] = useState('');
@@ -40,8 +48,8 @@ export default function SignupPage() {
       </p>
       <form onSubmit={startCheckout} style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1.5rem' }}>
         <div style={{ display: 'flex', gap: '.75rem', flexWrap: 'wrap' }}>
-          {(['essential','growth','district'] as Plan[]).map(p => (
-            <button key={p} type="button" onClick={() => setPlan(p)} className={`btn ${plan === p ? 'primary' : 'outline'}`} style={{ minWidth: 120 }}>{planLabels[p]}</button>
+          {(Object.keys(planLabels) as Plan[]).map(p => (
+            <button key={p} type="button" onClick={() => setPlan(p)} className={`btn ${plan === p ? 'primary' : 'outline'}`} style={{ minWidth: 160 }}>{planLabels[p]}</button>
           ))}
         </div>
         <L label="Work Email"><input required type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="you@college.edu" style={inputStyle} /></L>

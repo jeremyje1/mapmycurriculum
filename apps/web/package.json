@@ -11,7 +11,7 @@
     "build": "next build",
     "start": "next start",
   "postinstall": "prisma generate",
-  "stripe:setup": "tsx scripts/stripe-products.ts"
+  "stripe:setup": "tsx ../../scripts/stripe-products.ts"
   },
   "dependencies": {
     "@prisma/client": "5.15.0",

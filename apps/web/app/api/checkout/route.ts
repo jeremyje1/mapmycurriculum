@@ -10,14 +10,25 @@ if (secret) {
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
-type Plan = 'essential' | 'growth' | 'district';
+type Plan =
+  | 'school_starter'
+  | 'school_pro'
+  | 'district_pro'
+  | 'district_enterprise'
+  | 'department'
+  | 'college'
+  | 'institution';
 interface Body { email: string; institution?: string; state?: string; plan: Plan; }
 
 function priceId(plan: Plan) {
   switch (plan) {
-    case 'essential': return process.env.NEXT_PUBLIC_PRICE_ESSENTIAL;
-    case 'growth': return process.env.NEXT_PUBLIC_PRICE_GROWTH;
-    case 'district': return process.env.NEXT_PUBLIC_PRICE_DISTRICT;
+    case 'school_starter': return process.env.NEXT_PUBLIC_PRICE_SCHOOL_STARTER;
+    case 'school_pro': return process.env.NEXT_PUBLIC_PRICE_SCHOOL_PRO;
+    case 'district_pro': return process.env.NEXT_PUBLIC_PRICE_DISTRICT_PRO;
+    case 'district_enterprise': return process.env.NEXT_PUBLIC_PRICE_DISTRICT_ENTERPRISE;
+    case 'department': return process.env.NEXT_PUBLIC_PRICE_DEPARTMENT;
+    case 'college': return process.env.NEXT_PUBLIC_PRICE_COLLEGE;
+    case 'institution': return process.env.NEXT_PUBLIC_PRICE_INSTITUTION;
   }
 }
 
