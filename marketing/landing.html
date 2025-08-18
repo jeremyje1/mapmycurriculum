@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Map My Curriculum – Policy‑Aware Curriculum Intelligence Platform</title>
+  <meta name="description" content="Automated policy-aware curriculum mapping, compliance analytics, transferability scoring, and accreditation evidence generation." />
+  <link rel="canonical" href="https://platform.mapmycurriculum.com" />
+  <meta property="og:site_name" content="Map My Curriculum" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://platform.mapmycurriculum.com" />
+  <meta property="og:title" content="Map My Curriculum" />
+  <meta property="og:description" content="Policy‑aware curriculum intelligence & compliance automation." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <style>
+    :root { --brand:#1b4ae8; --brand-dark:#163dbd; --bg-hero:#f5f8ff; --bg-contrast:#0f1729; --radius:14px; }
+    * { box-sizing:border-box; }
+    html,body { margin:0; padding:0; font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,'Fira Sans','Droid Sans','Helvetica Neue',Arial,sans-serif; line-height:1.4; color:#111; scroll-behavior:smooth; }
+    a { color:var(--brand); text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    h1,h2,h3,h4 { line-height:1.15; font-weight:600; margin:0 0 .75rem; }
+    p { max-width:62ch; }
+    .container { width:100%; max-width:1200px; margin:0 auto; padding:0 1.25rem; }
+    header.site-header { position:sticky; top:0; backdrop-filter:blur(8px); background:rgba(255,255,255,.9); border-bottom:1px solid #e6e8ef; z-index:50; }
+    .nav-row { display:flex; align-items:center; justify-content:space-between; gap:1rem; min-height:64px; }
+    .logo { font-size:1.25rem; font-weight:700; letter-spacing:.5px; color:#111; display:inline-flex; align-items:center; }
+    .logo span { color:var(--brand); }
+    nav a { margin-left:1rem; font-size:.9rem; font-weight:500; }
+    nav a.btn { margin-left:1.5rem; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; padding:.65rem 1.1rem; font-weight:600; font-size:.9rem; border:1px solid #ccd2e5; border-radius:6px; background:#fff; color:#1b2432; transition:.15s; cursor:pointer; }
+    .btn:hover { background:#f2f5fb; text-decoration:none; }
+    .btn.primary { background:var(--brand); border-color:var(--brand); color:#fff; }
+    .btn.primary:hover { background:var(--brand-dark); }
+    .btn.outline { background:transparent; }
+    .btn.small { padding:.5rem .85rem; font-size:.75rem; }
+    .btn.full { width:100%; }
+    section { padding:4.5rem 0; }
+    section.hero { padding:5.5rem 0 4rem; background:linear-gradient(140deg,var(--bg-hero),#eef2f9); }
+    section.contrast { background:var(--bg-contrast); color:#f5f8ff; }
+    section.contrast a { color:#6ea8ff; }
+    section.cta-final { background:linear-gradient(120deg,var(--brand),#113073); color:#fff; text-align:center; }
+    .hero-inner { display:flex; flex-wrap:wrap; gap:3rem; align-items:stretch; }
+    .hero-copy { flex:1 1 430px; }
+    .hero-copy h1 { font-size:clamp(2.1rem,4.5vw,3rem); margin:0 0 1rem; }
+    .lead { font-size:1.15rem; margin-bottom:1.25rem; }
+    .hero-panel { flex:1 1 360px; display:flex; align-items:stretch; }
+    .panel-card { background:#fff; border:1px solid #d8dfec; box-shadow:0 4px 16px -6px rgba(0,32,96,.15); padding:1.25rem 1.1rem 1.4rem; border-radius:var(--radius); width:100%; max-width:420px; display:flex; flex-direction:column; }
+    .mini-metrics { list-style:none; padding:0; margin:0 0 1rem; display:grid; grid-template-columns:repeat(auto-fit,minmax(110px,1fr)); gap:.75rem; }
+    .mini-metrics li { background:#f5f7fb; border:1px solid #e2e8f4; border-radius:8px; padding:.6rem .6rem .55rem; display:flex; flex-direction:column; align-items:flex-start; }
+    .mini-metrics strong { font-size:1.15rem; line-height:1; }
+    .mini-metrics span { font-size:.65rem; text-transform:uppercase; letter-spacing:.5px; opacity:.75; margin-top:.25rem; }
+    .trust { margin-top:1.25rem; }
+    .cta-row { display:flex; gap:.85rem; flex-wrap:wrap; }
+    .two-col { display:grid; gap:3rem; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); align-items:start; }
+    .checklist { list-style:none; padding:0; margin:0; }
+    .checklist li { position:relative; padding-left:1.45rem; margin:.6rem 0; }
+    .checklist li:before { content:'✔'; position:absolute; left:0; top:0; color:var(--brand); font-size:.85rem; }
+    .feature-grid { display:grid; gap:2rem; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); margin-top:2rem; }
+    .feature { background:#fff; border:1px solid #e1e6f0; border-radius:12px; padding:1.1rem 1rem 1.3rem; box-shadow:0 2px 10px -4px rgba(0,0,0,.06); }
+    .flow { counter-reset:step; list-style:none; padding:0; margin:2rem 0 0; display:grid; gap:1.15rem; }
+    .flow li { padding-left:2.25rem; position:relative; }
+    .flow li:before { counter-increment:step; content:counter(step); position:absolute; left:0; top:0; width:1.55rem; height:1.55rem; display:flex; align-items:center; justify-content:center; background:var(--brand); color:#fff; font-size:.75rem; font-weight:600; border-radius:50%; }
+    .timeline { border-collapse:collapse; width:100%; font-size:.9rem; }
+    .timeline th, .timeline td { text-align:left; padding:.55rem .75rem; border-bottom:1px solid #e2e8f4; vertical-align:top; }
+    .timeline th { width:90px; font-weight:600; color:var(--brand); }
+    .trust-grid { display:grid; gap:2.5rem; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); align-items:start; }
+    .pill-grid { list-style:none; padding:0; margin:0; display:grid; gap:.65rem; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); }
+    .pill-grid li { background:#142038; border:1px solid #20304b; padding:.6rem .75rem; font-size:.7rem; text-transform:uppercase; letter-spacing:.5px; border-radius:22px; font-weight:600; text-align:center; color:#fff; }
+    .pricing-grid { display:grid; gap:2rem; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); margin-top:2rem; }
+    .price-card { background:#fff; border:1px solid #dfe4ef; border-radius:14px; padding:1.35rem 1.1rem 1.6rem; display:flex; flex-direction:column; gap:.65rem; position:relative; }
+    .price-card.highlight { border:1px solid var(--brand); box-shadow:0 6px 22px -8px rgba(27,74,232,.35); }
+    .price-line { font-size:.75rem; text-transform:uppercase; letter-spacing:1px; opacity:.7; margin:0; }
+    .price-card ul { list-style:none; margin:.5rem 0 0; padding:0; font-size:.8rem; display:flex; flex-direction:column; gap:.45rem; }
+    .cta-final .cta-row { justify-content:center; margin-top:1.2rem; }
+    footer.site-footer { background:#0f1729; color:#c9d4ea; padding:3.5rem 0 3rem; margin-top:4rem; }
+    .footer-grid { display:grid; gap:2.5rem; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); }
+    .footer-grid h4 { margin:.2rem 0 .75rem; font-size:.85rem; letter-spacing:.5px; text-transform:uppercase; font-weight:600; color:#fff; }
+    .footer-grid ul { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.4rem; font-size:.75rem; }
+    .footer-grid a { color:#9fb4d9; }
+    .footer-grid a:hover { color:#fff; }
+    .muted { opacity:.75; }
+    .tiny { font-size:.7rem; }
+    .text-link { font-weight:600; }
+    @media (max-width:760px){ nav a { margin-left:.75rem; } .hero-inner { flex-direction:column; } .nav-row { flex-wrap:wrap; } }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-row">
+      <a class="logo" href="https://platform.mapmycurriculum.com">Map<span>My</span>Curriculum</a>
+      <nav aria-label="Primary">
+        <a href="https://platform.mapmycurriculum.com#features">Features</a>
+        <a href="https://platform.mapmycurriculum.com#how-it-works">Flow</a>
+        <a href="https://platform.mapmycurriculum.com#implementation">Implementation</a>
+        <a href="https://platform.mapmycurriculum.com#credibility">Credibility</a>
+        <a href="https://platform.mapmycurriculum.com#pricing">Pricing</a>
+        <a class="btn small" href="https://platform.mapmycurriculum.com/login">Portal Login</a>
+        <a class="btn primary small" href="https://platform.mapmycurriculum.com/signup">Get Started</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero" id="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <h1>Policy‑Aware Curriculum Intelligence</h1>
+          <p class="lead">Continuously map, evaluate, & prove compliance and transferability across state frameworks, outcomes, and accreditation evidence – automatically.</p>
+          <div class="cta-row">
+            <a class="btn primary" href="https://platform.mapmycurriculum.com/signup">Get Started</a>
+            <a class="btn outline" href="https://platform.mapmycurriculum.com/login">Portal Login</a>
+          </div>
+          <p class="trust tiny">Covers state core frameworks, transfer pathways, learning outcomes mastery, and evidence PDF generation.</p>
+        </div>
+        <div class="hero-panel">
+          <div class="panel-card" aria-label="Sample live metrics">
+            <h3>Live Compliance Snapshot</h3>
+            <ul class="mini-metrics">
+              <li><strong>63</strong><span>Total SCH</span></li>
+              <li><strong>42</strong><span>Core SCH</span></li>
+              <li><strong>100%</strong><span>PLO Mastery</span></li>
+              <li><strong>0</strong><span>Foundation Gaps</span></li>
+            </ul>
+            <p class="tiny muted">Demo data (Texas AA Business pathway)</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="contrast" id="problem">
+      <div class="container two-col">
+        <div>
+          <h2>The Manual Curriculum Audit Cycle Is Broken</h2>
+          <ul class="checklist">
+            <li>Spreadsheet silos & stale copies</li>
+            <li>Policy drift across state / system updates</li>
+            <li>Slow impact analysis before catalog changes</li>
+            <li>Fragmented evidence for accreditation visits</li>
+          </ul>
+        </div>
+        <div>
+          <h3>What If It Were Continuous?</h3>
+          <p>Map My Curriculum treats curriculum as a living graph of Programs, Versions, Courses, Outcomes, and RulePacks. Changes trigger re‑evaluation, highlighting compliance & transfer gaps instantly.</p>
+          <a class="text-link" href="https://platform.mapmycurriculum.com/signup">Start continuous mapping →</a>
+        </div>
+      </div>
+    </section>
+    <section id="features">
+      <div class="container">
+        <h2>Platform Features</h2>
+        <div class="feature-grid">
+          <div class="feature"><h3>State RulePacks</h3><p>Versioned policy-as-code (Core Curriculum, transfer pathways) with transparent citations.</p></div>
+          <div class="feature"><h3>JSONLogic Engine</h3><p>Deterministic evaluation across program, course, and term plan scopes.</p></div>
+          <div class="feature"><h3>Outcomes Mastery Matrix</h3><p>I/D/M coverage tracking with automated PLO mastery percentage.</p></div>
+          <div class="feature"><h3>Impact Simulation</h3><p>Preview compliance diffs before approving catalog changes.</p></div>
+          <div class="feature"><h3>Evidence PDF</h3><p>One‑click export of narrative, coverage tables, and rule appendix.</p></div>
+          <div class="feature"><h3>Scheduling & Queues</h3><p>Background jobs & weekly scans (Growth tier).</p></div>
+        </div>
+      </div>
+    </section>
+    <section class="contrast" id="how-it-works">
+      <div class="container">
+        <h2>Customer Flow</h2>
+        <ol class="flow">
+          <li><strong>Onboard</strong> – pick state, import catalog.</li>
+          <li><strong>Evaluate</strong> – run RulePack; review scorecard.</li>
+          <li><strong>Iterate</strong> – adjust sequencing & re‑evaluate.</li>
+          <li><strong>Simulate</strong> – model proposed changes.</li>
+          <li><strong>Evidence</strong> – generate PDF artifacts.</li>
+          <li><strong>Monitor</strong> – scheduled scans flag drift.</li>
+        </ol>
+      </div>
+    </section>
+    <section id="implementation">
+      <div class="container two-col">
+        <div>
+          <h2>Implementation Timeline</h2>
+          <table class="timeline"><tbody>
+            <tr><th>Week 1</th><td>Setup, state selection, import data</td></tr>
+            <tr><th>Week 2</th><td>Baseline evaluations & outcome review</td></tr>
+            <tr><th>Week 3</th><td>Impact simulation & governance</td></tr>
+            <tr><th>Week 4</th><td>Evidence exports & scheduled scans</td></tr>
+          </tbody></table>
+        </div>
+        <div>
+          <h3>Data Ingestion Paths</h3>
+          <ul class="checklist">
+            <li>CSV bulk upload (Programs, Courses, Term Plans, Outcomes, Alignments)</li>
+            <li>Planned SIS connectors (Growth tier)</li>
+            <li>API & future AI mapping suggestions</li>
+          </ul>
+            <a class="btn small" href="https://platform.mapmycurriculum.com/signup">Request Sandbox Access</a>
+        </div>
+      </div>
+    </section>
+    <section class="contrast" id="credibility">
+      <div class="container trust-grid">
+        <div>
+          <h2>Credibility & Trust</h2>
+          <p>Transparent rule sources, deterministic evaluation, and exportable evidence artifacts. Security & privacy controls align to higher‑ed data handling expectations.</p>
+        </div>
+        <ul class="pill-grid" aria-label="Trust commitments">
+          <li>Versioned RulePacks</li><li>Deterministic Engine</li><li>Immutable Snapshots</li><li>Audit Trails (Planned)</li><li>SSO & RBAC (Growth+)</li><li>No Student PII</li>
+        </ul>
+      </div>
+    </section>
+    <section id="pricing">
+      <div class="container pricing">
+        <h2>Simple Tiering</h2>
+        <div class="pricing-grid">
+          <div class="price-card"><h3>Essential</h3><p class="price-line">Entry</p><ul><li>1 State RulePack</li><li>Manual Upload</li><li>On‑Demand Evaluations</li><li>Evidence PDF</li></ul><a class="btn outline full" href="https://platform.mapmycurriculum.com/signup">Start</a></div>
+          <div class="price-card highlight"><h3>Growth</h3><p class="price-line">Most Popular</p><ul><li>All Essential +</li><li>Weekly Scans</li><li>Connectors</li><li>SSO / RBAC</li></ul><a class="btn primary full" href="https://platform.mapmycurriculum.com/signup">Upgrade</a></div>
+            <div class="price-card"><h3>District / System</h3><p class="price-line">Custom</p><ul><li>Multi‑College Aggregation</li><li>Unlimited Programs</li><li>Private Exports</li><li>Advanced Analytics</li></ul><a class="btn outline full" href="https://platform.mapmycurriculum.com/contact">Talk to Us</a></div>
+        </div>
+      </div>
+    </section>
+    <section class="cta-final" id="cta">
+      <div class="container">
+        <h2>Ready to operationalize curriculum compliance?</h2>
+        <p>Spin up a sandbox and evaluate a program in under 10 minutes.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="https://platform.mapmycurriculum.com/signup">Launch Sandbox</a>
+          <a class="btn" href="https://platform.mapmycurriculum.com/login">Login</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>Map My Curriculum</strong>
+        <p class="muted">Policy‑aware curriculum intelligence platform.</p>
+        <p class="tiny">© <span id="year"></span> MapMyCurriculum. All rights reserved.</p>
+      </div>
+      <div>
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="https://platform.mapmycurriculum.com#features">Features</a></li>
+          <li><a href="https://platform.mapmycurriculum.com#how-it-works">Flow</a></li>
+          <li><a href="https://platform.mapmycurriculum.com#implementation">Implementation</a></li>
+          <li><a href="https://platform.mapmycurriculum.com#pricing">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="https://platform.mapmycurriculum.com/login">Portal Login</a></li>
+          <li><a href="https://platform.mapmycurriculum.com/signup">Get Started</a></li>
+          <li><a href="mailto:hello@mapmycurriculum.com">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Compliance</h4>
+        <ul>
+          <li><a href="https://platform.mapmycurriculum.com#credibility">Security & Trust</a></li>
+          <li><a href="https://platform.mapmycurriculum.com/privacy">Privacy</a></li>
+          <li><a href="https://platform.mapmycurriculum.com/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
