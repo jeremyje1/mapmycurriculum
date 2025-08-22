@@ -1,85 +1,106 @@
 export type PlanKey =
-  | 'school_starter'
-  | 'school_pro'
-  | 'district_pro'
-  | 'district_enterprise'
-  | 'department'
-  | 'college'
-  | 'institution';
+  | 'starter'
+  | 'professional'
+  | 'comprehensive'
+  | 'enterprise';
 
 export interface PlanDef {
   key: PlanKey;
   label: string;
-  segment: 'k12' | 'highered';
+  segment: 'all'; // Now serving both K-12 and Higher Ed
   annualCents: number;
   checkout: boolean; // whether self-serve checkout is enabled
   features: string[];
   envVar: string; // NEXT_PUBLIC_PRICE_* variable name
+  userLimits: {
+    students: number | 'unlimited';
+    faculty: number | 'unlimited';
+  };
 }
 
 export const PLANS: PlanDef[] = [
   {
-    key: 'school_starter',
-    label: 'School Starter',
-    segment: 'k12',
-    annualCents: 150000,
+    key: 'starter',
+    label: 'Starter Plan',
+    segment: 'all',
+    annualCents: 249500, // $2,495
     checkout: true,
-    features: ['1 program map','3 users','Standards library','Alignment & gap analysis','1 narrative export / yr','Email support'],
-    envVar: 'NEXT_PUBLIC_PRICE_SCHOOL_STARTER'
+    features: [
+      'Upload curriculum maps (CSV, Excel, PDF)',
+      'Auto-alignment with national/state standards',
+      'AI-generated gap analysis report (10 pages)',
+      'Exportable curriculum maps (CSV/Word/PDF)',
+      'Email support only'
+    ],
+    envVar: 'NEXT_PUBLIC_PRICE_STARTER',
+    userLimits: {
+      students: 500,
+      faculty: 50
+    }
   },
   {
-    key: 'school_pro',
-    label: 'School Pro',
-    segment: 'k12',
-    annualCents: 350000,
+    key: 'professional',
+    label: 'Professional Plan',
+    segment: 'all',
+    annualCents: 599500, // $5,995
     checkout: true,
-    features: ['5 program maps','10 users','Evidence pack builder','Unlimited standards imports','CSV / API export','Priority email'],
-    envVar: 'NEXT_PUBLIC_PRICE_SCHOOL_PRO'
+    features: [
+      'Everything in Starter',
+      'AI narrative report (20–25 pages)',
+      'Multi-program support (5 programs/departments)',
+      'Faculty collaboration portal',
+      'Scenario modeling (curriculum redesign options)',
+      'Standards crosswalks (state → accreditation body)',
+      'Monthly office hours session with consultant'
+    ],
+    envVar: 'NEXT_PUBLIC_PRICE_PROFESSIONAL',
+    userLimits: {
+      students: 2500,
+      faculty: 200
+    }
   },
   {
-    key: 'district_pro',
-    label: 'District Pro',
-    segment: 'k12',
-    annualCents: 950000,
-    checkout: false,
-    features: ['Up to 10 schools (+$700 each addl)','50 program maps pooled','50 users pooled','Bulk import','Google / OIDC SSO','Connectors add-on ready'],
-    envVar: 'NEXT_PUBLIC_PRICE_DISTRICT_PRO'
-  },
-  {
-    key: 'district_enterprise',
-    label: 'District Enterprise',
-    segment: 'k12',
-    annualCents: 1800000,
-    checkout: false,
-    features: ['Unlimited maps','Unlimited users','SAML / OIDC included','Connectors bundle','Quarterly success review'],
-    envVar: 'NEXT_PUBLIC_PRICE_DISTRICT_ENTERPRISE'
-  },
-  {
-    key: 'department',
-    label: 'Department',
-    segment: 'highered',
-    annualCents: 600000,
+    key: 'comprehensive',
+    label: 'Comprehensive Plan',
+    segment: 'all',
+    annualCents: 1250000, // $12,500
     checkout: true,
-    features: ['Up to 5 program maps','10 users','Accreditation framework packs','Narrative generator','API export'],
-    envVar: 'NEXT_PUBLIC_PRICE_DEPARTMENT'
+    features: [
+      'Everything in Professional',
+      'Custom accreditation alignment (regional + professional)',
+      'AI-powered curriculum visualization dashboards',
+      'Unlimited program uploads',
+      'Real-time gap closure tracking',
+      'Annual curriculum strategy workshop (virtual)',
+      '40–50 page AI narrative & accreditation package'
+    ],
+    envVar: 'NEXT_PUBLIC_PRICE_COMPREHENSIVE',
+    userLimits: {
+      students: 10000,
+      faculty: 1000
+    }
   },
   {
-    key: 'college',
-    label: 'College',
-    segment: 'highered',
-    annualCents: 1800000,
-    checkout: true,
-    features: ['Up to 20 program maps','50 users','OIDC SSO included','LMS connector add-on','Priority support'],
-    envVar: 'NEXT_PUBLIC_PRICE_COLLEGE'
-  },
-  {
-    key: 'institution',
-    label: 'Institution',
-    segment: 'highered',
-    annualCents: 4500000,
-    checkout: false,
-    features: ['Unlimited programs/users','SAML / OIDC','LMS + SIS connectors','Governance workshop','Custom reporting'],
-    envVar: 'NEXT_PUBLIC_PRICE_INSTITUTION'
+    key: 'enterprise',
+    label: 'Enterprise Transformation',
+    segment: 'all',
+    annualCents: 2500000, // Starting at $25,000 (custom pricing)
+    checkout: false, // Contact sales
+    features: [
+      'Everything in Comprehensive',
+      'Unlimited users and programs',
+      'Dedicated customer success manager',
+      'API integrations (Canvas, Banner, Workday, etc.)',
+      'Power BI / Tableau dashboard embed',
+      'Quarterly progress audits',
+      'On-site or hybrid accreditation support',
+      'Full white-glove implementation'
+    ],
+    envVar: 'NEXT_PUBLIC_PRICE_ENTERPRISE',
+    userLimits: {
+      students: 'unlimited',
+      faculty: 'unlimited'
+    }
   }
 ];
 
@@ -90,7 +111,7 @@ export function getPlan(key: PlanKey) {
 export function priceIdFor(key: PlanKey): string | undefined {
   const plan = getPlan(key);
   if (!plan) return undefined;
-  return process.env[plan.envVar] as string | undefined;
+  return process.env[plan.envVar];
 }
 
 export const CHECKOUT_ENABLED = PLANS.filter(p => p.checkout).map(p => p.key);
