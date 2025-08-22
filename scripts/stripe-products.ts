@@ -44,13 +44,22 @@ async function ensurePrice(productId: string, plan: PlanDef) {
   const existing = await stripe.prices.search({ query: `product:'${productId}' AND active:'true' AND currency:'usd'` });
   const match = existing.data.find(p => p.unit_amount === plan.amount && p.recurring?.interval === plan.interval);
   if (match) return match;
-  return stripe.prices.create({
+  const created = await stripe.prices.create({
     product: productId,
     currency: 'usd',
     unit_amount: plan.amount,
     recurring: { interval: plan.interval },
     metadata: { plan_key: plan.key }
   });
+  if (process.env.STRIPE_ARCHIVE_OLD_PRICES) {
+    // Archive any other active annual prices for this product not matching new amount
+    for (const p of existing.data) {
+      if (p.id !== created.id && p.recurring?.interval === plan.interval) {
+        try { await stripe.prices.update(p.id, { active: false }); console.log(`Archived old price ${p.id} for ${plan.key}`); } catch (e) { console.warn('Archive failed', p.id, e); }
+      }
+    }
+  }
+  return created;
 }
 
 async function main() {
