@@ -1,19 +1,12 @@
 "use client";
 import React, { useState } from 'react';
+import { PLANS, PlanKey } from '../../lib/plans';
 
-type Plan = 'school_starter' | 'school_pro' | 'district_pro' | 'district_enterprise' | 'department' | 'college' | 'institution';
-const planLabels: Record<Plan, string> = {
-  school_starter: 'School Starter',
-  school_pro: 'School Pro',
-  district_pro: 'District Pro',
-  district_enterprise: 'District Enterprise',
-  department: 'Department',
-  college: 'College',
-  institution: 'Institution'
-};
+type Plan = PlanKey;
+const selectablePlans = PLANS.filter(p => p.checkout);
 
 export default function SignupPage() {
-  const [plan, setPlan] = useState<Plan>('school_starter');
+  const [plan, setPlan] = useState<Plan>(selectablePlans[0].key);
   const [email, setEmail] = useState('');
   const [institution, setInstitution] = useState('');
   const [stateCode, setStateCode] = useState('');
@@ -48,8 +41,8 @@ export default function SignupPage() {
       </p>
       <form onSubmit={startCheckout} style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1.5rem' }}>
         <div style={{ display: 'flex', gap: '.75rem', flexWrap: 'wrap' }}>
-          {(Object.keys(planLabels) as Plan[]).map(p => (
-            <button key={p} type="button" onClick={() => setPlan(p)} className={`btn ${plan === p ? 'primary' : 'outline'}`} style={{ minWidth: 160 }}>{planLabels[p]}</button>
+          {selectablePlans.map(p => (
+            <button key={p.key} type="button" onClick={() => setPlan(p.key)} className={`btn ${plan === p.key ? 'primary' : 'outline'}`} style={{ minWidth: 160 }}>{p.label}</button>
           ))}
         </div>
         <L label="Work Email"><input required type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="you@college.edu" style={inputStyle} /></L>
@@ -64,7 +57,7 @@ export default function SignupPage() {
             <option value="OTHER">Other / Multi-State</option>
           </select>
         </L>
-        <button className="btn primary" type="submit" disabled={loading}>{loading ? 'Redirecting…' : `Subscribe – ${planLabels[plan]}`}</button>
+  <button className="btn primary" type="submit" disabled={loading}>{loading ? 'Redirecting…' : `Subscribe – ${PLANS.find(p=>p.key===plan)?.label}`}</button>
         {error && <p className="tiny" style={{ color: '#c00' }}>{error}</p>}
         <p className="tiny muted">Redirects to secure Stripe. No card data hits our servers.</p>
       </form>

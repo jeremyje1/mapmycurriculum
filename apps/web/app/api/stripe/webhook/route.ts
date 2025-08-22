@@ -60,6 +60,15 @@ export async function POST(req: Request) {
   try {
     if (event.type === 'checkout.session.completed') {
       await provisionFromCheckoutSession(event.data.object);
+    } else if (event.type === 'customer.subscription.updated') {
+      // Placeholder: update tier / plan mapping if persisted (no tier column yet).
+      const sub = event.data.object;
+      console.log('[stripe] subscription.updated', {
+        id: sub.id,
+        status: sub.status,
+        priceIds: sub.items.data.map(i => i.price.id)
+      });
+      // Future: look up user/institution via customer id and adjust feature flags.
     }
   } catch (err) {
     console.error('Webhook handling error', err);

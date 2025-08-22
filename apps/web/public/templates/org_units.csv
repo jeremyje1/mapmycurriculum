@@ -1,0 +1,4 @@
+unit_id,parent_unit_id,name
+INST,,Sample Institution
+DIV1,INST,Academic Division 1
+DEPT1,DIV1,Business Department

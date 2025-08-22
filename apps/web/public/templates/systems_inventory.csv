@@ -1,0 +1,4 @@
+system_id,name,category,owner_unit
+SIS001,Student Information System,SIS,INST
+LMS001,LMS Platform,LMS,DIV1
+ANL001,Analytics Warehouse,Data,INST

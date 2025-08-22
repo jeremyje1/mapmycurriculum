@@ -1,0 +1,4 @@
+person_id,position_id,email,first_name,last_name
+u001,PRES,president@example.edu,Alice,Executive
+u002,DEAN1,dean1@example.edu,Bob,Academic
+u003,CHAIR1,chair1@example.edu,Carol,Leader

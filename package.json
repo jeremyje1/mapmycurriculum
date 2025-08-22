@@ -6,9 +6,12 @@
   "packageManager": "npm@10.8.1",
   "scripts": {
     "build": "npm --prefix apps/web run build",
-    "dev": "npm --prefix apps/web run dev"
+    "dev": "npm --prefix apps/web run dev",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
   "devDependencies": {
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "cypress": "^13.12.0"
   }
 }

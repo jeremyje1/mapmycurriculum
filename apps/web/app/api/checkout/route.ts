@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
+import { priceIdFor, CHECKOUT_ENABLED } from '../../../lib/plans';
 
 const secret = process.env.STRIPE_SECRET_KEY;
 let stripe: Stripe | null = null;
@@ -10,27 +11,10 @@ if (secret) {
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
-type Plan =
-  | 'school_starter'
-  | 'school_pro'
-  | 'district_pro'
-  | 'district_enterprise'
-  | 'department'
-  | 'college'
-  | 'institution';
+type Plan = typeof CHECKOUT_ENABLED[number];
 interface Body { email: string; institution?: string; state?: string; plan: Plan; }
 
-function priceId(plan: Plan) {
-  switch (plan) {
-    case 'school_starter': return process.env.NEXT_PUBLIC_PRICE_SCHOOL_STARTER;
-    case 'school_pro': return process.env.NEXT_PUBLIC_PRICE_SCHOOL_PRO;
-    case 'district_pro': return process.env.NEXT_PUBLIC_PRICE_DISTRICT_PRO;
-    case 'district_enterprise': return process.env.NEXT_PUBLIC_PRICE_DISTRICT_ENTERPRISE;
-    case 'department': return process.env.NEXT_PUBLIC_PRICE_DEPARTMENT;
-    case 'college': return process.env.NEXT_PUBLIC_PRICE_COLLEGE;
-    case 'institution': return process.env.NEXT_PUBLIC_PRICE_INSTITUTION;
-  }
-}
+function priceId(plan: Plan) { return priceIdFor(plan as any); }
 
 export async function POST(req: Request) {
   if (!stripe) return NextResponse.json({ error: 'Stripe not configured' }, { status: 500 });
@@ -38,6 +22,9 @@ export async function POST(req: Request) {
     const body = (await req.json()) as Body;
     if (!body.email || !body.plan) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+    }
+    if (!CHECKOUT_ENABLED.includes(body.plan)) {
+      return NextResponse.json({ error: 'Contact sales for this plan' }, { status: 400 });
     }
     const pid = priceId(body.plan);
     if (!pid) return NextResponse.json({ error: 'Price ID not set for plan' }, { status: 400 });
@@ -48,7 +35,7 @@ export async function POST(req: Request) {
       line_items: [{ price: pid, quantity: 1 }],
       allow_promotion_codes: true,
       metadata: { institution: body.institution || '', state: body.state || '', plan: body.plan },
-      success_url: `${origin}/signup/success?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${origin}/assessment/start?tier=${body.plan}&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/signup?canceled=1`
     });
     return NextResponse.json({ url: session.url });
