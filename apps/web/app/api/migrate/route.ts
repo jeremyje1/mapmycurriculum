@@ -120,8 +120,6 @@ CREATE POLICY "Users can delete simple_alignments from their institution" ON sim
       }, { status: 500 });
     }
     
-    return NextResponse.json({ success: true, message: 'Migration executed successfully' });
-    
   } catch (error) {
     console.error('API error:', error);
     return NextResponse.json(

@@ -3,6 +3,15 @@
   "version": "0.1.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "scripts": { "build": "tsc -b" },
-  "dependencies": { "zod": "^3.23.8", "@cmt/state-packs": "*" }
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "dependencies": {
+    "@cmt/state-packs": "*",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.11",
+    "@types/react-dom": "^19.1.7"
+  }
 }
