@@ -46,10 +46,13 @@ export async function POST(req: Request) {
   } catch (e: any) {
     console.error('Checkout error:', e);
     const errorMessage = e.message || 'Failed to create checkout session';
-    // In development, return the actual error for debugging
-    if (process.env.NODE_ENV === 'development') {
-      return NextResponse.json({ error: errorMessage, details: e.toString() }, { status: 500 });
-    }
-    return NextResponse.json({ error: 'Failed to create checkout session' }, { status: 500 });
+    // Return debug info temporarily
+    return NextResponse.json({ 
+      error: 'Failed to create checkout session',
+      debug: {
+        message: errorMessage,
+        stripeConfigured: !!stripe
+      }
+    }, { status: 500 });
   }
 }
