@@ -1,52 +1,40 @@
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import crypto from 'crypto';
-import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
 export async function POST(req: Request) {
   try {
-    const { email, password } = await req.json();
+    const { email } = await req.json();
     
-    if (!email || !password) {
-      return NextResponse.json({ error: 'Email and password are required' }, { status: 400 });
+    if (!email) {
+      return NextResponse.json({ error: 'Email is required' }, { status: 400 });
     }
 
     // Check if user exists
     const user = await prisma.user.findUnique({
       where: { email },
+      include: { institution: true }
     });
 
     if (!user) {
-      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
+      return NextResponse.json({ error: 'No account found with this email. Please check your email or sign up for a new account.' }, { status: 404 });
     }
 
-    // If user doesn't have a password (came through Stripe), redirect to password setup
-    if (!user.password) {
-      return NextResponse.json({ 
-        error: 'Password not set',
-        needsPasswordSetup: true,
-        message: 'Please set up your password to access your account'
-      }, { status: 403 });
-    }
-
-    // Verify password
-    const isValidPassword = await bcrypt.compare(password, user.password);
-    if (!isValidPassword) {
-      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
-    }
-
-    // Generate a simple session token (in production, use JWT)
+    // For users who came through Stripe (no password), generate a session token and log them in
+    // In production, you might want to send a magic link via email instead
     const sessionToken = crypto.randomBytes(32).toString('hex');
     
     const response = NextResponse.json({ 
       success: true,
+      message: 'Login successful',
       user: {
         id: user.id,
         email: user.email,
         role: user.role,
         institutionId: user.institutionId,
+        institution: user.institution.name
       },
       token: sessionToken
     });

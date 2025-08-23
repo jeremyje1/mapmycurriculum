@@ -12,6 +12,11 @@ export function AuthForm({ mode }: AuthFormProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   
+  const getButtonText = () => {
+    if (loading) return 'Processing...';
+    return isSignup ? 'Launch Sandbox' : 'Access Account';
+  };
+  
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError(null);
@@ -64,9 +69,16 @@ export function AuthForm({ mode }: AuthFormProps) {
       <Field label="Work Email">
         <input required type="email" name="email" placeholder="you@college.edu" style={inputStyle} />
       </Field>
-      <Field label="Password">
-        <input required type="password" name="password" placeholder="••••••••" style={inputStyle} />
-      </Field>
+      {!isSignup && (
+        <p className="tiny" style={{ color: '#666', margin: '0.5rem 0' }}>
+          Enter your email to access your account. No password required for existing subscribers.
+        </p>
+      )}
+      {isSignup && (
+        <Field label="Password">
+          <input required type="password" name="password" placeholder="••••••••" style={inputStyle} />
+        </Field>
+      )}
       {isSignup && (
         <>
           <Field label="State / RulePack Focus">
@@ -137,7 +149,7 @@ export function AuthForm({ mode }: AuthFormProps) {
         </>
       )}
       <button className="btn primary" type="submit" disabled={loading}>
-        {loading ? 'Processing...' : (isSignup ? 'Launch Sandbox' : 'Login')}
+        {getButtonText()}
       </button>
       {error && (
         <p className="tiny" style={{ color: '#c00', marginTop: '0.5rem' }}>
