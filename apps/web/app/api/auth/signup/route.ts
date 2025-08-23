@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import crypto from 'crypto';
+import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
@@ -21,6 +22,9 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'User already exists' }, { status: 409 });
     }
 
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 12);
+
     // Create or find institution
     let institution = await prisma.institution.findFirst({
       where: { name: institutionName },
@@ -35,10 +39,11 @@ export async function POST(req: Request) {
       });
     }
 
-    // Create user (in production, hash the password first)
+    // Create user with hashed password
     const user = await prisma.user.create({
       data: {
         email,
+        password: hashedPassword,
         institutionId: institution.id,
         role: 'admin', // Default role for new signups
       },

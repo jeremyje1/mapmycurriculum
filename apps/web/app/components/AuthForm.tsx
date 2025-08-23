@@ -31,6 +31,11 @@ export function AuthForm({ mode }: AuthFormProps) {
       const result = await response.json();
       
       if (!response.ok) {
+        // Handle special case where user needs password setup
+        if (result.needsPasswordSetup) {
+          router.push(`/setup-password?email=${encodeURIComponent(data.email as string)}` as any);
+          return;
+        }
         throw new Error(result.error || 'Authentication failed');
       }
       

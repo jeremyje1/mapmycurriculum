@@ -13,40 +13,40 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Email and password are required' }, { status: 400 });
     }
 
-    // Check if user exists
+    // Find user by email
     const user = await prisma.user.findUnique({
       where: { email },
     });
 
     if (!user) {
-      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
+      return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
-    // If user doesn't have a password (came through Stripe), redirect to password setup
-    if (!user.password) {
-      return NextResponse.json({ 
-        error: 'Password not set',
-        needsPasswordSetup: true,
-        message: 'Please set up your password to access your account'
-      }, { status: 403 });
+    // Check if user already has a password
+    if (user.password) {
+      return NextResponse.json({ error: 'Password already set' }, { status: 409 });
     }
 
-    // Verify password
-    const isValidPassword = await bcrypt.compare(password, user.password);
-    if (!isValidPassword) {
-      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
-    }
+    // Hash the new password
+    const hashedPassword = await bcrypt.hash(password, 12);
 
-    // Generate a simple session token (in production, use JWT)
+    // Update user with password
+    const updatedUser = await prisma.user.update({
+      where: { id: user.id },
+      data: { password: hashedPassword },
+    });
+
+    // Generate session token and log them in
     const sessionToken = crypto.randomBytes(32).toString('hex');
     
     const response = NextResponse.json({ 
       success: true,
+      message: 'Password set successfully',
       user: {
-        id: user.id,
-        email: user.email,
-        role: user.role,
-        institutionId: user.institutionId,
+        id: updatedUser.id,
+        email: updatedUser.email,
+        role: updatedUser.role,
+        institutionId: updatedUser.institutionId,
       },
       token: sessionToken
     });
@@ -61,7 +61,7 @@ export async function POST(req: Request) {
 
     return response;
   } catch (error) {
-    console.error('Login error:', error);
+    console.error('Password setup error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
