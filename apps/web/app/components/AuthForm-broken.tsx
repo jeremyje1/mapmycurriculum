@@ -1,6 +1,28 @@
 "use client";
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import React, { useState } fro      } else {
+        // For login, submit to API with email and password
+        const email = (data as any).email as string;
+        const password = (data as any).password as string;
+        
+        if (email?.includes('@')) {
+          const response = await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+          });
+          
+          const result = await response.json();
+          
+          if (!response.ok) {
+            throw new Error(result.error || 'Login failed');
+          }
+          
+          // Successful login, redirect to dashboard
+          router.push('/enterprise/dashboard' as any);
+        } else {
+          throw new Error('Please enter a valid email address');
+        }
+      }import { useRouter } from 'next/navigation';
 
 export type AuthMode = 'login' | 'signup';
 
@@ -43,24 +65,11 @@ export function AuthForm({ mode }: AuthFormProps) {
         // Redirect to assessment page for new signups
         router.push('/assessment/onboarding' as any);
       } else {
-        // For login, submit to API with email and password
-        const email = (data as any).email as string;
-        const password = (data as any).password as string;
-        
-        if (email?.includes('@')) {
-          const response = await fetch('/api/auth/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password }),
-          });
-          
-          const result = await response.json();
-          
-          if (!response.ok) {
-            throw new Error(result.error || 'Login failed');
-          }
-          
-          // Successful login, redirect to dashboard
+        // For login, just redirect to dashboard (simplified auth)
+  const email = (data as any).email as string;
+  if (email?.includes('@')) {
+          // Set a simple session cookie
+          document.cookie = `session-token=simplified_auth_${Date.now()}; path=/; max-age=${60*60*24*7}`;
           router.push('/enterprise/dashboard' as any);
         } else {
           throw new Error('Please enter a valid email address');
@@ -86,15 +95,11 @@ export function AuthForm({ mode }: AuthFormProps) {
         <input required type="email" name="email" placeholder="you@college.edu" style={inputStyle} />
       </Field>
       {!isSignup && (
-        <Field label="Password">
-          <input required type="password" name="password" placeholder="Enter your password" style={inputStyle} />
-        </Field>
-      )}
-      {!isSignup && (
         <p className="tiny" style={{ color: '#666', margin: '0.5rem 0' }}>
-          Don't have a password yet? Complete your <a href="/setup-password" style={{color: '#1b4ae8'}}>account setup</a>.
+          Enter your email to access your account. No password required for existing subscribers.
         </p>
       )}
+  {/* Password removed: passwordless signup */}
       {isSignup && (
         <>
           <Field label="State / RulePack Focus">

@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 export async function POST(req: Request) {
   try {
-    const { email } = await req.json();
+    const { email, password } = await req.json();
     
     if (!email) {
       return NextResponse.json({ error: 'Email is required' }, { status: 400 });
@@ -22,8 +22,20 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'No account found with this email. Please check your email or sign up for a new account.' }, { status: 404 });
     }
 
-    // For users who came through Stripe (no password), generate a session token and log them in
-    // In production, you might want to send a magic link via email instead
+    // If user has a password, verify it
+    if (user.password) {
+      if (!password) {
+        return NextResponse.json({ error: 'Password is required for this account' }, { status: 400 });
+      }
+      
+      // Simple password comparison (in production, use proper hashing)
+      if (user.password !== password) {
+        return NextResponse.json({ error: 'Invalid password' }, { status: 401 });
+      }
+    }
+    // If no password set, allow passwordless login (legacy users)
+
+    // Generate a simple session token
     const sessionToken = crypto.randomBytes(32).toString('hex');
     
     const response = NextResponse.json({ 
