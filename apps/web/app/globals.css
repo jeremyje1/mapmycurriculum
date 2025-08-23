@@ -23,11 +23,12 @@ nav a.btn { margin-left:1.5rem; }
 .btn.small { padding:.5rem .85rem; font-size:.75rem; }
 .btn.full { width:100%; }
 
-section { padding:4.5rem 0; }
+section { padding:4.5rem 0; scroll-margin-top: 80px; }
 section.hero { padding:5.5rem 0 4rem; background:linear-gradient(140deg,#f5f8ff,#eef2f9); }
 section.contrast { background:#0f1729; color:#f5f8ff; }
 section.contrast a { color:#6ea8ff; }
 section.cta-final { background:linear-gradient(120deg,#1b4ae8,#113073); color:#fff; text-align:center; }
+section[id] { scroll-margin-top: 80px; }
 
 .hero-inner { display:flex; flex-wrap:wrap; gap:3rem; align-items:stretch; }
 .hero-copy { flex:1 1 430px; }

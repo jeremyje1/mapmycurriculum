@@ -19,3 +19,4 @@ coverage/
 .next/
 out/
 prisma/migrations/*/steps.json
+.vercel

@@ -34,6 +34,10 @@ export async function POST(req: Request) {
       customer_email: body.email,
       line_items: [{ price: pid, quantity: 1 }],
       allow_promotion_codes: true,
+      subscription_data: {
+        trial_period_days: 14, // 14-day free trial
+        metadata: { institution: body.institution || '', state: body.state || '', plan: body.plan }
+      },
       metadata: { institution: body.institution || '', state: body.state || '', plan: body.plan },
       success_url: `${origin}/assessment/start?tier=${body.plan}&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/signup?canceled=1`
