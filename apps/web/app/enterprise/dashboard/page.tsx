@@ -93,22 +93,29 @@ export default function EnterpriseDashboard() {
         <h2 style={{ fontSize: '1.2rem', marginBottom: '1rem' }}>Getting Started</h2>
         <div style={{ background: '#f8fafc', borderRadius: '8px', padding: '24px' }}>
           <p style={{ marginBottom: '16px', color: '#4a5568' }}>
-            Your curriculum mapping platform is ready! Contact our team to begin importing your data and setting up your first analysis.
+            Your curriculum mapping platform is ready! Import your data or load demo data to get started.
           </p>
           <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
             <a 
-              href="/contact" 
+              href="/enterprise/dashboard/seed-demo" 
               className="btn primary"
               style={{ textDecoration: 'none' }}
             >
-              Contact Support
+              🎯 Load Demo Data
             </a>
             <a 
-              href="/assessment/onboarding" 
+              href="/enterprise/dashboard/import" 
               className="btn outline"
               style={{ textDecoration: 'none' }}
             >
-              View Resources
+              📊 Import Data
+            </a>
+            <a 
+              href="/contact" 
+              className="btn outline"
+              style={{ textDecoration: 'none' }}
+            >
+              Contact Support
             </a>
             <a 
               href="mailto:hello@mapmycurriculum.com" 
@@ -129,8 +136,8 @@ export default function EnterpriseDashboard() {
             <p style={{ fontSize: '0.9rem', color: '#666', marginBottom: '12px' }}>
               Upload CSV files with your course catalog, programs, and outcomes data.
             </p>
-            <a href="/assessment/onboarding" className="btn small outline" style={{ textDecoration: 'none' }}>
-              Download Templates
+            <a href="/enterprise/dashboard/import" className="btn small primary" style={{ textDecoration: 'none' }}>
+              Start Import
             </a>
           </div>
           
@@ -139,9 +146,9 @@ export default function EnterpriseDashboard() {
             <p style={{ fontSize: '0.9rem', color: '#666', marginBottom: '12px' }}>
               Run state-specific rule packs to validate curriculum compliance.
             </p>
-            <button className="btn small outline" disabled style={{ opacity: 0.6 }}>
-              Coming Soon
-            </button>
+            <a href="/enterprise/dashboard/analysis" className="btn small primary" style={{ textDecoration: 'none' }}>
+              Run Analysis
+            </a>
           </div>
 
           <div style={{ border: '1px solid #e0e6f0', borderRadius: '8px', padding: '20px', background: '#fff' }}>
@@ -149,9 +156,19 @@ export default function EnterpriseDashboard() {
             <p style={{ fontSize: '0.9rem', color: '#666', marginBottom: '12px' }}>
               Generate detailed reports on curriculum gaps and recommendations.
             </p>
-            <button className="btn small outline" disabled style={{ opacity: 0.6 }}>
-              Coming Soon
-            </button>
+            <a href="/enterprise/dashboard/analysis" className="btn small primary" style={{ textDecoration: 'none' }}>
+              View Gaps
+            </a>
+          </div>
+          
+          <div style={{ border: '1px solid #e0e6f0', borderRadius: '8px', padding: '20px', background: '#fff' }}>
+            <h3 style={{ fontSize: '1.1rem', marginBottom: '8px' }}>🗺️ Alignment Map</h3>
+            <p style={{ fontSize: '0.9rem', color: '#666', marginBottom: '12px' }}>
+              Visualize curriculum alignments between PLOs and CLOs.
+            </p>
+            <a href="/enterprise/dashboard/alignment" className="btn small primary" style={{ textDecoration: 'none' }}>
+              View Map
+            </a>
           </div>
         </div>
       </section>

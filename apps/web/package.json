@@ -14,14 +14,16 @@
     "stripe:setup": "tsx ../../scripts/stripe-products.ts"
   },
   "dependencies": {
-  "@prisma/client": "5.15.0",
+    "@prisma/client": "5.15.0",
+    "@supabase/ssr": "^0.7.0",
+    "@supabase/supabase-js": "^2.56.0",
     "iconv-lite": "^0.6.3",
     "next": "14.2.5",
     "pdfkit": "0.15.0",
     "prisma": "5.15.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-  "stripe": "14.25.0"
+    "stripe": "14.25.0"
   },
   "devDependencies": {
     "@types/node": "20.11.30",

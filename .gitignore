@@ -3,6 +3,7 @@ dist/
 *.tsbuildinfo
 .env
 .env.local
+.env.supabase
 dev.db
 *.sqlite
 *.sqlite-journal
@@ -20,3 +21,4 @@ coverage/
 out/
 prisma/migrations/*/steps.json
 .vercel
+supabase/.temp/
