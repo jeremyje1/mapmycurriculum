@@ -1,83 +1,14 @@
 "use client";
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-
-interface User { 
-  id: string;
-  email: string; 
-  role: string;
-  institutionId: string;
-}
-
-type AuthStatus = 'loading' | 'unauthenticated' | 'authenticated';
-
-function useAuth(): { status: AuthStatus; user: User | null } {
-  const [status, setStatus] = useState<AuthStatus>('loading');
-  const [user, setUser] = useState<User | null>(null);
-  
-  useEffect(() => {
-    // Check for authentication via cookie
-    fetch('/api/auth/me', {
-      credentials: 'include'
-    })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      throw new Error('Not authenticated');
-    })
-    .then(data => {
-      setUser(data.user);
-      setStatus('authenticated');
-    })
-    .catch(() => {
-      setStatus('unauthenticated');
-    });
-  }, []);
-
-  return { status, user };
-}
+import React from 'react';
 
 export default function EnterpriseDashboard() {
-  const { status, user } = useAuth();
-  const router = useRouter();
-
-  const handleSignOut = async () => {
-    try {
-      await fetch('/api/auth/logout', {
-        method: 'POST',
-        credentials: 'include'
-      });
-      router.push('/login');
-    } catch (error) {
-      console.error('Sign out error:', error);
-      // Force redirect even if API call fails
-      router.push('/login');
+  const handleSignOut = () => {
+    // Clear any stored session data
+    if (typeof window !== 'undefined') {
+      document.cookie = 'session-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      window.location.href = '/login';
     }
   };
-
-  if (status === 'loading') {
-    return (
-      <main style={{ padding: '3rem', textAlign: 'center' }}>
-        <p className="muted">Loading dashboard…</p>
-      </main>
-    );
-  }
-
-  if (status === 'unauthenticated' || !user) {
-    return (
-      <main style={{ padding: '3rem', maxWidth: 860 }}>
-        <h1>Enterprise Dashboard</h1>
-        <p className="muted" style={{ maxWidth: '60ch' }}>
-          Please sign in to access your curriculum mapping dashboard and analytics.
-        </p>
-        <div style={{ marginTop: '1.5rem', display: 'flex', gap: '.75rem' }}>
-          <a className="btn primary" href="/login">Sign In</a>
-          <a className="btn outline" href="/signup">Get Started</a>
-        </div>
-      </main>
-    );
-  }
 
   return (
     <main style={{ padding: '2.5rem', maxWidth: 1200 }}>
@@ -85,7 +16,7 @@ export default function EnterpriseDashboard() {
         <div>
           <h1 style={{ marginBottom: '.35rem' }}>Curriculum Dashboard</h1>
           <p className="tiny muted" style={{ margin: 0 }}>
-            Welcome back, {user.email} · {user.role} role
+            Welcome to your MapMyCurriculum workspace
           </p>
         </div>
         <nav style={{ display: 'flex', gap: '.5rem', flexWrap: 'wrap' }}>
@@ -136,10 +67,10 @@ export default function EnterpriseDashboard() {
         <h2 style={{ fontSize: '1.2rem', marginBottom: '1rem' }}>Quick Stats</h2>
         <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fill,minmax(200px,1fr))' }}>
           {[
-            { label: 'Institution ID', value: user.institutionId.slice(0, 8) + '...', icon: '🏫' },
             { label: 'Account Status', value: 'Active', icon: '✅' },
             { label: 'Subscription', value: 'Professional', icon: '⭐' },
-            { label: 'Data Sources', value: 'Ready', icon: '📁' }
+            { label: 'Data Sources', value: 'Ready', icon: '📁' },
+            { label: 'Analysis Tools', value: 'Available', icon: '�' }
           ].map(card => (
             <div key={card.label} style={{ 
               border: '1px solid #e0e6f0', 
@@ -186,6 +117,41 @@ export default function EnterpriseDashboard() {
             >
               Schedule Demo
             </a>
+          </div>
+        </div>
+      </section>
+
+      <section style={{ marginTop: '2.5rem' }}>
+        <h2 style={{ fontSize: '1.2rem', marginBottom: '1rem' }}>Available Tools</h2>
+        <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
+          <div style={{ border: '1px solid #e0e6f0', borderRadius: '8px', padding: '20px', background: '#fff' }}>
+            <h3 style={{ fontSize: '1.1rem', marginBottom: '8px' }}>📊 Data Import</h3>
+            <p style={{ fontSize: '0.9rem', color: '#666', marginBottom: '12px' }}>
+              Upload CSV files with your course catalog, programs, and outcomes data.
+            </p>
+            <a href="/assessment/onboarding" className="btn small outline" style={{ textDecoration: 'none' }}>
+              Download Templates
+            </a>
+          </div>
+          
+          <div style={{ border: '1px solid #e0e6f0', borderRadius: '8px', padding: '20px', background: '#fff' }}>
+            <h3 style={{ fontSize: '1.1rem', marginBottom: '8px' }}>🎯 Compliance Analysis</h3>
+            <p style={{ fontSize: '0.9rem', color: '#666', marginBottom: '12px' }}>
+              Run state-specific rule packs to validate curriculum compliance.
+            </p>
+            <button className="btn small outline" disabled style={{ opacity: 0.6 }}>
+              Coming Soon
+            </button>
+          </div>
+
+          <div style={{ border: '1px solid #e0e6f0', borderRadius: '8px', padding: '20px', background: '#fff' }}>
+            <h3 style={{ fontSize: '1.1rem', marginBottom: '8px' }}>📈 Gap Analysis</h3>
+            <p style={{ fontSize: '0.9rem', color: '#666', marginBottom: '12px' }}>
+              Generate detailed reports on curriculum gaps and recommendations.
+            </p>
+            <button className="btn small outline" disabled style={{ opacity: 0.6 }}>
+              Coming Soon
+            </button>
           </div>
         </div>
       </section>

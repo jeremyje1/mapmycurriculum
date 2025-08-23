@@ -22,6 +22,54 @@ export default function OnboardingAssessmentPage() {
   const universal = 'One‑Click Org Chart + Curriculum Mapping';
   return (
     <main style={{ padding: '3rem 1rem', maxWidth: 1280, margin: '0 auto' }}>
+      
+      {/* Subscriber Access Banner */}
+      <div style={{ 
+        background: 'linear-gradient(135deg, #2b5cff 0%, #1e49d2 100%)', 
+        color: 'white', 
+        padding: '24px', 
+        borderRadius: '12px', 
+        marginBottom: '40px',
+        textAlign: 'center'
+      }}>
+        <h2 style={{ margin: '0 0 12px', fontSize: '1.5rem' }}>🎉 Welcome, Subscriber!</h2>
+        <p style={{ margin: '0 0 20px', fontSize: '1.1rem', opacity: 0.9 }}>
+          Your subscription is active. Access your curriculum mapping dashboard below.
+        </p>
+        <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <a 
+            className="btn" 
+            href="/enterprise/dashboard"
+            style={{
+              background: 'white',
+              color: '#2b5cff',
+              textDecoration: 'none',
+              padding: '12px 24px',
+              borderRadius: '8px',
+              fontWeight: '600',
+              border: 'none'
+            }}
+          >
+            Access Dashboard
+          </a>
+          <a 
+            className="btn" 
+            href="/login"
+            style={{
+              background: 'rgba(255,255,255,0.1)',
+              color: 'white',
+              textDecoration: 'none',
+              padding: '12px 24px',
+              borderRadius: '8px',
+              fontWeight: '600',
+              border: '1px solid rgba(255,255,255,0.3)'
+            }}
+          >
+            Sign In Instead
+          </a>
+        </div>
+      </div>
+
       <h1 style={{ textAlign: 'center', marginBottom: '0.5rem' }}>Assessment & Onboarding Tiers</h1>
       <p className="muted" style={{ textAlign: 'center', maxWidth: 760, margin: '0 auto 2.5rem' }}>
         Every tier starts with universal visibility: {universal}. Higher tiers layer advanced analytics, governance scenario modeling, and collaborative transformation support.
