@@ -1,0 +1,65 @@
+# The base URL of your website (required)
+site_url = "https://platform.mapmycurriculum.com"
+
+# A list of *exact* URLs that auth providers are permitted to redirect to post authentication
+additional_redirect_urls = ["https://platform.mapmycurriculum.com/auth/callback", "http://localhost:3000/auth/callback"]
+
+[auth]
+# Allow new users to sign up via email confirmation.
+enable_signup = true
+
+# Allow anonymous sign-ins
+enable_anonymous_sign_ins = false
+
+# Allow testing manual linking of accounts
+enable_manual_linking = false
+
+# Allow unconfirmed user session (only for development)
+enable_confirmations = true
+
+[auth.email]
+# Allow/disallow new user signups via email to your project.
+enable_signup = true
+# If enabled, users will be required to confirm their email address before signing in.
+enable_confirmations = true
+# If enabled, users will need to confirm their email address before signing in.
+confirm_email_change = true
+# If enabled, a user will be required to enter their password again to change their email address.
+secure_email_change = true
+
+# Use a custom SMTP server
+[auth.email.smtp]
+host = "smtp.gmail.com"
+port = 587
+user = ""
+pass = ""
+admin_email = ""
+sender_name = "Map My Curriculum"
+
+[auth.sms]
+# Allow/disallow new user signups via SMS to your project.
+enable_signup = false
+enable_confirmations = false
+
+# Use pre-defined map of phone number to OTP for testing.
+[auth.sms.test_otp]
+# 4152127777 = "123456"
+
+# Configure one of the supported SMS providers: `twilio`, `messagebird`, `textlocal`, `vonage`.
+[auth.sms.twilio]
+enabled = false
+account_sid = ""
+message_service_sid = ""
+auth_token = ""
+
+[auth.external.github]
+enabled = true
+client_id = "your_github_oauth_app_client_id"
+secret = "your_github_oauth_app_secret"
+redirect_uri = "https://dsxiiakytp ufxsqlimkf.supabase.co/auth/v1/callback"
+
+[auth.external.google]
+enabled = true
+client_id = "your_google_oauth_client_id"
+secret = "your_google_oauth_secret"
+redirect_uri = "https://dsxiiakytp ufxsqlimkf.supabase.co/auth/v1/callback"
