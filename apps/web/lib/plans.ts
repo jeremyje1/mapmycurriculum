@@ -32,7 +32,7 @@ export const PLANS: PlanDef[] = [
       'Exportable curriculum maps (CSV/Word/PDF)',
       'Email support only'
     ],
-    envVar: 'NEXT_PUBLIC_PRICE_STARTER',
+    envVar: 'NEXT_PUBLIC_PRICE_STARTER_FIXED',
     userLimits: {
       students: 500,
       faculty: 50
@@ -53,7 +53,7 @@ export const PLANS: PlanDef[] = [
       'Standards crosswalks (state → accreditation body)',
       'Monthly office hours session with consultant'
     ],
-    envVar: 'NEXT_PUBLIC_PRICE_PROFESSIONAL',
+    envVar: 'NEXT_PUBLIC_PRICE_PROFESSIONAL_FIXED',
     userLimits: {
       students: 2500,
       faculty: 200
@@ -74,7 +74,7 @@ export const PLANS: PlanDef[] = [
       'Annual curriculum strategy workshop (virtual)',
       '40–50 page AI narrative & accreditation package'
     ],
-    envVar: 'NEXT_PUBLIC_PRICE_COMPREHENSIVE',
+    envVar: 'NEXT_PUBLIC_PRICE_COMPREHENSIVE_FIXED',
     userLimits: {
       students: 10000,
       faculty: 1000
