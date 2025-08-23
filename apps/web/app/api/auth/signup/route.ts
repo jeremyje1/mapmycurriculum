@@ -1,16 +1,15 @@
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import crypto from 'crypto';
-import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
 export async function POST(req: Request) {
   try {
-    const { email, password, institution: institutionName, state } = await req.json();
-    
-    if (!email || !password || !institutionName) {
-      return NextResponse.json({ error: 'Email, password, and institution are required' }, { status: 400 });
+    const { email, institution: institutionName, state } = await req.json();
+
+    if (!email || !institutionName) {
+      return NextResponse.json({ error: 'Email and institution are required' }, { status: 400 });
     }
 
     // Check if user already exists
@@ -22,30 +21,24 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'User already exists' }, { status: 409 });
     }
 
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 12);
-
     // Create or find institution
     let institution = await prisma.institution.findFirst({
       where: { name: institutionName },
     });
 
-    if (!institution) {
-      institution = await prisma.institution.create({
-        data: {
-          name: institutionName,
-          state: state || 'US-TX', // Default to Texas if not provided
-        },
-      });
-    }
+    institution = institution ?? await prisma.institution.create({
+      data: {
+        name: institutionName,
+        state: state ?? 'US-TX',
+      },
+    });
 
-    // Create user with hashed password
+    // Create user without password (passwordless provisional account)
     const user = await prisma.user.create({
       data: {
         email,
-        password: hashedPassword,
         institutionId: institution.id,
-        role: 'admin', // Default role for new signups
+        role: 'admin',
       },
     });
 

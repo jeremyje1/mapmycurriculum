@@ -44,8 +44,8 @@ export function AuthForm({ mode }: AuthFormProps) {
         router.push('/assessment/onboarding' as any);
       } else {
         // For login, just redirect to dashboard (simplified auth)
-        const email = data.email as string;
-        if (email && email.includes('@')) {
+  const email = (data as any).email as string;
+  if (email?.includes('@')) {
           // Set a simple session cookie
           document.cookie = `session-token=simplified_auth_${Date.now()}; path=/; max-age=${60*60*24*7}`;
           router.push('/enterprise/dashboard' as any);
@@ -77,11 +77,7 @@ export function AuthForm({ mode }: AuthFormProps) {
           Enter your email to access your account. No password required for existing subscribers.
         </p>
       )}
-      {isSignup && (
-        <Field label="Password">
-          <input required type="password" name="password" placeholder="••••••••" style={inputStyle} />
-        </Field>
-      )}
+  {/* Password removed: passwordless signup */}
       {isSignup && (
         <>
           <Field label="State / RulePack Focus">
