@@ -1,8 +1,9 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+export const dynamic = 'force-dynamic';
 
-export default function SetupPasswordPage() {
+function SetupPasswordInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const email = searchParams?.get('email');
@@ -210,5 +211,13 @@ export default function SetupPasswordPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function SetupPasswordPage() {
+  return (
+    <Suspense fallback={<div style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center'}}>Loading...</div>}>
+      <SetupPasswordInner />
+    </Suspense>
   );
 }

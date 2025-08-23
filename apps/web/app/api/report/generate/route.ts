@@ -3,6 +3,9 @@ import { NextResponse } from 'next/server';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
+// Ensure fontkit optional dependency iconv-lite is available to avoid build warnings
+// (pdfkit -> fontkit -> restructure expects iconv-lite). We explicitly import it so Next bundles it.
+import 'iconv-lite';
 
 interface GenerateBody {
   answers: Record<string, unknown>;
