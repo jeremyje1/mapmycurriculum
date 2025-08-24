@@ -1,7 +1,16 @@
 import { createClient } from '@supabase/supabase-js'
+import * as dotenv from 'dotenv'
 
-const supabaseUrl = 'https://dsxiiakytpufxsqlimkf.supabase.co'
-const supabaseServiceKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRzeGlpYWt5dHB1ZnhzcWxpbWtmIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1NTk4MjYyMSwiZXhwIjoyMDcxNTU4NjIxfQ.CnbcvECwqn4EzIx_tLDaYUW0K7roc9Pvp_n2_mU6g1g'
+// Load environment variables
+dotenv.config()
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://dsxiiakytpufxsqlimkf.supabase.co'
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+
+if (!supabaseServiceKey) {
+  console.error('❌ Error: SUPABASE_SERVICE_ROLE_KEY environment variable is required')
+  process.exit(1)
+}
 
 const supabase = createClient(supabaseUrl, supabaseServiceKey)
 
