@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { headers } from 'next/headers';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '@/lib/prisma';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -9,7 +9,6 @@ export const dynamic = 'force-dynamic';
 const secret = process.env.STRIPE_SECRET_KEY;
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 const stripe = secret ? new Stripe(secret, { apiVersion: '2023-10-16' }) : null;
-const prisma = new PrismaClient();
 
 async function provisionFromCheckoutSession(session: Stripe.Checkout.Session) {
   const email = session.customer_details?.email || session.customer_email;

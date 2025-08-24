@@ -1,11 +1,9 @@
 import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '@/lib/prisma';
 import crypto from 'crypto';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
-
-const prisma = new PrismaClient();
 
 export async function POST(req: Request) {
   try {
@@ -65,8 +63,25 @@ export async function POST(req: Request) {
   } catch (error) {
     console.error('Password setup error:', error);
     console.error('Error details:', error);
+    
+    // Better error messages for debugging
+    if (error instanceof Error) {
+      console.error('Error message:', error.message);
+      console.error('Error stack:', error.stack);
+      
+      // Check for common Prisma errors
+      if (error.message.includes('P1001') || error.message.includes('connect')) {
+        return NextResponse.json({ 
+          error: 'Database connection failed', 
+          details: process.env.NODE_ENV === 'development' ? error.message : undefined 
+        }, { status: 503 });
+      }
+      
+      if (error.message.includes('P2002')) {
+        return NextResponse.json({ error: 'User already exists' }, { status: 409 });
+      }
+    }
+    
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  } finally {
-    await prisma.$disconnect();
   }
 }
