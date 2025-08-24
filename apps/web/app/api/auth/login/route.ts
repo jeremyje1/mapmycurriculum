@@ -19,7 +19,9 @@ export async function POST(req: Request) {
     });
 
     if (!user) {
-      return NextResponse.json({ error: 'No account found with this email. Please check your email or sign up for a new account.' }, { status: 404 });
+      return NextResponse.json({ 
+        error: 'No account found with this email. Please complete your signup or check if you have an active subscription.' 
+      }, { status: 404 });
     }
 
     // If user has a password, verify it

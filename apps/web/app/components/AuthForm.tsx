@@ -86,13 +86,14 @@ export function AuthForm({ mode }: AuthFormProps) {
         <input required type="email" name="email" placeholder="you@college.edu" style={inputStyle} />
       </Field>
       {!isSignup && (
-        <Field label="Password">
-          <input required type="password" name="password" placeholder="Enter your password" style={inputStyle} />
+        <Field label="Password (optional for new subscribers)">
+          <input type="password" name="password" placeholder="Leave blank if you just subscribed" style={inputStyle} />
         </Field>
       )}
       {!isSignup && (
         <p className="tiny" style={{ color: '#666', margin: '0.5rem 0' }}>
-          Don't have a password yet? Complete your <a href="/setup-password" style={{color: '#1b4ae8'}}>account setup</a>.
+          <strong>New subscriber?</strong> Just enter your email and leave password blank. <br/>
+          <strong>Existing user?</strong> Enter your password or <a href="/setup-password" style={{color: '#1b4ae8'}}>set up a new password</a>.
         </p>
       )}
       {isSignup && (
