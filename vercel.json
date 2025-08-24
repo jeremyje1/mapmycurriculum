@@ -1,9 +1,17 @@
 {
   "version": 2,
   "framework": "nextjs",
-  "buildCommand": "pnpm --filter curriculum-map-web build",
+  "buildCommand": "cd apps/web && npm run build",
   "outputDirectory": "apps/web/.next",
-  "installCommand": "pnpm install",
+  "installCommand": "cd apps/web && npm install",
+  "functions": {
+    "apps/web/app/api/auth/*.ts": {
+      "maxDuration": 30
+    },
+    "apps/web/app/api/stripe/*.ts": {
+      "maxDuration": 30
+    }
+  },
   "crons": [
     {
       "path": "/api/health",
