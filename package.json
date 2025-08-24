@@ -5,10 +5,10 @@
   "engines": {
     "node": "22.x"
   },
-  "packageManager": "pnpm@8.15.6",
+  "packageManager": "npm@10.8.1",
   "scripts": {
-    "build": "pnpm --filter curriculum-map-web build",
-    "dev": "pnpm --filter curriculum-map-web dev",
+    "build": "npm --prefix apps/web run build",
+    "dev": "npm --prefix apps/web run dev",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "stripe:verify": "tsx scripts/stripe-verify.ts",
