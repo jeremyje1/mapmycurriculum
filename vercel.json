@@ -5,10 +5,10 @@
   "outputDirectory": "apps/web/.next",
   "installCommand": "cd apps/web && npm install",
   "functions": {
-    "apps/web/app/api/auth/*.ts": {
+    "apps/web/app/api/auth/*/route.ts": {
       "maxDuration": 30
     },
-    "apps/web/app/api/stripe/*.ts": {
+    "apps/web/app/api/stripe/*/route.ts": {
       "maxDuration": 30
     }
   },
