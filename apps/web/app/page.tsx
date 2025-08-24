@@ -143,102 +143,90 @@ export default function MarketingHome() {
       {/* Pricing */}
       <section id="pricing">
         <div className="container pricing">
-          <h2>Pricing</h2>
-          <h3 style={{marginTop:'1rem'}}>K‑12</h3>
-          <div className="pricing-grid" style={{marginBottom:'2.5rem'}}>
-            <div className="price-card">
-              <h3>School Starter</h3>
-              <p className="price-line">$1,500 / school / yr</p>
-              <ul>
-                <li>1 program map</li>
-                <li>3 users</li>
-                <li>Standards library (state + national)</li>
-                <li>Automated alignment & gap analysis</li>
-                <li>1 narrative export / yr</li>
-                <li>Email support</li>
-              </ul>
-              <a className="btn outline full" href="/signup">Get Started</a>
-            </div>
-            <div className="price-card highlight">
-              <h3>School Pro</h3>
-              <p className="price-line">$3,500 / school / yr</p>
-              <ul>
-                <li>5 program maps</li>
-                <li>10 users</li>
-                <li>Evidence pack builder</li>
-                <li>Unlimited standards imports</li>
-                <li>CSV / API export</li>
-                <li>Priority email</li>
-              </ul>
-              <a className="btn primary full" href="/signup">Select</a>
-            </div>
-            <div className="price-card">
-              <h3>District Pro</h3>
-              <p className="price-line">$9,500 / district / yr*</p>
-              <ul>
-                <li>Up to 10 schools (+$700 each add'l)</li>
-                <li>50 program maps pooled</li>
-                <li>50 users pooled</li>
-                <li>Bulk import</li>
-                <li>SSO (Google / OIDC)</li>
-                <li>Connectors add‑on ready</li>
-              </ul>
-              <a className="btn outline full" href="/contact">Talk to Sales</a>
-            </div>
-            <div className="price-card">
-              <h3>District Enterprise</h3>
-              <p className="price-line">$18,000 / district / yr</p>
-              <ul>
-                <li>Unlimited program maps</li>
-                <li>Unlimited users</li>
-                <li>SSO (SAML / OIDC) included</li>
-                <li>Connectors bundle included</li>
-                <li>Quarterly success review</li>
-                <li>White‑glove onboarding (add-on)</li>
-              </ul>
-              <a className="btn outline full" href="/contact">Request Quote</a>
-            </div>
-          </div>
-          <h3>Higher‑Ed</h3>
+          <h2>Simple, Transparent Pricing</h2>
+          <p style={{textAlign:'center',fontSize:'1.1rem',marginBottom:'2rem'}}>Choose the plan that fits your institution. All plans include our AI-powered curriculum engine.</p>
           <div className="pricing-grid">
+            {/* Starter Plan */}
             <div className="price-card">
-              <h3>Department</h3>
-              <p className="price-line">$6,000 / dept / yr</p>
+              <p className="price-tier">Starter Plan</p>
+              <h3 style={{margin:0}}>
+                <span className="price-amount">$2,495</span>
+                <span className="price-period">/ year</span>
+              </h3>
+              <p className="price-users">Up to 500 students / 50 faculty</p>
               <ul>
-                <li>Up to 5 program maps</li>
-                <li>10 users</li>
-                <li>Accreditation framework packs</li>
-                <li>Narrative generator</li>
-                <li>API export</li>
+                <li>Upload curriculum maps (CSV, Excel, PDF)</li>
+                <li>Auto-alignment with national/state standards</li>
+                <li>AI-generated gap analysis report (10 pages)</li>
+                <li>Exportable curriculum maps (CSV/Word/PDF)</li>
+                <li>Email support only</li>
               </ul>
-              <a className="btn outline full" href="/signup">Get Started</a>
+              <a className="btn outline full cta-button" href="https://platform.mapmycurriculum.com/signup?plan=starter">Start Free Trial</a>
             </div>
+            {/* Professional Plan */}
             <div className="price-card highlight">
-              <h3>College</h3>
-              <p className="price-line">$18,000 / college / yr</p>
+              <p className="price-tier">Professional Plan</p>
+              <h3 style={{margin:0}}>
+                <span className="price-amount">$5,995</span>
+                <span className="price-period">/ year</span>
+              </h3>
+              <p className="price-users">Up to 2,500 students / 200 faculty</p>
               <ul>
-                <li>Up to 20 program maps</li>
-                <li>50 users</li>
-                <li>SSO (OIDC) included</li>
-                <li>LMS connector add‑on</li>
-                <li>Priority support</li>
+                <li>Everything in Starter, plus:</li>
+                <li>AI narrative report (20–25 pages)</li>
+                <li>Multi-program support (5 programs/departments)</li>
+                <li>Faculty collaboration portal</li>
+                <li>Scenario modeling (curriculum redesign options)</li>
+                <li>Standards crosswalks (state → accreditation body)</li>
+                <li>Monthly office hours session with consultant</li>
               </ul>
-              <a className="btn primary full" href="/signup">Select</a>
+              <a className="btn primary full cta-button" href="https://platform.mapmycurriculum.com/signup?plan=professional">Start Free Trial</a>
             </div>
+            {/* Comprehensive Plan */}
             <div className="price-card">
-              <h3>Institution</h3>
-              <p className="price-line">$45,000 / institution / yr</p>
+              <p className="price-tier">Comprehensive Plan</p>
+              <h3 style={{margin:0}}>
+                <span className="price-amount">$12,500</span>
+                <span className="price-period">/ year</span>
+              </h3>
+              <p className="price-users">Up to 10,000 students / 1,000 faculty</p>
               <ul>
-                <li>Unlimited programs & users</li>
-                <li>SSO (SAML / OIDC)</li>
-                <li>LMS + SIS connectors</li>
-                <li>Quarterly governance workshop</li>
-                <li>Custom reporting</li>
+                <li>Everything in Professional, plus:</li>
+                <li>Custom accreditation alignment (regional + professional)</li>
+                <li>AI-powered curriculum visualization dashboards</li>
+                <li>Unlimited program uploads</li>
+                <li>Real-time gap closure tracking</li>
+                <li>Annual curriculum strategy workshop (virtual)</li>
+                <li>40–50 page AI narrative & accreditation package</li>
               </ul>
-              <a className="btn outline full" href="/contact">Request Quote</a>
+              <a className="btn outline full cta-button" href="https://platform.mapmycurriculum.com/contact?plan=comprehensive">Get Quote</a>
+            </div>
+            {/* Enterprise Plan */}
+            <div className="price-card">
+              <p className="price-tier">Enterprise Transformation</p>
+              <h3 style={{margin:0}}>
+                <span className="price-amount">$25,000+</span>
+                <span className="price-period">custom pricing</span>
+              </h3>
+              <p className="price-users">Unlimited users and programs</p>
+              <ul>
+                <li>Everything in Comprehensive, plus:</li>
+                <li>Dedicated customer success manager</li>
+                <li>API integrations (Canvas, Banner, Workday, etc.)</li>
+                <li>Power BI / Tableau dashboard embed</li>
+                <li>Quarterly progress audits</li>
+                <li>On-site or hybrid accreditation support</li>
+                <li>Full white-glove implementation</li>
+              </ul>
+              <a className="btn outline full cta-button" href="https://platform.mapmycurriculum.com/contact?plan=enterprise">Contact Sales</a>
             </div>
           </div>
-          <p className="tiny muted" style={{marginTop:'1.25rem'}}>*+$700 each additional school. Consortia / equity discounts: 10% state co‑ops; 15% Title I (&gt;70% FRL).</p>
+          <div style={{marginTop:'3rem',textAlign:'center'}}>
+            <p style={{fontSize:'0.9rem',color:'#6b7280'}}>
+              🔒 All plans include: Secure data handling • Regular platform updates • Standards library access<br/>
+              💳 Payment options: Annual billing • Purchase orders accepted • Multi-year discounts available
+            </p>
+          </div>
         </div>
       </section>
 
