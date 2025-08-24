@@ -1,9 +1,9 @@
 {
   "version": 2,
   "framework": "nextjs",
-  "buildCommand": "npm --prefix apps/web run build",
+  "buildCommand": "pnpm --filter curriculum-map-web build",
   "outputDirectory": "apps/web/.next",
-  "installCommand": "npm --prefix apps/web install",
+  "installCommand": "pnpm install",
   "crons": [
     {
       "path": "/api/health",
