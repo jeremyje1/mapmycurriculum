@@ -8,6 +8,7 @@
   "packageManager": "npm@10.8.1",
   "scripts": {
     "build": "npm --prefix apps/web run build",
+    "start": "npm --prefix apps/web run start",
     "dev": "npm --prefix apps/web run dev",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
