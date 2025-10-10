@@ -9,16 +9,16 @@ async function listVersions(stateDir: string): Promise<string[]> {
   const entries = await fs.readdir(stateDir, { withFileTypes: true }) as unknown as Dirent[];
   return entries
     .filter((e: Dirent) => e.isDirectory() && isVersionDir(e.name))
-    .map((e: Dirent) => e.name)
-    .sort();
+  .map((e: Dirent) => e.name)
+  .sort((a, b) => a.localeCompare(b));
 }
 
-async function readYamlFile<T=any>(filePath: string): Promise<T> {
+async function readYamlFile<T = unknown>(filePath: string): Promise<T> {
   const raw = await fs.readFile(filePath, 'utf8');
   return parseYaml(raw) as T;
 }
 
-async function readJsonOrYaml(filePath: string): Promise<any> {
+async function readJsonOrYaml(filePath: string): Promise<unknown> {
   const raw = await fs.readFile(filePath, 'utf8');
   if (filePath.endsWith('.json')) return JSON.parse(raw);
   return parseYaml(raw);
@@ -27,18 +27,23 @@ async function readJsonOrYaml(filePath: string): Promise<any> {
 async function loadRuleFiles(files: string[], baseDir: string): Promise<Rule[]> {
   const all: Rule[] = [];
   for (const rel of files) {
-    const full = path.resolve(baseDir, rel);
-    let arr: any;
-    try { arr = await readYamlFile<any[]>(full); } catch (e: any) {
-      throw new Error(`Failed reading rule file ${rel}: ${e.message}`);
+    const relPath = String(rel);
+    const full = path.resolve(baseDir, relPath);
+    let arr: unknown;
+    try {
+      arr = await readYamlFile<unknown[]>(full);
+    } catch (e: any) {
+      throw new Error(`Failed reading rule file ${relPath}: ${e.message}`);
     }
-    if (!Array.isArray(arr)) throw new Error(`Rule file ${rel} did not return an array`);
+    if (!Array.isArray(arr)) throw new Error(`Rule file ${relPath} did not return an array`);
     for (const r of arr) {
       const parsed = RuleSchema.safeParse(r);
       if (!parsed.success) {
-        const issues = parsed.error.issues.map(issue => issue.message).join('; ');
-        const rid = (r && (r as any).id) ? (r as any).id : 'UNKNOWN';
-        throw new Error(`Rule validation failed in ${rel} for id='${rid}': ${issues}`);
+  const issues = parsed.error.issues.map(issue => issue.message).join('; ');
+        const rid = (r && (r as Record<string, unknown>).id)
+          ? (r as Record<string, unknown>).id
+          : 'UNKNOWN';
+        throw new Error(`Rule validation failed in ${relPath} for id='${String(rid)}': ${issues}`);
       }
       all.push(parsed.data);
     }
@@ -65,18 +70,21 @@ export async function loadRulePack(state: string, version?: string): Promise<Loa
   const metaRaw = await readYamlFile(metaPath);
   const metaParsed = PackMetadataSchema.safeParse(metaRaw);
   if (!metaParsed.success) {
-    const issuesStr = metaParsed.error.issues.map(issue => `${issue.path.join('.')}: ${issue.message}`).join('; ');
+    const issuesStr = metaParsed.error.issues
+      .map(issue => `${issue.path.join('.')}: ${issue.message}`)
+      .join('; ');
     throw new Error('pack.yaml invalid: ' + issuesStr);
   }
   const meta = metaParsed.data;
 
   const datasets: Record<string, any> = {};
   for (const [key, rel] of Object.entries(meta.datasets)) {
-    const full = path.resolve(baseDir, rel);
+    const relPath = String(rel);
+    const full = path.resolve(baseDir, relPath);
     try {
       datasets[key] = await readJsonOrYaml(full);
     } catch (e: any) {
-      throw new Error(`Dataset '${key}' failed to load at ${rel}: ${e.message}`);
+      throw new Error(`Dataset '${key}' failed to load at ${relPath}: ${e.message}`);
     }
   }
 
@@ -84,8 +92,7 @@ export async function loadRulePack(state: string, version?: string): Promise<Loa
   if (Array.isArray(meta.rules)) {
     ruleFilePaths = meta.rules;
   } else {
-    const values = Object.values(meta.rules) as string[][];
-    ruleFilePaths = values.flat();
+  ruleFilePaths = Object.values(meta.rules).flat();
   }
   ruleFilePaths = [...new Set(ruleFilePaths)];
   const allRules = await loadRuleFiles(ruleFilePaths, baseDir);

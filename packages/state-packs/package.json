@@ -5,5 +5,14 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc -b"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.1",
+    "@types/yaml": "^1.9.7"
+  },
+  "dependencies": {
+    "yaml": "^2.8.1",
+    "zod": "^4.1.12"
   }
 }

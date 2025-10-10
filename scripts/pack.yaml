@@ -1,0 +1,22 @@
+state: US-TX
+version: "2025.09"
+title: "Texas RulePack (Demo)"
+effective_from: "2025-09-01"
+description: >
+  Demonstration RulePack for Texas Core Curriculum and Business FOSC-style checks.
+  This is illustrative demo content for pilots; not an official THECB dataset.
+rules:
+  - rules/program_rules.yaml
+  - rules/course_rules.yaml
+  - rules/termplan_rules.yaml
+datasets:
+  core_areas: datasets/core_areas.json
+  transfer_framework: datasets/transfer_framework.json
+  numbering: datasets/numbering.json
+  course_catalog: datasets/course_catalog.json
+references:
+  citations: references/citations.json
+tests:
+  fixtures:
+    - tests/fixtures/business_aa.json
+  spec: tests/spec.md

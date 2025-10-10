@@ -1,0 +1,9 @@
+type,ownerCode,code,level,description
+PLO,BUS-AA-TX,PLO1,M,Apply accounting and quantitative analysis to business decisions.
+PLO,BUS-AA-TX,PLO2,M,Demonstrate professional written and oral communication in business contexts.
+CLO,ACCT 2301,CLO_ACCT2301_1,D,Prepare and interpret basic financial statements.
+CLO,ACCT 2302,CLO_ACCT2302_1,M,Analyze cost behavior and apply budgeting techniques.
+CLO,MATH 1325,CLO_MATH1325_1,I,Use derivatives to solve marginal analysis problems.
+CLO,ECON 2302,CLO_ECON2302_1,D,Apply supply and demand to market analysis.
+CLO,ENGL 1302,CLO_ENGL1302_1,D,Write sourced analytical essays in standard business formats.
+CLO,SPCH 1315,CLO_SPCH1315_1,M,"Deliver organized, audience-centered oral presentations."

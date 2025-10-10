@@ -1,0 +1,172 @@
+{
+  "courses": [
+    {
+      "subject": "ENGL",
+      "number": "1301",
+      "title": "Composition I",
+      "credits": 3,
+      "coreArea": "Communication",
+      "cip": "23.1301"
+    },
+    {
+      "subject": "ENGL",
+      "number": "1302",
+      "title": "Composition II",
+      "credits": 3,
+      "coreArea": "Communication",
+      "cip": "23.1301"
+    },
+    {
+      "subject": "MATH",
+      "number": "1325",
+      "title": "Calculus for Business & Social Sciences",
+      "credits": 3,
+      "coreArea": "Mathematics",
+      "cip": "27.0101"
+    },
+    {
+      "subject": "HIST",
+      "number": "1301",
+      "title": "United States History I",
+      "credits": 3,
+      "coreArea": "American History",
+      "cip": "54.0102"
+    },
+    {
+      "subject": "HIST",
+      "number": "1302",
+      "title": "United States History II",
+      "credits": 3,
+      "coreArea": "American History",
+      "cip": "54.0102"
+    },
+    {
+      "subject": "GOVT",
+      "number": "2305",
+      "title": "Federal Government",
+      "credits": 3,
+      "coreArea": "Government/Political Science",
+      "cip": "45.1001"
+    },
+    {
+      "subject": "GOVT",
+      "number": "2306",
+      "title": "Texas Government",
+      "credits": 3,
+      "coreArea": "Government/Political Science",
+      "cip": "45.1001"
+    },
+    {
+      "subject": "PSYC",
+      "number": "2301",
+      "title": "General Psychology",
+      "credits": 3,
+      "coreArea": "Social & Behavioral Sciences",
+      "cip": "42.0101"
+    },
+    {
+      "subject": "PHIL",
+      "number": "1301",
+      "title": "Introduction to Philosophy",
+      "credits": 3,
+      "coreArea": "Language, Philosophy & Culture",
+      "cip": "38.0101"
+    },
+    {
+      "subject": "ARTS",
+      "number": "1301",
+      "title": "Art Appreciation",
+      "credits": 3,
+      "coreArea": "Creative Arts",
+      "cip": "50.0701"
+    },
+    {
+      "subject": "BIOL",
+      "number": "1308",
+      "title": "Biology for Non-Science Majors I",
+      "credits": 3,
+      "coreArea": "Life & Physical Sciences",
+      "cip": "26.0101"
+    },
+    {
+      "subject": "PHYS",
+      "number": "1301",
+      "title": "College Physics I",
+      "credits": 3,
+      "coreArea": "Life & Physical Sciences",
+      "cip": "40.0801"
+    },
+    {
+      "subject": "SPCH",
+      "number": "1315",
+      "title": "Public Speaking",
+      "credits": 3,
+      "coreArea": "Component Area Option",
+      "cip": "09.0101"
+    },
+    {
+      "subject": "COSC",
+      "number": "1301",
+      "title": "Intro to Computing",
+      "credits": 3,
+      "coreArea": "Component Area Option",
+      "cip": "11.0101"
+    },
+    {
+      "subject": "ECON",
+      "number": "2301",
+      "title": "Principles of Macroeconomics",
+      "credits": 3,
+      "coreArea": null,
+      "cip": "45.0601"
+    },
+    {
+      "subject": "ECON",
+      "number": "2302",
+      "title": "Principles of Microeconomics",
+      "credits": 3,
+      "coreArea": null,
+      "cip": "45.0601"
+    },
+    {
+      "subject": "ACCT",
+      "number": "2301",
+      "title": "Principles of Financial Accounting",
+      "credits": 3,
+      "coreArea": null,
+      "cip": "52.0301"
+    },
+    {
+      "subject": "ACCT",
+      "number": "2302",
+      "title": "Principles of Managerial Accounting",
+      "credits": 3,
+      "coreArea": null,
+      "cip": "52.0301"
+    },
+    {
+      "subject": "BUSI",
+      "number": "2305",
+      "title": "Business Statistics",
+      "credits": 3,
+      "coreArea": null,
+      "cip": "52.0201"
+    },
+    {
+      "subject": "BCIS",
+      "number": "1305",
+      "title": "Business Computer Applications",
+      "credits": 3,
+      "coreArea": null,
+      "cip": "11.0101"
+    },
+    {
+      "subject": "BUSI",
+      "number": "1301",
+      "title": "Business Principles",
+      "credits": 3,
+      "coreArea": null,
+      "cip": "52.0101"
+    }
+  ]
+}
