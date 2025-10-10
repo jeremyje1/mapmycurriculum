@@ -12,7 +12,9 @@
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "stripe:verify": "tsx scripts/stripe-verify.ts",
-    "stripe:setup:marketing": "tsx scripts/stripe-products-marketing.ts"
+    "stripe:setup:marketing": "tsx scripts/stripe-products-marketing.ts",
+    "demo:evaluate": "npm --prefix packages/domain run demo:evaluate",
+    "test": "npm --prefix packages/domain run test"
   },
   "dependencies": {
     "dotenv": "^16.4.5",

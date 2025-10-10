@@ -11,20 +11,24 @@ Early-stage implementation of a policy‑aware curriculum mapping & compliance e
 
 ## Quick Start
 ```bash
-pnpm install
-export DATABASE_URL='file:./dev.db'
-pnpm dlx prisma migrate dev --name init
-pnpm dlx prisma db seed
-pnpm test
+npm install
+npm test
 ```
 
-## Validate a RulePack
+## Demo Evaluation
+Run a demo curriculum evaluation against the Texas RulePack:
 ```bash
-pnpm state:validate US-TX 2025.09
+npm run demo:evaluate
 ```
+
+This will:
+- Load demo data from CSV files (programs, courses, term plans, outcomes, alignments)
+- Build a program snapshot with calculated metrics
+- Evaluate against Texas Core Curriculum requirements
+- Display compliance results
 
 ## Planned Next Steps
-1. Rule engine package (JSONLogic) + evaluations.
+1. ~~Rule engine package (JSONLogic) + evaluations~~ ✅ Complete
 2. Snapshot DB integration.
 3. API endpoints & workers.
 4. CSV import pipeline & UI.

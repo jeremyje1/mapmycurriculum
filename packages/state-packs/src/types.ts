@@ -47,7 +47,7 @@ export const LoadedRulePackSchema = z.object({
     course: z.array(RuleSchema),
     termPlan: z.array(RuleSchema)
   }),
-  datasets: z.record(z.any())
+  datasets: z.record(z.string(), z.any())
 });
 
 export type ValidationIssue = { level: 'error' | 'warn'; message: string };

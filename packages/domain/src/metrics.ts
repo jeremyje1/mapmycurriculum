@@ -1,10 +1,23 @@
 export interface ComputedMetrics {
-  totalCredits: number;
-  generalEducationCredits: number;
-  coreAreaBreakdown: Record<string, { credits: number; courses: string[] }>;
-  businessFoundation: { missing: string[]; complete: boolean };
-  ploMasteryCoverage: number; // percent
-  maxTermCredits: number;
+  program: {
+    totalCredits: number;
+    maxTermCredits: number;
+  };
+  core: {
+    totalCredits: number;
+    areaCredits: Record<string, number>;
+    areaBreakdown: Record<string, { credits: number; courses: string[] }>;
+  };
+  transfer: {
+    businessFOSC: {
+      missing: string[];
+      missingCount: number;
+      complete: boolean;
+    };
+  };
+  outcomes: {
+    ploMasteryCoveragePct: number;
+  };
 }
 
 interface CalcInput {
@@ -18,23 +31,48 @@ interface CalcInput {
 export function computeMetrics(input: CalcInput): ComputedMetrics {
   const totalCredits = input.courses.reduce((s,c)=>s + c.credits,0);
   const coreAreaBreakdown: Record<string, { credits: number; courses: string[] }> = {};
-  let generalEducationCredits = 0;
+  let coreAreaCredits: Record<string, number> = {};
+  let coreTotalCredits = 0;
+  
   for (const c of input.courses) {
     if (c.coreArea) {
-      generalEducationCredits += c.credits;
-      if (!coreAreaBreakdown[c.coreArea]) coreAreaBreakdown[c.coreArea] = { credits: 0, courses: [] };
+      coreTotalCredits += c.credits;
+      if (!coreAreaBreakdown[c.coreArea]) {
+        coreAreaBreakdown[c.coreArea] = { credits: 0, courses: [] };
+        coreAreaCredits[c.coreArea] = 0;
+      }
       coreAreaBreakdown[c.coreArea].credits += c.credits;
       coreAreaBreakdown[c.coreArea].courses.push(`${c.subject}${c.number}`);
+      coreAreaCredits[c.coreArea] += c.credits;
     }
   }
+  
   const foundationSubjects = new Set(input.businessFoundationSubjects ?? ['ACCT','ECON','BUSI','BCIS','MATH','SPCH']);
   const offeredSubjects = new Set(input.courses.map(c=>c.subject));
   const missing = Array.from(foundationSubjects).filter(s=>!offeredSubjects.has(s));
-  const businessFoundation = { missing, complete: missing.length === 0 };
+  const businessFOSC = { missing, missingCount: missing.length, complete: missing.length === 0 };
+  
   const ploMasteryByPlo = new Set(
     input.alignments.filter(a=>a.level==='M').map(a=>a.ploId)
   );
-  const ploMasteryCoverage = input.plos.length ? Math.round( (ploMasteryByPlo.size / input.plos.length) * 100 ) : 0;
+  const ploMasteryCoveragePct = input.plos.length ? Math.round( (ploMasteryByPlo.size / input.plos.length) * 100 ) : 0;
   const maxTermCredits = input.termPlans.reduce((m,t)=> Math.max(m, t.credits), 0);
-  return { totalCredits, generalEducationCredits, coreAreaBreakdown, businessFoundation, ploMasteryCoverage, maxTermCredits };
+  
+  return {
+    program: {
+      totalCredits,
+      maxTermCredits
+    },
+    core: {
+      totalCredits: coreTotalCredits,
+      areaCredits: coreAreaCredits,
+      areaBreakdown: coreAreaBreakdown
+    },
+    transfer: {
+      businessFOSC
+    },
+    outcomes: {
+      ploMasteryCoveragePct
+    }
+  };
 }

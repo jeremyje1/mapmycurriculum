@@ -4,14 +4,21 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc -b"
+    "build": "tsc -b",
+    "test": "vitest run",
+    "demo:evaluate": "tsx scripts/demo-evaluate.ts"
   },
   "dependencies": {
     "@cmt/state-packs": "*",
+    "csv-parse": "^6.1.0",
+    "json-logic-js": "^2.0.5",
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/json-logic-js": "^2.0.8",
     "@types/react": "^19.1.11",
-    "@types/react-dom": "^19.1.7"
+    "@types/react-dom": "^19.1.7",
+    "tsx": "^4.20.6",
+    "vitest": "^3.2.4"
   }
 }

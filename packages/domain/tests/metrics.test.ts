@@ -26,10 +26,10 @@ describe('computeMetrics', () => {
       { ploId: 'P2', cloId: 'c2', level: 'M' as const },
     ];
     const metrics = computeMetrics({ courses, termPlans, plos, alignments });
-    expect(metrics.totalCredits).toBe(27);
-    expect(metrics.generalEducationCredits).toBe(9); // ENGL+MATH+SPCH coreArea tagged (COMM+MATH)
-    expect(metrics.businessFoundation.complete).toBe(true);
-    expect(metrics.ploMasteryCoverage).toBe(100);
-    expect(metrics.maxTermCredits).toBe(9);
+    expect(metrics.program.totalCredits).toBe(27);
+    expect(metrics.core.totalCredits).toBe(9); // ENGL+MATH+SPCH coreArea tagged (COMM+MATH)
+    expect(metrics.transfer.businessFOSC.complete).toBe(true);
+    expect(metrics.outcomes.ploMasteryCoveragePct).toBe(100);
+    expect(metrics.program.maxTermCredits).toBe(9);
   });
 });
