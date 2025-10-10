@@ -1,0 +1,12 @@
+c_id_courses:
+  - code: "C-ID ENGL 100"
+    title: "College Composition"
+    description: "Articulated English composition course"
+    
+  - code: "C-ID MATH 140"
+    title: "Precalculus"
+    description: "Articulated precalculus mathematics"
+    
+  - code: "C-ID BUS 110"
+    title: "Introduction to Business"
+    description: "Foundational business course"

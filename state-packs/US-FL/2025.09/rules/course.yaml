@@ -1,0 +1,11 @@
+[
+  {
+    "id": "FL_COURSE_MIN_1_CREDIT",
+    "scope": "course",
+    "severity": "ERROR",
+    "description": "All courses must have at least 1 semester credit",
+    "predicate": {
+      ">=": [{ "var": "course.credits" }, 1]
+    }
+  }
+]

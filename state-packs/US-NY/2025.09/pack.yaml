@@ -1,0 +1,19 @@
+state: US-NY
+version: "2025.09"
+title: "New York SUNY General Education Requirements"
+effective_from: "2025-08-01"
+description: "State University of New York (SUNY) general education requirements for associate and baccalaureate degree programs."
+
+datasets:
+  suny_gen_ed: "datasets/suny_gen_ed.yaml"
+
+rules:
+  program:
+    - "rules/program.yaml"
+  course:
+    - "rules/course.yaml"
+  termPlan:
+    - "rules/termplan.yaml"
+
+references:
+  citations: "references/citations.json"

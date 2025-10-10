@@ -1,0 +1,8 @@
+gordon_rule_courses:
+  - type: "writing"
+    minCredits: 6
+    description: "Courses requiring substantial writing (6000+ words)"
+    
+  - type: "mathematics"
+    minCredits: 6
+    description: "Mathematics at college algebra level or higher"

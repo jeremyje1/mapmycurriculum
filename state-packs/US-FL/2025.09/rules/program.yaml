@@ -1,0 +1,52 @@
+[
+  {
+    "id": "FL_MIN_TOTAL_60",
+    "scope": "programVersion",
+    "severity": "ERROR",
+    "description": "Florida AA degrees require minimum 60 semester credit hours",
+    "predicate": {
+      ">=": [{ "var": "metrics.program.totalCredits" }, 60]
+    },
+    "remediation": "Add courses to reach 60 credit hour minimum for AA degree"
+  },
+  {
+    "id": "FL_GEN_ED_36",
+    "scope": "programVersion",
+    "severity": "ERROR",
+    "description": "General education core must be at least 36 credit hours",
+    "predicate": {
+      ">=": [{ "var": "metrics.core.totalCredits" }, 36]
+    },
+    "remediation": "Ensure general education meets Florida 36-hour requirement"
+  },
+  {
+    "id": "FL_GORDON_RULE_WRITING",
+    "scope": "programVersion",
+    "severity": "ERROR",
+    "description": "Gordon Rule requires 6000 words of graded written work across courses",
+    "predicate": {
+      ">=": [{ "var": "metrics.gordon_rule.writing_credits" }, 6]
+    },
+    "remediation": "Designate writing-intensive courses to meet Gordon Rule (6 credits minimum)"
+  },
+  {
+    "id": "FL_GORDON_RULE_MATH",
+    "scope": "programVersion",
+    "severity": "ERROR",
+    "description": "Gordon Rule requires 6 credit hours of mathematics at college algebra level or higher",
+    "predicate": {
+      ">=": [{ "var": "metrics.gordon_rule.math_credits" }, 6]
+    },
+    "remediation": "Include at least 6 credits of college-level mathematics"
+  },
+  {
+    "id": "FL_PLO_MASTERY",
+    "scope": "programVersion",
+    "severity": "WARNING",
+    "description": "All PLOs should demonstrate Mastery-level coverage",
+    "predicate": {
+      ">=": [{ "var": "metrics.outcomes.ploMasteryCoveragePct" }, 90]
+    },
+    "remediation": "Ensure 90%+ of PLOs have Mastery-level alignments"
+  }
+]

@@ -1,33 +1,55 @@
-## Go‑Live Checklist
+## 🎉 Go‑Live Checklist - UPDATED FOR PRODUCTION
 
-Purpose: Final verification before/after production deploy on Vercel.
+**Production URL**: https://platform.mapmycurriculum.com  
+**Status**: ✅ 2/3 Steps Complete  
+**Last Updated**: October 10, 2025
 
-### 1. Environment Variables (Vercel Project Settings → Environment → Production)
-Verify each is present (value / secret manager):
+---
 
-| Key | Purpose |
-|-----|---------|
-| DATABASE_URL | Postgres connection (sslmode=require if managed) |
-| NEXT_PUBLIC_APP_URL | https://app.northpathstrategies.org |
-| NEXT_PUBLIC_DOMAIN | app.northpathstrategies.org |
-| STRIPE_SECRET_KEY | Live secret key (starts with sk_live_) |
-| STRIPE_WEBHOOK_SECRET | From Stripe CLI/dashboard endpoint |
-| NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY | pk_live_* for future client usage |
-| NEXT_PUBLIC_PRICE_SCHOOL_STARTER | Price ID (price_...) |
-| NEXT_PUBLIC_PRICE_SCHOOL_PRO | Price ID |
-| NEXT_PUBLIC_PRICE_DISTRICT_PRO | Price ID (custom = no checkout) |
-| NEXT_PUBLIC_PRICE_DISTRICT_ENTERPRISE | Price ID (custom) |
-| NEXT_PUBLIC_PRICE_DEPARTMENT | Price ID |
-| NEXT_PUBLIC_PRICE_COLLEGE | Price ID |
-| NEXT_PUBLIC_PRICE_INSTITUTION | Price ID |
-| OPENAI_API_KEY | (If AI narrative/report features enabled) |
-| POWERBI_CLIENT_ID | (Enterprise embed) |
-| POWERBI_CLIENT_SECRET | (Enterprise embed – secret) |
-| POWERBI_TENANT_ID | Tenant GUID |
-| POWERBI_WORKSPACE_ID | Workspace GUID |
-| POWERBI_REPORT_ID | Report GUID |
-| POWERBI_SCOPE | https://analysis.windows.net/powerbi/api/.default |
-| POWERBI_AUTHORITY | https://login.microsoftonline.com/${TENANT_ID} |
+## ✅ Completed Steps
+
+### 1. ✅ Domain Configuration
+- **Custom Domain**: platform.mapmycurriculum.com
+- **DNS**: CNAME configured and propagated
+- **SSL**: Active (HTTPS working)
+- **Status**: LIVE ✅
+
+### 2. ✅ Stripe Webhook 
+- **Endpoint**: https://platform.mapmycurriculum.com/api/stripe/webhook
+- **Webhook ID**: we_1SGm3QCzPgWh4DF8EkrsPWDP
+- **Secret**: whsec_dlgXiaEY3kpI4CGYDQyW5j5El9TLZAD2
+- **Events**: checkout.session.completed, customer.subscription.*, invoice.*
+- **Vercel Env**: Updated and deployed ✅
+
+### 3. 🔄 Supabase Auth Configuration (IN PROGRESS)
+**Dashboard opened at**: https://supabase.com/dashboard/project/dsxiiakytpufxsqlimkf/auth/url-configuration
+
+**Required Configuration**:
+- [ ] Site URL: `https://platform.mapmycurriculum.com`
+- [ ] Add redirect URLs:
+  - `https://platform.mapmycurriculum.com/**`
+  - `https://platform.mapmycurriculum.com/auth/callback`
+  - `https://platform.mapmycurriculum.com/auth/confirm`
+- [ ] Keep development URLs for local testing
+- [ ] Save changes
+
+---
+
+## 📋 Environment Variables (Vercel Production)
+
+### ✅ Currently Configured
+
+| Key | Value | Status |
+|-----|-------|--------|
+| DATABASE_URL | postgresql://... | ✅ Set |
+| NEXT_PUBLIC_SUPABASE_URL | https://dsxiiakytpufxsqlimkf.supabase.co | ✅ Set |
+| NEXT_PUBLIC_SUPABASE_ANON_KEY | eyJhbGc... | ✅ Set |
+| SUPABASE_SERVICE_ROLE_KEY | eyJhbGc... | ✅ Set |
+| STRIPE_SECRET_KEY | sk_live_51RxXTa... | ✅ Set |
+| STRIPE_WEBHOOK_SECRET | whsec_dlgXiaEY... | ✅ Updated |
+| NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY | pk_live_... | ✅ Set |
+| NEXT_PUBLIC_PRICE_ID | price_1SGk9KCzPgWh4DF8Vw8mAR5d | ✅ Set |
+| NEXT_PUBLIC_APP_URL | platform.mapmycurriculum.com | ✅ Set |
 
 Action: In Vercel run “Redeploy with existing variables” if any were added post-build.
 

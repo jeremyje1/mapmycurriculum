@@ -1,0 +1,30 @@
+areas:
+  - code: "AREA-1"
+    name: "English Communication"
+    minCredits: 9
+    description: "CSU GE Area A - Written and oral communication"
+    
+  - code: "AREA-2"
+    name: "Mathematical Concepts"
+    minCredits: 3
+    description: "CSU GE Area B4 - Mathematics/Quantitative Reasoning"
+    
+  - code: "AREA-3"
+    name: "Arts and Humanities"
+    minCredits: 9
+    description: "CSU GE Area C - Arts, Literature, Philosophy, and Foreign Languages"
+    
+  - code: "AREA-4"
+    name: "Social and Behavioral Sciences"
+    minCredits: 9
+    description: "CSU GE Area D - Social Sciences"
+    
+  - code: "AREA-5"
+    name: "Physical and Biological Sciences"
+    minCredits: 9
+    description: "CSU GE Area B1-B3 - Physical/Biological Sciences with lab"
+    
+  - code: "AREA-6"
+    name: "US History, Constitution, and American Ideals"
+    minCredits: 6
+    description: "CSU US History and American Institutions requirement"

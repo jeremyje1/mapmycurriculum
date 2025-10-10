@@ -1,0 +1,25 @@
+areas:
+  - code: "COMM"
+    name: "Communication"
+    minCredits: 9
+    description: "Composition and oral communication skills"
+    
+  - code: "MATH"
+    name: "Mathematics"
+    minCredits: 6
+    description: "Quantitative reasoning and mathematics"
+    
+  - code: "HUMA"
+    name: "Humanities"
+    minCredits: 6
+    description: "Literature, philosophy, religion, or foreign languages"
+    
+  - code: "SOCSCI"
+    name: "Social Sciences"
+    minCredits: 6
+    description: "Behavioral or social sciences"
+    
+  - code: "NATSCI"
+    name: "Natural Sciences"
+    minCredits: 6
+    description: "Physical or biological sciences with lab component"

@@ -1,0 +1,52 @@
+[
+  {
+    "id": "NY_MIN_TOTAL_60_AA",
+    "scope": "programVersion",
+    "severity": "ERROR",
+    "description": "SUNY associate degrees require minimum 60 semester credit hours",
+    "predicate": {
+      ">=": [{ "var": "metrics.program.totalCredits" }, 60]
+    },
+    "remediation": "Add courses to meet 60 credit minimum for AA/AS degrees"
+  },
+  {
+    "id": "NY_GEN_ED_30",
+    "scope": "programVersion",
+    "severity": "ERROR",
+    "description": "SUNY General Education must include at least 30 credits distributed across knowledge areas",
+    "predicate": {
+      ">=": [{ "var": "metrics.core.totalCredits" }, 30]
+    },
+    "remediation": "Ensure general education meets SUNY 30-credit minimum"
+  },
+  {
+    "id": "NY_BASIC_COMM_6",
+    "scope": "programVersion",
+    "severity": "ERROR",
+    "description": "SUNY requires 6 credits in Basic Communication",
+    "predicate": {
+      ">=": [{ "var": "metrics.core.area.COMM.credits" }, 6]
+    },
+    "remediation": "Include 6 credits of composition and oral communication"
+  },
+  {
+    "id": "NY_SEVEN_AREAS",
+    "scope": "programVersion",
+    "severity": "WARNING",
+    "description": "Programs should include courses from at least 7 of 10 SUNY Gen Ed knowledge areas",
+    "predicate": {
+      ">=": [{ "var": "metrics.core.areaCount" }, 7]
+    },
+    "remediation": "Diversify general education across multiple knowledge areas"
+  },
+  {
+    "id": "NY_PLO_MASTERY_90",
+    "scope": "programVersion",
+    "severity": "WARNING",
+    "description": "At least 90% of PLOs should have Mastery-level coverage",
+    "predicate": {
+      ">=": [{ "var": "metrics.outcomes.ploMasteryCoveragePct" }, 90]
+    },
+    "remediation": "Map PLOs to Mastery-level course outcomes"
+  }
+]

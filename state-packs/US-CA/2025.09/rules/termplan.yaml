@@ -1,0 +1,12 @@
+[
+  {
+    "id": "CA_TERM_MAX_18",
+    "scope": "termPlan",
+    "severity": "WARNING",
+    "description": "California community colleges typically limit enrollment to 18 units per semester",
+    "predicate": {
+      "<=": [{ "var": "term.credits" }, 18]
+    },
+    "remediation": "Consider reducing term load to recommended maximum of 18 units"
+  }
+]

@@ -1,0 +1,21 @@
+state: US-CA
+version: "2025.09"
+title: "California General Education & CSU/UC Transfer Requirements"
+effective_from: "2025-08-01"
+description: "California State University and University of California general education patterns (IGETC and CSU GE-Breadth) for associate degree transfer pathways."
+
+datasets:
+  igetc_areas: "datasets/igetc_areas.yaml"
+  csu_ge_breadth: "datasets/csu_ge_breadth.yaml"
+  c_id: "datasets/c_id.yaml"
+
+rules:
+  program:
+    - "rules/program.yaml"
+  course:
+    - "rules/course.yaml"
+  termPlan:
+    - "rules/termplan.yaml"
+
+references:
+  citations: "references/citations.json"

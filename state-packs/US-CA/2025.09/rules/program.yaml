@@ -1,0 +1,49 @@
+[
+  {
+    "id": "CA_MIN_TOTAL_60",
+    "scope": "programVersion",
+    "severity": "ERROR",
+    "description": "California associate degree programs must have a minimum of 60 semester units",
+    "predicate": {
+      ">=": [{ "var": "metrics.program.totalCredits" }, 60]
+    },
+    "remediation": "Add courses to reach minimum 60 units required for California AA/AS degrees"
+  },
+  {
+    "id": "CA_GE_MIN_39",
+    "scope": "programVersion",
+    "severity": "ERROR",
+    "description": "General Education requirements must meet minimum 39 units (CSU GE-Breadth pattern)",
+    "predicate": {
+      ">=": [{ "var": "metrics.core.totalCredits" }, 39]
+    },
+    "remediation": "Ensure general education courses meet CSU GE-Breadth 39-unit minimum"
+  },
+  {
+    "id": "CA_AREA_COVERAGE",
+    "scope": "programVersion",
+    "severity": "WARNING",
+    "description": "All six GE areas should have minimum required credits",
+    "predicate": {
+      "and": [
+        { ">=": [{ "var": "metrics.core.area.AREA-1.credits" }, 9] },
+        { ">=": [{ "var": "metrics.core.area.AREA-2.credits" }, 3] },
+        { ">=": [{ "var": "metrics.core.area.AREA-3.credits" }, 9] },
+        { ">=": [{ "var": "metrics.core.area.AREA-4.credits" }, 9] },
+        { ">=": [{ "var": "metrics.core.area.AREA-5.credits" }, 9] },
+        { ">=": [{ "var": "metrics.core.area.AREA-6.credits" }, 6] }
+      ]
+    },
+    "remediation": "Review GE distribution to ensure all six areas meet minimum requirements"
+  },
+  {
+    "id": "CA_PLO_COVERAGE_100",
+    "scope": "programVersion",
+    "severity": "ERROR",
+    "description": "100% of program learning outcomes must have Mastery-level (M) alignments",
+    "predicate": {
+      "==": [{ "var": "metrics.outcomes.ploMasteryCoveragePct" }, 100]
+    },
+    "remediation": "Ensure every PLO has at least one course-level outcome mapped at Mastery level"
+  }
+]

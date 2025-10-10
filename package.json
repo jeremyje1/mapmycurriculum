@@ -13,6 +13,7 @@
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "demo:evaluate": "tsx scripts/run-demo-evaluation.ts",
+    "state:validate": "tsx scripts/state-validate.ts",
     "stripe:verify": "tsx scripts/stripe-verify.ts",
     "stripe:setup:marketing": "tsx scripts/stripe-products-marketing.ts"
   },

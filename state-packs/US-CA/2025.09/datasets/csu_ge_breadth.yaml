@@ -1,0 +1,44 @@
+breadth_areas:
+  - code: "A1"
+    name: "Oral Communication"
+    minCredits: 3
+    
+  - code: "A2"
+    name: "Written Communication"
+    minCredits: 3
+    
+  - code: "A3"
+    name: "Critical Thinking"
+    minCredits: 3
+    
+  - code: "B1"
+    name: "Physical Science"
+    minCredits: 3
+    
+  - code: "B2"
+    name: "Life Science"
+    minCredits: 3
+    
+  - code: "B3"
+    name: "Laboratory Activity"
+    minCredits: 0
+    
+  - code: "B4"
+    name: "Mathematics/Quantitative Reasoning"
+    minCredits: 3
+    
+  - code: "C1"
+    name: "Arts"
+    minCredits: 3
+    
+  - code: "C2"
+    name: "Humanities"
+    minCredits: 3
+    
+  - code: "D"
+    name: "Social Sciences"
+    minCredits: 9
+    
+  - code: "E"
+    name: "Lifelong Learning and Self-Development"
+    minCredits: 3

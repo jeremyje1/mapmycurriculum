@@ -1,0 +1,12 @@
+[
+  {
+    "id": "FL_TERM_MAX_18",
+    "scope": "termPlan",
+    "severity": "WARNING",
+    "description": "Florida colleges recommend maximum 15-18 credit hours per semester",
+    "predicate": {
+      "<=": [{ "var": "term.credits" }, 18]
+    },
+    "remediation": "Consider reducing term load to 15-18 credit maximum"
+  }
+]

@@ -1,0 +1,50 @@
+areas:
+  - code: "MATH"
+    name: "Mathematics"
+    minCredits: 3
+    description: "Mathematical reasoning and quantitative skills"
+    
+  - code: "NATSCI"
+    name: "Natural Sciences"
+    minCredits: 3
+    description: "Scientific reasoning with laboratory component"
+    
+  - code: "SOCSCI"
+    name: "Social Sciences"
+    minCredits: 3
+    description: "Understanding human behavior and social institutions"
+    
+  - code: "AMHIST"
+    name: "American History"
+    minCredits: 3
+    description: "US history and constitutional principles"
+    
+  - code: "WEST"
+    name: "Western Civilization"
+    minCredits: 3
+    description: "European history and cultural traditions"
+    
+  - code: "OTHERWORLD"
+    name: "Other World Civilizations"
+    minCredits: 3
+    description: "Non-Western cultures and civilizations"
+    
+  - code: "HUMA"
+    name: "Humanities"
+    minCredits: 3
+    description: "Arts, literature, philosophy, or foreign language"
+    
+  - code: "ARTS"
+    name: "The Arts"
+    minCredits: 3
+    description: "Visual arts, music, theater, or creative expression"
+    
+  - code: "COMM"
+    name: "Basic Communication"
+    minCredits: 6
+    description: "Written and oral communication skills"
+    
+  - code: "INFO"
+    name: "Information Management"
+    minCredits: 0
+    description: "Library and information literacy skills (embedded)"
