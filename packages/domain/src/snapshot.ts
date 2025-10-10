@@ -23,12 +23,25 @@ export const CloSchema = z.object({ id: z.string(), courseId: z.string(), code: 
 export const AlignmentSchema = z.object({ ploId: z.string(), cloId: z.string(), level: z.enum(['I','D','M']), weight: z.number().optional() });
 
 export const MetricsSchema = z.object({
-  totalCredits: z.number(),
-  generalEducationCredits: z.number(),
-  coreAreaBreakdown: z.record(z.object({ credits: z.number(), courses: z.array(z.string()) })),
-  businessFoundation: z.object({ missing: z.array(z.string()), complete: z.boolean() }),
-  ploMasteryCoverage: z.number(),
-  maxTermCredits: z.number()
+  program: z.object({
+    totalCredits: z.number(),
+    maxTermCredits: z.number()
+  }),
+  core: z.object({
+    totalCredits: z.number(),
+    areaCredits: z.record(z.string(), z.number()),
+    areaBreakdown: z.record(z.string(), z.object({ credits: z.number(), courses: z.array(z.string()) }))
+  }),
+  transfer: z.object({
+    businessFOSC: z.object({
+      missing: z.array(z.string()),
+      missingCount: z.number(),
+      complete: z.boolean()
+    })
+  }),
+  outcomes: z.object({
+    ploMasteryCoveragePct: z.number()
+  })
 });
 
 export const ProgramSnapshotSchema = z.object({
