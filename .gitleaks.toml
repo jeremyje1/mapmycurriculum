@@ -1,0 +1,52 @@
+title = "GitLeaks Configuration for Map My Curriculum"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "vercel-env-files"
+description = "Vercel environment files"
+regex = '''\.env\.vercel\.(production|preview|development)'''
+path = '''\.env\.vercel\.(production|preview|development)'''
+
+[[rules]]
+id = "stripe-webhook-secret"
+description = "Stripe Webhook Secret"
+regex = '''whsec_[a-zA-Z0-9]{32,}'''
+secretGroup = 1
+
+[[rules]]
+id = "supabase-service-role"
+description = "Supabase Service Role Key"
+regex = '''(eyJ[a-zA-Z0-9_-]{500,}|[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})'''
+secretGroup = 1
+
+[[rules]]
+id = "vercel-oidc-token"
+description = "Vercel OIDC Token"
+regex = '''VERCEL_OIDC_TOKEN=["']?(eyJ[a-zA-Z0-9_-]+\.eyJ[a-zA-Z0-9_-]+\.[a-zA-Z0-9_-]+)["']?'''
+secretGroup = 1
+
+[[rules]]
+id = "generic-api-key"
+description = "Generic API Key Pattern"
+regex = '''(?i)(api[_-]?key|apikey|access[_-]?token|secret[_-]?key)["\s:=]+([a-zA-Z0-9_\-]{20,})'''
+secretGroup = 2
+
+[allowlist]
+description = "Global allowlist"
+paths = [
+    '''\.md$''',
+    '''\.txt$''',
+    '''^\.gitignore$''',
+    '''package-lock\.json$''',
+    '''pnpm-lock\.yaml$''',
+]
+
+# Allow example/dummy values
+regexes = [
+    '''(example|sample|dummy|test|fake)''',
+    '''your_api_key_here''',
+    '''YOUR_.*_HERE''',
+    '''<.*>''',
+]
