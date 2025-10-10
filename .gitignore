@@ -25,3 +25,6 @@ prisma/migrations/*/steps.json
 .vercel
 supabase/.temp/
 .env.vercel
+.env.vercel.production
+.env*.production
+.env*.local
