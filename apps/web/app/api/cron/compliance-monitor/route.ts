@@ -60,7 +60,7 @@ export async function GET(request: Request) {
 
     // 1. Get all active programs
     const { data: programs, error: programsError } = await supabase
-      .from('simple_programs')
+      .from('programs')
       .select('*')
       .order('code');
 
