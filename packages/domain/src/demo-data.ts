@@ -13,6 +13,38 @@ type ProgramCourse = ProgramData['courses'][number];
 
 const toCourseKey = (subject: string, number: string) => `${subject.trim().toUpperCase()}-${number.trim().toUpperCase()}`;
 
+function parseCsvLine(line: string): string[] {
+  const cells: string[] = [];
+  let current = '';
+  let inQuotes = false;
+
+  for (let idx = 0; idx < line.length; idx += 1) {
+    const char = line[idx];
+
+    if (char === '"') {
+      const nextChar = line[idx + 1];
+      if (inQuotes && nextChar === '"') {
+        current += '"';
+        idx += 1;
+        continue;
+      }
+      inQuotes = !inQuotes;
+      continue;
+    }
+
+    if (char === ',' && !inQuotes) {
+      cells.push(current.trim());
+      current = '';
+      continue;
+    }
+
+    current += char;
+  }
+
+  cells.push(current.trim());
+  return cells.map(value => value.trim());
+}
+
 async function readCsvRecords(filePath: string): Promise<CsvRecord[]> {
   const raw = await fs.readFile(filePath, 'utf8');
   const lines = raw
@@ -20,9 +52,9 @@ async function readCsvRecords(filePath: string): Promise<CsvRecord[]> {
     .map((line: string) => line.trim())
     .filter((line: string) => line.length);
   if (lines.length === 0) return [];
-  const headers = lines[0].split(',').map((header: string) => header.trim());
+  const headers = parseCsvLine(lines[0]).map((header: string) => header.trim());
   return lines.slice(1).map((line: string) => {
-    const values = line.split(',');
+    const values = parseCsvLine(line);
     const record: CsvRecord = {};
     headers.forEach((header: string, idx: number) => {
       record[header] = (values[idx] ?? '').trim();

@@ -34,7 +34,10 @@ function formatMetrics(snapshot: Awaited<ReturnType<typeof buildSnapshot>>) {
 }
 
 async function main() {
-  const [, , programCodeArg, stateArg, versionArg, dataRootArg] = process.argv;
+  const args = process.argv.slice(2);
+  const optionArgs = new Set(args.filter(arg => arg.startsWith('--')));
+  const [programCodeArg, stateArg, versionArg, dataRootArg] = args.filter(arg => !arg.startsWith('--'));
+  const debugMode = optionArgs.has('--debug');
   const programCode = programCodeArg ?? 'BUS-AA-TX';
   const state = stateArg ?? 'US-TX';
   const version = versionArg ?? '2025.09';
@@ -51,6 +54,25 @@ async function main() {
 
   console.log('Key Metrics');
   console.table(formatMetrics(snapshot));
+
+  if (debugMode) {
+    console.log('Core Area Credits');
+    console.table(snapshot.metrics.core.areaCredits);
+    if (snapshot.metrics.core.minCredits) {
+      console.log('Core Area Minimums');
+      console.table(snapshot.metrics.core.minCredits);
+    }
+    const areaCourses = snapshot.courses.reduce<Record<string, string[]>>((acc, course) => {
+      if (!course.coreArea) return acc;
+      if (!acc[course.coreArea]) acc[course.coreArea] = [];
+      acc[course.coreArea].push(`${course.subject} ${course.number}`);
+      return acc;
+    }, {});
+    console.log('Course Core Areas');
+    Object.entries(areaCourses).forEach(([area, courses]) => {
+      console.log(`  ${area}: ${courses.join(', ')}`);
+    });
+  }
 
   const summary = {
     Program: summarizeResults(evaluation.program),
