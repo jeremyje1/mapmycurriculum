@@ -1,0 +1,41 @@
+{
+  "areas": [
+    {
+      "id": "Communication",
+      "minCredits": 6
+    },
+    {
+      "id": "Mathematics",
+      "minCredits": 3
+    },
+    {
+      "id": "Life & Physical Sciences",
+      "minCredits": 6
+    },
+    {
+      "id": "Language, Philosophy & Culture",
+      "minCredits": 3
+    },
+    {
+      "id": "Creative Arts",
+      "minCredits": 3
+    },
+    {
+      "id": "American History",
+      "minCredits": 6
+    },
+    {
+      "id": "Government/Political Science",
+      "minCredits": 6
+    },
+    {
+      "id": "Social & Behavioral Sciences",
+      "minCredits": 3
+    },
+    {
+      "id": "Component Area Option",
+      "minCredits": 6
+    }
+  ],
+  "totalCoreMinCredits": 42
+}

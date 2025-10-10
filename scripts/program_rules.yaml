@@ -1,0 +1,58 @@
+- id: TX_CORE_42_MIN_SH
+  scope: programVersion
+  severity: ERROR
+  description: "Texas Core requires at least 42 SCH across component areas."
+  predicate:
+    ">=":
+      - { "var": "metrics.core.totalCredits" }
+      - 42
+  remediation: "Increase mapped core courses or reclassify eligible courses into core areas."
+  references:
+    - { label: "Texas Core (demo)", url: "https://example.org/tx/core" }
+
+- id: TX_CORE_AREA_MINIMA
+  scope: programVersion
+  severity: ERROR
+  description: "Each core area meets the state's minimum SCH."
+  predicate:
+    "and":
+      - { ">=": [ { "var": "metrics.core.areaCredits.Communication" }, 6 ] }
+      - { ">=": [ { "var": "metrics.core.areaCredits.Mathematics" }, 3 ] }
+      - { ">=": [ { "var": "metrics.core.areaCredits.Life & Physical Sciences" }, 6 ] }
+      - { ">=": [ { "var": "metrics.core.areaCredits.Language, Philosophy & Culture" }, 3 ] }
+      - { ">=": [ { "var": "metrics.core.areaCredits.Creative Arts" }, 3 ] }
+      - { ">=": [ { "var": "metrics.core.areaCredits.American History" }, 6 ] }
+      - { ">=": [ { "var": "metrics.core.areaCredits.Government/Political Science" }, 6 ] }
+      - { ">=": [ { "var": "metrics.core.areaCredits.Social & Behavioral Sciences" }, 3 ] }
+      - { ">=": [ { "var": "metrics.core.areaCredits.Component Area Option" }, 6 ] }
+  remediation: "Adjust core course selection to satisfy each area minimum."
+
+- id: TX_MIN_TOTAL_CREDITS_60_66
+  scope: programVersion
+  severity: ERROR
+  description: "Associate programs should require 60–66 SCH."
+  predicate:
+    "and":
+      - { ">=": [ { "var": "metrics.program.totalCredits" }, 60 ] }
+      - { "<=": [ { "var": "metrics.program.totalCredits" }, 66 ] }
+  remediation: "Add or remove electives to meet the 60–66 SCH window."
+
+- id: TX_BUSINESS_FOSC_FOUNDATION
+  scope: programVersion
+  severity: ERROR
+  description: "Business FOSC foundational set must be satisfied (demo)."
+  predicate:
+    "==":
+      - { "var": "metrics.transfer.businessFOSC.missingCount" }
+      - 0
+  remediation: "Add missing foundational courses (ACCT 2301/2302, ECON 2301/2302, and required math option)."
+
+- id: TX_PLO_MASTERY_COVERAGE
+  scope: programVersion
+  severity: WARNING
+  description: "All PLOs should have at least one 'M' (mastery) alignment."
+  predicate:
+    "==":
+      - { "var": "metrics.outcomes.ploMasteryCoveragePct" }
+      - 100
+  remediation: "Ensure at least one course outcome assesses each PLO at 'M' level before graduation."

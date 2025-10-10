@@ -8,10 +8,14 @@
   },
   "dependencies": {
     "@cmt/state-packs": "*",
+    "json-logic-js": "^2.0.2",
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/node": "20.11.30",
+    "@types/json-logic-js": "^2.0.4",
     "@types/react": "^19.1.11",
-    "@types/react-dom": "^19.1.7"
+    "@types/react-dom": "^19.1.7",
+    "vitest": "^1.6.0"
   }
 }

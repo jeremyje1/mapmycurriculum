@@ -11,10 +11,12 @@
     "dev": "npm --prefix apps/web run dev",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
+    "demo:evaluate": "tsx scripts/run-demo-evaluation.ts",
     "stripe:verify": "tsx scripts/stripe-verify.ts",
     "stripe:setup:marketing": "tsx scripts/stripe-products-marketing.ts"
   },
   "dependencies": {
+    "@cmt/state-packs": "file:packages/state-packs",
     "dotenv": "^16.4.5",
     "stripe": "14.25.0"
   },
