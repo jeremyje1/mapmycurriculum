@@ -24,13 +24,14 @@ export async function GET() {
       STRIPE_SECRET_KEY_PREFIX: stripeKey ? stripeKey.substring(0, 20) + '...' : 'N/A',
       STRIPE_SECRET_KEY_SUFFIX: stripeKey ? '...' + stripeKey.substring(stripeKey.length - 10) : 'N/A',
       NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
-      NEXT_PUBLIC_PRICE_STARTER_FIXED: process.env.NEXT_PUBLIC_PRICE_STARTER_FIXED,
-      NEXT_PUBLIC_PRICE_PROFESSIONAL_FIXED: process.env.NEXT_PUBLIC_PRICE_PROFESSIONAL_FIXED,
-      NEXT_PUBLIC_PRICE_COMPREHENSIVE_FIXED: process.env.NEXT_PUBLIC_PRICE_COMPREHENSIVE_FIXED,
-      NEXT_PUBLIC_PRICE_ENTERPRISE: process.env.NEXT_PUBLIC_PRICE_ENTERPRISE,
+      NEXT_PUBLIC_PRICE_ID: process.env.NEXT_PUBLIC_PRICE_ID,
     },
     stripeTest: stripeTestResult,
     plans: PLANS,
-    checkoutEnabledPlans: CHECKOUT_ENABLED
+    pricing: {
+      model: 'single',
+      price: '$249',
+      priceId: process.env.NEXT_PUBLIC_PRICE_ID
+    }
   });
 }
