@@ -44,10 +44,11 @@ export async function GET(request: Request) {
 
     console.log('[CRON] Starting weekly compliance monitoring...');
     
+    // Use service role key for cron job to bypass RLS
     const cookieStore = cookies();
     const supabase = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!,
       {
         cookies: {
           get(name: string) {
