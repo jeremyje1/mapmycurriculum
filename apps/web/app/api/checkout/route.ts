@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { getDefaultPriceId } from '../../../lib/plans';
+import { getDefaultPriceId, getDefaultTrialDays } from '../../../lib/plans';
 
 const secret = process.env.STRIPE_SECRET_KEY;
 let stripe: Stripe | null = null;
@@ -26,6 +26,7 @@ export async function POST(req: Request) {
     if (!pid) return NextResponse.json({ error: 'Price ID not configured' }, { status: 400 });
     const origin = process.env.NEXT_PUBLIC_APP_URL || new URL(req.url).origin;
     const subscriptionMetadata = { institution: body.institution || '', state: body.state || '', plan: 'full_access' };
+    const trialDays = getDefaultTrialDays();
 
     const session = await stripe.checkout.sessions.create({
       mode: 'subscription',
@@ -33,6 +34,7 @@ export async function POST(req: Request) {
       line_items: [{ price: pid, quantity: 1 }],
       allow_promotion_codes: true,
       subscription_data: {
+        trial_period_days: trialDays,
         metadata: subscriptionMetadata
       },
       metadata: subscriptionMetadata,

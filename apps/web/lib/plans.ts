@@ -48,6 +48,7 @@ export function getPlan(key: PlanKey) {
 }
 
 const FALLBACK_PRICE_ID = 'price_1SHikoCzPgWh4DF8cLcigK7c';
+const FALLBACK_TRIAL_DAYS = 7;
 
 export function priceIdFor(key: PlanKey = 'full_access'): string | undefined {
   const plan = getPlan(key);
@@ -58,6 +59,14 @@ export function priceIdFor(key: PlanKey = 'full_access'): string | undefined {
 // Helper to get the single price ID directly
 export function getDefaultPriceId(): string | undefined {
   return process.env.NEXT_PUBLIC_PRICE_ID || FALLBACK_PRICE_ID;
+}
+
+export function getDefaultTrialDays(): number {
+  const raw = process.env.STRIPE_TRIAL_DAYS;
+  if (!raw) return FALLBACK_TRIAL_DAYS;
+  const parsed = Number.parseInt(raw, 10);
+  if (Number.isFinite(parsed) && parsed >= 0) return parsed;
+  return FALLBACK_TRIAL_DAYS;
 }
 
 export const CHECKOUT_ENABLED = PLANS.filter(p => p.checkout).map(p => p.key);
