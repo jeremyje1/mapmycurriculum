@@ -25,16 +25,17 @@ export async function POST(req: Request) {
     const pid = getDefaultPriceId();
     if (!pid) return NextResponse.json({ error: 'Price ID not configured' }, { status: 400 });
     const origin = process.env.NEXT_PUBLIC_APP_URL || new URL(req.url).origin;
+    const subscriptionMetadata = { institution: body.institution || '', state: body.state || '', plan: 'full_access' };
+
     const session = await stripe.checkout.sessions.create({
       mode: 'subscription',
       customer_email: body.email,
       line_items: [{ price: pid, quantity: 1 }],
       allow_promotion_codes: true,
       subscription_data: {
-        trial_period_days: 14, // 14-day free trial
-        metadata: { institution: body.institution || '', state: body.state || '', plan: 'full_access' }
+        metadata: subscriptionMetadata
       },
-      metadata: { institution: body.institution || '', state: body.state || '', plan: 'full_access' },
+      metadata: subscriptionMetadata,
       success_url: `${origin}/signup/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/signup?canceled=1`
     });

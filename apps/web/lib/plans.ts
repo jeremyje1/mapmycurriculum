@@ -47,15 +47,17 @@ export function getPlan(key: PlanKey) {
   return PLANS.find(p => p.key === key);
 }
 
+const FALLBACK_PRICE_ID = 'price_1SHikoCzPgWh4DF8cLcigK7c';
+
 export function priceIdFor(key: PlanKey = 'full_access'): string | undefined {
   const plan = getPlan(key);
   if (!plan) return undefined;
-  return process.env[plan.envVar];
+  return process.env[plan.envVar] || FALLBACK_PRICE_ID;
 }
 
 // Helper to get the single price ID directly
 export function getDefaultPriceId(): string | undefined {
-  return process.env.NEXT_PUBLIC_PRICE_ID;
+  return process.env.NEXT_PUBLIC_PRICE_ID || FALLBACK_PRICE_ID;
 }
 
 export const CHECKOUT_ENABLED = PLANS.filter(p => p.checkout).map(p => p.key);
