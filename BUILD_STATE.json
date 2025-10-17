@@ -1,0 +1,497 @@
+{
+  "projectName": "Map My Curriculum",
+  "description": "Policy-aware curriculum mapping & compliance engine for educational institutions",
+  "version": "0.9.0-beta",
+  "status": "PRE-PRODUCTION",
+  "lastUpdated": "2025-10-16",
+  
+  "architecture": {
+    "type": "monorepo",
+    "buildTool": "pnpm",
+    "framework": "Next.js 14",
+    "database": "PostgreSQL (Supabase + Prisma)",
+    "auth": "Supabase Auth (dual system with legacy)",
+    "payments": "Stripe",
+    "hosting": "Vercel",
+    "testing": "Cypress"
+  },
+
+  "coreFeatures": {
+    "implemented": {
+      "rulePacks": {
+        "status": "COMPLETE",
+        "location": "state-packs/US-TX/2025.09",
+        "loader": "packages/state-packs/loader.ts",
+        "description": "Zod-validated loader for state-specific regulatory rules and datasets",
+        "features": [
+          "Versioned rule packs (YYYY.MM format)",
+          "State codes (US-TX, US-CA, US-FL, US-NY)",
+          "JSONLogic-based validation",
+          "Schema validation via Zod"
+        ]
+      },
+      "domainLayer": {
+        "status": "COMPLETE",
+        "location": "packages/domain",
+        "description": "Business logic, schemas, and evaluation engine",
+        "features": [
+          "Course, term plan, outcome schemas",
+          "Snapshot generation (buildSnapshot())",
+          "Metrics computation (computeMetrics())",
+          "JSON Logic evaluation (evaluator.ts)",
+          "Demo data CSV parsing"
+        ]
+      },
+      "database": {
+        "status": "COMPLETE",
+        "schema": "prisma/schema.prisma",
+        "description": "Data models for institutions, programs, courses, outcomes, alignments, rules",
+        "tables": [
+          "Institution", "Program", "ProgramVersion", "Course",
+          "TermPlan", "TermCourse", "ProgramOutcome", "CourseOutcome",
+          "Alignment", "RulePack", "RuleResult", "ImpactItem",
+          "ProgramSnapshot", "ExportArtifact", "User"
+        ],
+        "migrations": {
+          "compliance": "supabase/migrations/*_compliance_monitoring.sql",
+          "tables": ["compliance_monitor_runs", "compliance_snapshots", "compliance_alerts"]
+        }
+      },
+      "marketingSite": {
+        "status": "COMPLETE",
+        "location": "apps/web/app/(marketing)",
+        "features": [
+          "Pricing page with tiers (Basic, Professional, Enterprise)",
+          "Plan definitions in lib/plans.ts",
+          "Sign-up flow with plan selection",
+          "Marketing landing page"
+        ]
+      },
+      "scenarioModeling": {
+        "status": "PARTIAL",
+        "location": "apps/web/app/enterprise/dashboard/scenarios",
+        "description": "Interactive scenario builder for Enterprise tier",
+        "implemented": [
+          "Load program data from Supabase",
+          "Add/remove courses in scenarios",
+          "Calculate proposed vs current metrics",
+          "Impact analysis visualization",
+          "Recommendation generation"
+        ],
+        "missing": [
+          "Scenario persistence (no scenarios table)",
+          "Scenario history and versioning",
+          "Apply scenario to program",
+          "Multi-user collaboration",
+          "Scenario comparison dashboard"
+        ]
+      },
+      "accreditationReports": {
+        "status": "PARTIAL",
+        "location": "apps/web/app/api/report/accreditation/route.ts",
+        "description": "PDF report generator for accreditation",
+        "implemented": [
+          "Multi-page PDF generation",
+          "Cover page with institution data",
+          "Table of contents",
+          "Narrative sections",
+          "Placeholder charts",
+          "Certification page"
+        ],
+        "missing": [
+          "Multiple templates (HLC, SACSCOC, ABET)",
+          "Dynamic chart generation",
+          "Evidence binder compilation",
+          "Template customization based on evaluation results"
+        ]
+      },
+      "complianceMonitoring": {
+        "status": "PARTIAL",
+        "location": "apps/web/app/api/cron/compliance-monitor/route.ts",
+        "description": "Weekly compliance evaluation cron job",
+        "implemented": [
+          "Cron endpoint scheduled weekly",
+          "Basic hardcoded rules evaluation",
+          "Snapshot storage",
+          "Alert generation for critical issues",
+          "Database tables (runs, snapshots, alerts)"
+        ],
+        "missing": [
+          "Integration with full rule-pack evaluator",
+          "Use of packages/domain evaluation engine",
+          "Rule pack version tracking in snapshots",
+          "Admin UI for viewing runs and alerts",
+          "Alert acknowledgment workflow",
+          "Email/Slack notifications"
+        ]
+      },
+      "checkoutFlow": {
+        "status": "PARTIAL",
+        "location": "apps/web/app/api/checkout/route.ts",
+        "description": "Stripe checkout initiation",
+        "implemented": [
+          "POST /api/checkout handler",
+          "Redirect to Stripe checkout",
+          "Plan selection from sign-up form"
+        ],
+        "missing": [
+          "Webhook handler for payment events",
+          "Subscription status tracking",
+          "Institution provisioning after payment",
+          "Billing management page",
+          "Plan upgrade/downgrade flow"
+        ]
+      }
+    },
+
+    "notImplemented": {
+      "dataOnboarding": {
+        "priority": "CRITICAL",
+        "description": "No UI/API to import or manage program structures",
+        "tasks": [
+          "CSV/Excel importer for programs, courses, outcomes",
+          "Manual forms to create/edit programs",
+          "Bulk import validation and error handling",
+          "Seed initial data for simple_programs, simple_courses, simple_alignments",
+          "RLS policies for multi-tenant isolation",
+          "Version history for program changes"
+        ]
+      },
+      "evaluationEngineIntegration": {
+        "priority": "CRITICAL",
+        "description": "Compliance cron uses hardcoded rules instead of rule-pack evaluator",
+        "tasks": [
+          "Refactor cron to use packages/state-packs loader",
+          "Call buildSnapshot() and evaluate() from packages/domain",
+          "Track rule pack versions in compliance_snapshots",
+          "Store detailed evaluation results with datasets",
+          "Support multiple state rule packs per institution"
+        ]
+      },
+      "scenarioPersistence": {
+        "priority": "HIGH",
+        "description": "Scenario modeling doesn't save scenarios",
+        "tasks": [
+          "Create scenarios table in Supabase",
+          "API routes: POST/GET/PUT/DELETE /api/scenarios",
+          "Save scenario name, proposed changes, impact metrics",
+          "Implement RLS for scenario access control",
+          "Apply scenario workflow (review, approve, apply)",
+          "Scenario comparison dashboard",
+          "Scenario history and rollback"
+        ]
+      },
+      "authenticationRoles": {
+        "priority": "CRITICAL",
+        "description": "Mock localStorage auth; no RBAC implementation",
+        "tasks": [
+          "Integrate Supabase Auth across all pages",
+          "Create roles table (admin, editor, viewer)",
+          "Update middleware for route protection",
+          "Implement RBAC in API routes",
+          "Sign-in/sign-out flow",
+          "Password reset and email verification",
+          "Role-based UI rendering"
+        ]
+      },
+      "subscriptionBilling": {
+        "priority": "CRITICAL",
+        "description": "No webhook handling or subscription management",
+        "tasks": [
+          "Implement POST /api/stripe/webhook",
+          "Handle checkout.session.completed",
+          "Handle invoice.payment_succeeded/failed",
+          "Create subscriptions table",
+          "Provision institution after successful payment",
+          "Billing management page",
+          "Plan upgrade/downgrade with proration",
+          "Cancellation flow",
+          "Usage-based billing for Enterprise"
+        ]
+      },
+      "reportingEnhancements": {
+        "priority": "MEDIUM",
+        "description": "Expand accreditation templates and evidence binder",
+        "tasks": [
+          "Multiple accreditation templates (HLC, SACSCOC, ABET)",
+          "Dynamic chart generation (Chart.js to PNG)",
+          "Evidence binder generator (PDF/ZIP)",
+          "Compile compliance snapshots into binder",
+          "Include scenario analyses in reports",
+          "Custom section builder for reports",
+          "Report scheduling and distribution"
+        ]
+      },
+      "notificationsIntegrations": {
+        "priority": "MEDIUM",
+        "description": "No notification system for alerts",
+        "tasks": [
+          "Email service integration (Postmark/SendGrid)",
+          "Slack webhook integration",
+          "Alert notifications for compliance status changes",
+          "Scenario approval notifications",
+          "Digest emails for weekly compliance runs",
+          "Notification preferences per user",
+          "LMS integration (Canvas, Banner) - future",
+          "HR system integration - future"
+        ]
+      },
+      "adminDashboards": {
+        "priority": "HIGH",
+        "description": "No UI for viewing compliance history and alerts",
+        "tasks": [
+          "Compliance monitor run history page",
+          "Alert management dashboard",
+          "Alert acknowledgment actions",
+          "Compliance trends over time (charts)",
+          "Program health scorecard",
+          "Institution analytics dashboard",
+          "User management page"
+        ]
+      },
+      "testingCI": {
+        "priority": "HIGH",
+        "description": "Minimal test coverage and no CI pipeline",
+        "tasks": [
+          "Unit tests for core domain functions",
+          "Integration tests for API routes",
+          "Cypress E2E tests for user flows",
+          "Test program import workflow",
+          "Test evaluation engine integration",
+          "Test scenario persistence",
+          "Test auth flow",
+          "Test subscription flow",
+          "Test compliance alerts",
+          "Test report downloads",
+          "GitHub Actions CI workflow",
+          "Enforce no secrets in commits (pre-commit hook)",
+          "Code coverage reporting"
+        ]
+      }
+    }
+  },
+
+  "technicalDebt": {
+    "dualAuth": {
+      "description": "Supabase and legacy Prisma auth coexist",
+      "impact": "MEDIUM",
+      "resolution": "Complete migration to Supabase Auth, remove legacy patterns"
+    },
+    "hardcodedRules": {
+      "description": "Compliance cron uses hardcoded rules instead of rule-pack evaluator",
+      "impact": "HIGH",
+      "resolution": "Refactor to use packages/domain evaluation engine"
+    },
+    "mockAuth": {
+      "description": "Dashboard uses localStorage token for testing",
+      "impact": "CRITICAL",
+      "resolution": "Implement proper Supabase Auth"
+    },
+    "missingRLS": {
+      "description": "Not all Supabase tables have RLS policies",
+      "impact": "CRITICAL",
+      "resolution": "Audit and implement RLS on all tables"
+    }
+  },
+
+  "security": {
+    "environmentVariables": {
+      "status": "PARTIAL",
+      "required": [
+        "NEXT_PUBLIC_APP_URL",
+        "NEXT_PUBLIC_SUPABASE_URL",
+        "NEXT_PUBLIC_SUPABASE_ANON_KEY",
+        "SUPABASE_SERVICE_ROLE_KEY",
+        "DATABASE_URL",
+        "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
+        "STRIPE_SECRET_KEY",
+        "STRIPE_WEBHOOK_SECRET",
+        "NEXT_PUBLIC_PRICE_BASIC",
+        "NEXT_PUBLIC_PRICE_PROFESSIONAL",
+        "NEXT_PUBLIC_PRICE_ENTERPRISE",
+        "CRON_SECRET"
+      ],
+      "documented": "DEPLOYMENT.md, ENV_SETUP_CHECKLIST.md",
+      "validation": "MISSING - need runtime validation on startup",
+      "gitignore": "COMPLETE - .env files excluded"
+    },
+    "rowLevelSecurity": {
+      "status": "PARTIAL",
+      "implemented": [
+        "compliance_monitor_runs",
+        "compliance_snapshots", 
+        "compliance_alerts"
+      ],
+      "missing": [
+        "simple_programs",
+        "simple_courses",
+        "simple_alignments",
+        "learning_outcomes",
+        "scenarios (table doesn't exist)"
+      ]
+    },
+    "rbac": {
+      "status": "NOT_IMPLEMENTED",
+      "needed": "Role-based access control for admin, editor, viewer roles"
+    },
+    "secretManagement": {
+      "status": "GOOD",
+      "notes": "Environment variables used, no secrets in repo, .env.example provided"
+    }
+  },
+
+  "deployment": {
+    "platform": "Vercel",
+    "project": "mapmycurriculum",
+    "buildCommand": "npm --prefix apps/web run build",
+    "rootDirectory": "apps/web",
+    "status": "CONFIGURED",
+    "documentation": [
+      "DEPLOYMENT.md",
+      "DEPLOYMENT_GUIDE.md",
+      "QUICK_START.md",
+      "Go-Live-Checklist.md"
+    ],
+    "cronJobs": {
+      "complianceMonitor": {
+        "endpoint": "/api/cron/compliance-monitor",
+        "schedule": "weekly",
+        "status": "CONFIGURED"
+      }
+    },
+    "healthChecks": {
+      "endpoint": "/api/health",
+      "status": "IMPLEMENTED"
+    }
+  },
+
+  "documentation": {
+    "architecture": "ARCHITECTURE.md",
+    "deployment": "DEPLOYMENT.md, DEPLOYMENT_GUIDE.md",
+    "quickStart": "QUICK_START.md",
+    "features": "FEATURES_DELIVERED.md",
+    "supabaseMigration": "SUPABASE_MIGRATION_GUIDE.md, docs/SUPABASE_MIGRATION.md",
+    "pricing": "PRICING_SIMPLIFIED.md, stripe-price-ids.md",
+    "status": "Multiple status docs (needs consolidation)"
+  },
+
+  "nextSteps": {
+    "phase1_mvp": {
+      "priority": "CRITICAL",
+      "timeline": "2-3 weeks",
+      "tasks": [
+        "Implement Supabase Auth across all pages",
+        "Add RBAC with admin/editor/viewer roles",
+        "Complete Stripe webhook handler",
+        "Create subscription management",
+        "Build data import UI (CSV upload)",
+        "Add RLS policies for multi-tenant isolation",
+        "Refactor compliance cron to use rule-pack evaluator",
+        "Create scenarios table and persistence API",
+        "Add basic admin dashboard for compliance alerts"
+      ]
+    },
+    "phase2_production": {
+      "priority": "HIGH",
+      "timeline": "3-4 weeks",
+      "tasks": [
+        "Implement email notifications (Postmark/SendGrid)",
+        "Build admin dashboards (compliance history, alerts, users)",
+        "Add scenario comparison and apply workflow",
+        "Enhance accreditation report templates",
+        "Create evidence binder generator",
+        "Add comprehensive E2E tests (Cypress)",
+        "Set up GitHub Actions CI pipeline",
+        "Add runtime environment variable validation",
+        "Complete RLS audit and implementation"
+      ]
+    },
+    "phase3_scale": {
+      "priority": "MEDIUM",
+      "timeline": "4-6 weeks",
+      "tasks": [
+        "Implement usage-based billing for Enterprise",
+        "Add Slack integration for notifications",
+        "Build analytics and reporting dashboards",
+        "Add LMS integration (Canvas, Banner)",
+        "Implement program version history and rollback",
+        "Add bulk operations and batch processing",
+        "Optimize database queries and caching",
+        "Add monitoring and error tracking (Sentry)",
+        "Create mobile-responsive views"
+      ]
+    }
+  },
+
+  "qualityGates": {
+    "preProduction": [
+      "All critical security issues resolved (auth, RLS, RBAC)",
+      "Stripe webhook handling complete",
+      "Multi-tenant data isolation verified",
+      "No secrets in repository (audit passed)",
+      "Basic E2E tests passing",
+      "Environment variables documented and validated",
+      "Health checks operational",
+      "Compliance monitoring using rule-pack evaluator"
+    ],
+    "production": [
+      "95%+ test coverage for critical paths",
+      "All admin dashboards operational",
+      "Email notifications working",
+      "Full RBAC implementation tested",
+      "Load testing completed",
+      "Disaster recovery plan documented",
+      "Customer data backup strategy implemented",
+      "SLA monitoring in place"
+    ]
+  },
+
+  "risks": {
+    "criticalPath": [
+      {
+        "issue": "Authentication not implemented",
+        "impact": "Cannot launch without proper auth",
+        "mitigation": "Prioritize Supabase Auth integration in Phase 1"
+      },
+      {
+        "issue": "No multi-tenant isolation",
+        "impact": "Data leakage between institutions",
+        "mitigation": "Implement RLS policies before onboarding real customers"
+      },
+      {
+        "issue": "Stripe webhooks missing",
+        "impact": "Subscriptions won't be provisioned or tracked",
+        "mitigation": "Complete webhook handler in Phase 1"
+      },
+      {
+        "issue": "Compliance evaluator not integrated",
+        "impact": "Core value proposition not delivered",
+        "mitigation": "Refactor cron job to use domain evaluator"
+      }
+    ],
+    "technical": [
+      {
+        "issue": "Dual auth systems create complexity",
+        "impact": "MEDIUM - maintenance burden, confusion",
+        "mitigation": "Complete migration to Supabase, remove legacy"
+      },
+      {
+        "issue": "No comprehensive testing",
+        "impact": "MEDIUM - bugs may reach production",
+        "mitigation": "Add tests incrementally, focus on critical paths"
+      }
+    ]
+  },
+
+  "team": {
+    "recommendations": [
+      "Assign dedicated developer to auth implementation (1-2 weeks)",
+      "Assign developer to Stripe integration completion (1 week)",
+      "Assign developer to RLS policy audit and implementation (1 week)",
+      "Schedule security review before production launch",
+      "Create staging environment for testing",
+      "Document runbook for common operations",
+      "Set up on-call rotation for production support"
+    ]
+  }
+}

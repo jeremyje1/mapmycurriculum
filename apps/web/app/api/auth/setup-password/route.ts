@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import crypto from 'crypto';
+import bcrypt from 'bcryptjs';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -27,8 +28,11 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Password already set' }, { status: 409 });
     }
 
-    // Store password as plain text for simplified auth (not recommended for production)
-    const hashedPassword = password; // In production, use proper hashing
+    if (password.length < 8) {
+      return NextResponse.json({ error: 'Password must be at least 8 characters' }, { status: 400 });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 12);
 
     // Update user with password
     const updatedUser = await prisma.user.update({

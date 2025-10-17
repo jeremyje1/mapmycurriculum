@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>Map My Curriculum - Policy-Aware Curriculum Mapping & Compliance Platform for Higher Education</title>
+    <meta name="description" content="Transform your institution's curriculum management with intelligent compliance monitoring, accreditation reporting, and scenario modeling. 20 years of higher education expertise. Custom solutions for universities, colleges, and educational institutions.">
+    <meta name="keywords" content="curriculum mapping, accreditation compliance, higher education software, curriculum management, SACSCOC compliance, HLC compliance, ABET accreditation, program outcomes, learning outcomes, curriculum intelligence, educational technology, academic compliance">
+    <meta name="author" content="Jeremy Estrella, North Path Strategies">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mapmycurriculum.com/">
+    <meta property="og:title" content="Map My Curriculum - Intelligent Curriculum Compliance Platform">
+    <meta property="og:description" content="Policy-aware curriculum mapping and compliance engine for educational institutions. Custom solutions backed by 20 years of higher ed expertise.">
+    <meta property="og:image" content="https://mapmycurriculum.com/wp-content/uploads/2025/10/IMG_3158.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://mapmycurriculum.com/">
+    <meta property="twitter:title" content="Map My Curriculum - Intelligent Curriculum Compliance Platform">
+    <meta property="twitter:description" content="Policy-aware curriculum mapping and compliance engine for educational institutions. Custom solutions backed by 20 years of higher ed expertise.">
+    <meta property="twitter:image" content="https://mapmycurriculum.com/wp-content/uploads/2025/10/IMG_3158.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://mapmycurriculum.com/">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Map My Curriculum",
+      "applicationCategory": "BusinessApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "Policy-aware curriculum mapping and compliance engine for educational institutions",
+      "operatingSystem": "Web-based",
+      "author": {
+        "@type": "Person",
+        "name": "Jeremy Estrella",
+        "jobTitle": "Educational Technology Consultant",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "North Path Strategies"
+        }
+      }
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1e40af;
+            --primary-light: #3b82f6;
+            --secondary-color: #10b981;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f9fafb;
+            --bg-white: #ffffff;
+            --border-color: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-white);
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        .nav {
+            background: var(--bg-white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+        
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+        
+        .hero-container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+        
+        .hero .description {
+            font-size: 1.125rem;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            opacity: 0.9;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--bg-white);
+            color: var(--primary-color);
+            padding: 1rem 2.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.125rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .section {
+            padding: 5rem 2rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        
+        .section-subtitle {
+            font-size: 1.25rem;
+            text-align: center;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+        
+        /* Problems & Solutions */
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .problem-card {
+            background: var(--bg-white);
+            border: 2px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .problem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-color);
+        }
+        
+        .problem-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .problem-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        
+        .problem-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+        
+        /* Features */
+        .features {
+            background: var(--bg-light);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+        }
+        
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+        
+        /* Benefits */
+        .benefits-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--bg-light);
+            border-radius: 0.75rem;
+        }
+        
+        .benefit-icon {
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+        }
+        
+        .benefit-text {
+            font-size: 1rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+        
+        /* About Section */
+        .about {
+            background: var(--bg-white);
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .about-image {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        
+        .about-text h4 {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .about-text p {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+        
+        .expertise-list {
+            list-style: none;
+            margin-top: 2rem;
+        }
+        
+        .expertise-list li {
+            padding: 0.75rem 0;
+            font-size: 1.125rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .expertise-list li:before {
+            content: "✓";
+            color: var(--secondary-color);
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+        
+        /* Custom Solutions */
+        .custom-solutions {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .custom-solutions .section-title,
+        .custom-solutions .section-subtitle {
+            color: white;
+        }
+        
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .solution-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2rem;
+            border-radius: 1rem;
+            transition: background 0.3s;
+        }
+        
+        .solution-box:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .solution-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .solution-box p {
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+        
+        /* Contact Form */
+        .contact {
+            background: var(--bg-light);
+        }
+        
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg-white);
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        
+        .submit-button {
+            width: 100%;
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+        
+        .submit-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .submit-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .form-message {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .form-message.success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .form-message.error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 3rem 2rem 1.5rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        .copyright {
+            opacity: 0.6;
+            font-size: 0.875rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.25rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .about-image {
+                margin: 0 auto;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .section {
+                padding: 3rem 1rem;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        /* Loading Spinner */
+        .spinner {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-left: 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="#" class="logo">Map My Curriculum</a>
+            <ul class="nav-links">
+                <li><a href="#problems">Challenges</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container fade-in-up">
+            <h1>Transform Curriculum Management with Intelligence</h1>
+            <p class="subtitle">Policy-Aware Curriculum Mapping & Compliance Platform</p>
+            <p class="description">
+                Automate accreditation compliance, streamline curriculum mapping, and make data-driven decisions 
+                with our intelligent platform backed by 20 years of higher education expertise.
+            </p>
+            <a href="#contact" class="cta-button">Get a Custom Solution</a>
+        </div>
+    </section>
+
+    <!-- Problems Section -->
+    <section id="problems" class="section">
+        <div class="container">
+            <h2 class="section-title">Challenges We Solve</h2>
+            <p class="section-subtitle">
+                Educational institutions face complex compliance and curriculum management challenges. 
+                We've built solutions that address them head-on.
+            </p>
+            
+            <div class="problems-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">⚠️</div>
+                    <h3>Accreditation Compliance Burden</h3>
+                    <p>
+                        Manual tracking of SACSCOC, HLC, or ABET requirements consumes hundreds of staff hours 
+                        and increases risk of non-compliance. Our automated monitoring keeps you audit-ready 24/7.
+                    </p>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon">📊</div>
+                    <h3>Fragmented Data Systems</h3>
+                    <p>
+                        Curriculum data scattered across spreadsheets, LMS platforms, and legacy systems makes 
+                        it impossible to get a complete picture. We unify everything in one intelligent platform.
+                    </p>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon">🎯</div>
+                    <h3>Learning Outcome Gaps</h3>
+                    <p>
+                        Identifying gaps in program and course learning outcome alignment is time-consuming and 
+                        error-prone. Our AI-powered analysis reveals gaps and suggests improvements instantly.
+                    </p>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon">⏱️</div>
+                    <h3>Time-Intensive Reporting</h3>
+                    <p>
+                        Creating accreditation reports takes weeks of manual work. Our platform generates 
+                        comprehensive, audit-ready reports in minutes with just a few clicks.
+                    </p>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon">🔄</div>
+                    <h3>Reactive Curriculum Changes</h3>
+                    <p>
+                        Program modifications happen without understanding downstream impacts. Our scenario 
+                        modeling lets you test changes before implementation.
+                    </p>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon">📈</div>
+                    <h3>Lack of Evidence-Based Insights</h3>
+                    <p>
+                        Making curriculum decisions without comprehensive data leads to suboptimal outcomes. 
+                        We provide actionable intelligence for every decision.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section features">
+        <div class="container">
+            <h2 class="section-title">Powerful Features</h2>
+            <p class="section-subtitle">
+                Everything you need to manage curriculum, ensure compliance, and drive continuous improvement.
+            </p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>Automated Compliance Monitoring</h3>
+                    <p>
+                        Continuous evaluation against state and accreditation requirements. Get alerts for 
+                        critical issues before they become problems.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>Intelligent Curriculum Mapping</h3>
+                    <p>
+                        Visual curriculum maps with outcome alignment tracking, prerequisite chains, 
+                        and credit hour analysis.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎓</div>
+                    <h3>Learning Outcome Management</h3>
+                    <p>
+                        Track program and course learning outcomes, alignment matrices, and assessment 
+                        evidence in one centralized system.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔮</div>
+                    <h3>Scenario Modeling</h3>
+                    <p>
+                        Test curriculum changes before implementation. See the impact on compliance, 
+                        outcomes, and student progression.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📄</div>
+                    <h3>Accreditation Report Generator</h3>
+                    <p>
+                        Generate comprehensive accreditation reports for HLC, SACSCOC, ABET, and more 
+                        with a single click.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Evidence Binder Creation</h3>
+                    <p>
+                        Compile compliance snapshots, scenario analyses, and supporting documentation 
+                        into audit-ready evidence binders.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Gap Analysis</h3>
+                    <p>
+                        Identify missing prerequisites, outcome coverage gaps, and compliance deficiencies 
+                        with detailed recommendations.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔔</div>
+                    <h3>Smart Alerts & Notifications</h3>
+                    <p>
+                        Receive email and Slack notifications when compliance status changes or 
+                        action is required.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Multi-Tenant Security</h3>
+                    <p>
+                        Enterprise-grade security with role-based access control and complete 
+                        data isolation between institutions.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">The Impact</h2>
+            <p class="section-subtitle">
+                See the tangible benefits institutions experience with Map My Curriculum
+            </p>
+            
+            <div class="benefits-list">
+                <div class="benefit-item">
+                    <span class="benefit-icon">✓</span>
+                    <span class="benefit-text">Reduce accreditation preparation time by 75%</span>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">✓</span>
+                    <span class="benefit-text">Eliminate manual compliance tracking errors</span>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">✓</span>
+                    <span class="benefit-text">Generate comprehensive reports in minutes, not weeks</span>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">✓</span>
+                    <span class="benefit-text">Make data-driven curriculum decisions with confidence</span>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">✓</span>
+                    <span class="benefit-text">Maintain continuous accreditation readiness</span>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">✓</span>
+                    <span class="benefit-text">Identify and address outcome gaps proactively</span>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">✓</span>
+                    <span class="benefit-text">Test curriculum changes risk-free with scenario modeling</span>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">✓</span>
+                    <span class="benefit-text">Streamline faculty collaboration on curriculum</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Solutions Section -->
+    <section class="section custom-solutions">
+        <div class="container">
+            <h2 class="section-title">Custom Solutions for Your Institution</h2>
+            <p class="section-subtitle">
+                Every institution is unique. We customize our platform to match your specific needs, 
+                workflows, and compliance requirements.
+            </p>
+            
+            <div class="solutions-grid">
+                <div class="solution-box">
+                    <h3>🏫 Universities & Colleges</h3>
+                    <p>
+                        Comprehensive curriculum management across multiple departments, programs, 
+                        and accreditation bodies.
+                    </p>
+                </div>
+                
+                <div class="solution-box">
+                    <h3>🎯 Community Colleges</h3>
+                    <p>
+                        Transfer pathway tracking, workforce alignment, and state compliance 
+                        requirements tailored for 2-year institutions.
+                    </p>
+                </div>
+                
+                <div class="solution-box">
+                    <h3>🏢 School Districts</h3>
+                    <p>
+                        K-12 curriculum alignment, standards mapping, and district-wide 
+                        learning outcome tracking.
+                    </p>
+                </div>
+                
+                <div class="solution-box">
+                    <h3>🔬 Professional Programs</h3>
+                    <p>
+                        Specialized solutions for ABET engineering, nursing (CCNE/ACEN), 
+                        business (AACSB), and other professional accreditations.
+                    </p>
+                </div>
+                
+                <div class="solution-box">
+                    <h3>🌐 Multi-Campus Systems</h3>
+                    <p>
+                        Centralized oversight with campus-specific customization and 
+                        system-wide reporting capabilities.
+                    </p>
+                </div>
+                
+                <div class="solution-box">
+                    <h3>🤝 Consortia & Partnerships</h3>
+                    <p>
+                        Shared curriculum mapping, articulation agreements, and 
+                        collaborative program development.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about">
+        <div class="container">
+            <h2 class="section-title">About the Founder</h2>
+            <div class="about-content">
+                <img src="https://mapmycurriculum.com/wp-content/uploads/2025/10/IMG_3158.jpg" 
+                     alt="Jeremy Estrella - Educational Technology Consultant" 
+                     class="about-image">
+                <div class="about-text">
+                    <h3>Jeremy Estrella</h3>
+                    <h4>Educational Technology Consultant | North Path Strategies</h4>
+                    <p>
+                        With over 20 years of experience in higher education technology and curriculum 
+                        management, I've helped dozens of institutions navigate the complex landscape 
+                        of accreditation compliance and curriculum excellence.
+                    </p>
+                    <p>
+                        My expertise spans large university systems, community colleges, and specialized 
+                        professional programs. I understand the unique challenges each institution faces 
+                        because I've lived them alongside faculty, administrators, and accreditation teams.
+                    </p>
+                    <p>
+                        Map My Curriculum was born from years of seeing institutions struggle with 
+                        outdated tools and manual processes. I built this platform to give educators 
+                        the intelligent tools they deserve—tools that work the way you think and 
+                        adapt to your institution's specific needs.
+                    </p>
+                    
+                    <ul class="expertise-list">
+                        <li>20+ years in higher education technology</li>
+                        <li>Curriculum management expert</li>
+                        <li>Accreditation compliance specialist</li>
+                        <li>Custom educational software development</li>
+                        <li>LMS integration and implementation</li>
+                        <li>Data-driven institutional effectiveness</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <h2 class="section-title">Let's Talk About Your Needs</h2>
+            <p class="section-subtitle">
+                Tell me about your institution's challenges, and I'll show you how we can build 
+                a custom solution that works for you.
+            </p>
+            
+            <div class="contact-container">
+                <form id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="institution">Institution Name *</label>
+                        <input type="text" id="institution" name="institution" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="role">Your Role *</label>
+                            <select id="role" name="role" required>
+                                <option value="">Select your role</option>
+                                <option value="dean">Dean / Department Chair</option>
+                                <option value="faculty">Faculty / Professor</option>
+                                <option value="admin">Administrator</option>
+                                <option value="director">Director (Accreditation / Assessment)</option>
+                                <option value="provost">Provost / Academic Officer</option>
+                                <option value="it">IT / Technology</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="institutionType">Institution Type *</label>
+                            <select id="institutionType" name="institutionType" required>
+                                <option value="">Select type</option>
+                                <option value="university">University (4-year)</option>
+                                <option value="college">College (4-year)</option>
+                                <option value="community">Community College (2-year)</option>
+                                <option value="technical">Technical / Vocational</option>
+                                <option value="k12">K-12 School / District</option>
+                                <option value="system">Multi-Campus System</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="interest">What are you interested in? *</label>
+                        <select id="interest" name="interest" required>
+                            <option value="">Select primary interest</option>
+                            <option value="demo">Schedule a Demo</option>
+                            <option value="custom">Custom Solution Development</option>
+                            <option value="consultation">Consultation / Assessment</option>
+                            <option value="pricing">Pricing Information</option>
+                            <option value="partnership">Partnership / Investment Opportunity</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Tell me about your needs *</label>
+                        <textarea id="message" name="message" required placeholder="What challenges are you facing? What are you hoping to achieve? Any specific requirements or questions?"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-button" id="submitBtn">
+                        Send Message
+                    </button>
+                    
+                    <div id="formMessage" class="form-message" style="display: none;"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="https://northpathstrategies.org" target="_blank">North Path Strategies</a>
+                <a href="mailto:info@northpathstrategies.org">info@northpathstrategies.org</a>
+                <a href="#problems">Challenges</a>
+                <a href="#features">Features</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <p class="copyright">
+                &copy; 2025 Map My Curriculum. All rights reserved. | A North Path Strategies Solution
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const formMessage = document.getElementById('formMessage');
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Disable submit button and show loading
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Sending... <span class="spinner"></span>';
+            formMessage.style.display = 'none';
+            
+            // Collect form data
+            const formData = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                institution: document.getElementById('institution').value,
+                role: document.getElementById('role').value,
+                institutionType: document.getElementById('institutionType').value,
+                interest: document.getElementById('interest').value,
+                message: document.getElementById('message').value,
+                timestamp: new Date().toISOString()
+            };
+            
+            try {
+                // Send to webhook endpoint
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                if (response.ok) {
+                    // Success
+                    formMessage.className = 'form-message success';
+                    formMessage.textContent = '✓ Thank you! I\'ll get back to you within 24 hours.';
+                    formMessage.style.display = 'block';
+                    contactForm.reset();
+                    
+                    // Track conversion (if analytics is set up)
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'form_submission', {
+                            'event_category': 'contact',
+                            'event_label': formData.interest
+                        });
+                    }
+                } else {
+                    throw new Error('Failed to send message');
+                }
+            } catch (error) {
+                // Error
+                formMessage.className = 'form-message error';
+                formMessage.textContent = '✗ Something went wrong. Please email me directly at info@northpathstrategies.org';
+                formMessage.style.display = 'block';
+                
+                console.error('Form submission error:', error);
+            } finally {
+                // Re-enable submit button
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Message';
+            }
+        });
+        
+        // Add fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.problem-card, .feature-card, .benefit-item').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
