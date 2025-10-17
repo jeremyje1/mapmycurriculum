@@ -1,9 +1,9 @@
 {
   "projectName": "Map My Curriculum",
   "description": "Policy-aware curriculum mapping & compliance engine for educational institutions",
-  "version": "0.9.0-beta",
+  "version": "0.9.1-beta",
   "status": "PRE-PRODUCTION",
-  "lastUpdated": "2025-10-16",
+  "lastUpdated": "2025-10-17",
   
   "architecture": {
     "type": "monorepo",
@@ -59,13 +59,34 @@
       },
       "marketingSite": {
         "status": "COMPLETE",
-        "location": "apps/web/app/(marketing)",
+        "location": "apps/web/app/(marketing) + marketing/coming-soon.html",
         "features": [
           "Pricing page with tiers (Basic, Professional, Enterprise)",
           "Plan definitions in lib/plans.ts",
           "Sign-up flow with plan selection",
-          "Marketing landing page"
-        ]
+          "SEO-optimized landing page (coming-soon.html)",
+          "Contact form with SendGrid integration",
+          "Professional branding and responsive design",
+          "Cross-origin API integration (CORS enabled)"
+        ],
+        "deployment": {
+          "status": "DEPLOYED",
+          "mainSite": "https://mapmycurriculum.com (WordPress)",
+          "platform": "https://platform.mapmycurriculum.com (Vercel)",
+          "contactAPI": "https://platform.mapmycurriculum.com/api/contact",
+          "landingPage": "marketing/coming-soon.html + apps/web/public/coming-soon.html"
+        },
+        "email": {
+          "provider": "SendGrid",
+          "fromEmail": "info@northpathstrategies.org",
+          "features": [
+            "Dual email delivery (notification + confirmation)",
+            "Professional HTML email templates",
+            "Form validation and error handling",
+            "CORS-enabled for cross-domain submissions"
+          ],
+          "notes": "Sender verification required in SendGrid dashboard"
+        }
       },
       "scenarioModeling": {
         "status": "PARTIAL",
@@ -183,15 +204,34 @@
       },
       "authenticationRoles": {
         "priority": "CRITICAL",
-        "description": "Mock localStorage auth; no RBAC implementation",
-        "tasks": [
-          "Integrate Supabase Auth across all pages",
-          "Create roles table (admin, editor, viewer)",
-          "Update middleware for route protection",
-          "Implement RBAC in API routes",
-          "Sign-in/sign-out flow",
-          "Password reset and email verification",
-          "Role-based UI rendering"
+        "status": "PARTIAL - Auth system 80% complete",
+        "description": "Supabase Auth integrated with RBAC, sign-in complete",
+        "completed": [
+          "Supabase Auth integration (lib/auth.ts, lib/supabase-*.ts)",
+          "RBAC system with 3 roles (ADMIN, EDITOR, VIEWER)",
+          "20+ permissions defined (lib/rbac.ts)",
+          "Middleware route protection for /enterprise, /dashboard, /admin",
+          "Sign-in page with Suspense boundary (app/sign-in/page.tsx)",
+          "Auth callback handler (app/auth/callback/route.ts)",
+          "Server actions for signIn, signOut (app/actions/auth.ts)",
+          "Supabase migration with 4 tables (institutions, users, subscriptions, audit_logs)",
+          "Row Level Security (RLS) policies for tenant isolation",
+          "Helper functions: requireAuth(), requireRole(), hasPermission()"
+        ],
+        "remaining": [
+          "Update sign-up page to use Supabase Auth instead of direct checkout",
+          "Password reset flow UI",
+          "Email verification workflow",
+          "Admin role management interface"
+        ],
+        "files": [
+          "lib/auth.ts (8 helper functions)",
+          "lib/rbac.ts (Role enum, Permission enum, access control)",
+          "middleware.ts (route protection with session checking)",
+          "supabase/migrations/20251016000000_auth_and_rbac.sql",
+          "app/sign-in/page.tsx",
+          "app/auth/callback/route.ts",
+          "app/actions/auth.ts"
         ]
       },
       "subscriptionBilling": {
@@ -343,15 +383,52 @@
   "deployment": {
     "platform": "Vercel",
     "project": "mapmycurriculum",
+    "customDomain": "platform.mapmycurriculum.com",
+    "repository": "github.com/jeremyje1/mapmycurriculum",
+    "branch": "main",
     "buildCommand": "npm --prefix apps/web run build",
     "rootDirectory": "apps/web",
-    "status": "CONFIGURED",
+    "status": "DEPLOYED",
+    "currentDeployment": {
+      "date": "2025-10-17",
+      "commit": "7bac188",
+      "url": "https://platform.mapmycurriculum.com",
+      "features": ["Authentication system", "Marketing landing page", "Contact form with SendGrid"]
+    },
     "documentation": [
       "DEPLOYMENT.md",
       "DEPLOYMENT_GUIDE.md",
       "QUICK_START.md",
-      "Go-Live-Checklist.md"
+      "Go-Live-Checklist.md",
+      "DEPLOYMENT_SUMMARY.md"
     ],
+    "environmentVariables": {
+      "critical": [
+        "SENDGRID_API_KEY - SendGrid API key for contact form emails",
+        "FROM_EMAIL - info@northpathstrategies.org (requires sender verification)",
+        "SUPABASE_SERVICE_ROLE_KEY - Full access to Supabase",
+        "DATABASE_URL - PostgreSQL connection string",
+        "STRIPE_SECRET_KEY - Stripe payment processing"
+      ],
+      "notes": "Use printf '%s' (not echo) when setting via CLI to avoid newline characters"
+    },
+    "troubleshooting": {
+      "sendgridErrors": {
+        "symptom": "Invalid character in header content [Authorization]",
+        "cause": "Newline characters in API key from echo command",
+        "solution": "vercel env rm SENDGRID_API_KEY production && printf '%s' 'KEY' | vercel env add SENDGRID_API_KEY production"
+      },
+      "staticFiles": {
+        "symptom": "404 for marketing page",
+        "cause": "Custom directories not served by Next.js",
+        "solution": "Copy to apps/web/public/ directory"
+      },
+      "cors": {
+        "symptom": "Cross-origin errors",
+        "cause": "Missing CORS headers",
+        "solution": "Add Access-Control-Allow-Origin headers to API routes"
+      }
+    },
     "cronJobs": {
       "complianceMonitor": {
         "endpoint": "/api/cron/compliance-monitor",
