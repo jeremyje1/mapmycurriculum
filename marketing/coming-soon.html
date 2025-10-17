@@ -65,6 +65,25 @@
     }
     </script>
     
+    <!-- Additional Organization Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Map My Curriculum",
+      "url": "https://mapmycurriculum.com",
+      "logo": "https://mapmycurriculum.com/wp-content/uploads/2025/10/ChatGPT-Image-Oct-13-2025-04_24_29-AM.png",
+      "description": "Policy-aware curriculum mapping and compliance platform for educational institutions",
+      "founder": {
+        "@type": "Person",
+        "name": "Jeremy Estrella"
+      },
+      "sameAs": [
+        "https://northpathstrategies.org"
+      ]
+    }
+    </script>
+    
     <style>
         * {
             margin: 0;
@@ -99,6 +118,66 @@
             color: var(--text-dark);
             background-color: var(--bg-white);
             overflow-x: hidden;
+        }
+        
+        /* Skip Link */
+        .sr-only {
+            position: absolute;
+            left: -9999px;
+            top: auto;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+        
+        .sr-only-focusable:focus {
+            position: static;
+            width: auto;
+            height: auto;
+            padding: 0.5rem 1rem;
+            background: #fff;
+            border: 2px solid var(--text-dark);
+            z-index: 10000;
+            left: auto;
+        }
+        
+        /* Typography */
+        p {
+            max-width: 70ch;
+        }
+        
+        .section-subtitle,
+        .hero .description {
+            max-width: 70ch;
+        }
+        
+        /* Focus Outlines */
+        a:focus,
+        button:focus,
+        input:focus,
+        select:focus,
+        textarea:focus,
+        summary:focus {
+            outline: 3px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+        
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            .problem-card:hover,
+            .feature-card:hover,
+            .benefit-item:hover,
+            .solution-box:hover {
+                transform: none;
+            }
         }
         
         /* Navigation */
@@ -238,10 +317,19 @@
         
         .hero .subtitle {
             font-size: 1.75rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
             opacity: 0.95;
             font-weight: 400;
             letter-spacing: -0.01em;
+        }
+        
+        .hero .subhead {
+            font-size: 1.125rem;
+            max-width: 850px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+            line-height: 1.6;
+            font-weight: 400;
         }
         
         .hero .description {
@@ -295,7 +383,7 @@
         }
         
         .section {
-            padding: 5rem 2rem;
+            padding: 6rem 2rem;
         }
         
         .section-title {
@@ -312,7 +400,7 @@
             font-size: 1.25rem;
             text-align: center;
             color: var(--text-light);
-            max-width: 750px;
+            max-width: 70ch;
             margin: 0 auto 4rem;
             line-height: 1.7;
         }
@@ -325,13 +413,17 @@
             margin-bottom: 4rem;
         }
         
-        .problem-card {
+        .problem-card,
+        .feature-card {
             background: var(--bg-white);
             border: 1px solid var(--border-color);
             border-radius: 1.25rem;
             padding: 2.5rem;
             transition: all 0.3s;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
         
         .problem-card:before {
@@ -417,6 +509,9 @@
             font-size: 3rem;
             margin-bottom: 1.25rem;
             display: block;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
         }
         
         .feature-card h3 {
@@ -425,6 +520,7 @@
             margin-bottom: 0.85rem;
             color: var(--text-dark);
             font-weight: 600;
+            min-height: 2.7rem;
         }
         
         .feature-card p {
@@ -432,45 +528,215 @@
             line-height: 1.8;
         }
         
+        /* Trust Badges */
+        .trust-badges {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            color: var(--text-medium);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-top: 2rem;
+            padding: 0 1rem;
+        }
+        
+        .trust-badges span {
+            white-space: nowrap;
+        }
+        
+        /* CTA Row */
+        .cta-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2rem;
+        }
+        
+        .cta-secondary {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 1.25rem 2.5rem;
+            border-radius: 0.75rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.125rem;
+            transition: all 0.3s;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .cta-secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .scheduler-details {
+            margin-top: 1.5rem;
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        .scheduler-details summary {
+            cursor: pointer;
+            color: white;
+            opacity: 0.9;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            transition: opacity 0.3s;
+        }
+        
+        .scheduler-details summary:hover {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .scheduler-embed {
+            margin-top: 1rem;
+            position: relative;
+            padding-top: 56.25%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+            background: white;
+        }
+        
+        .scheduler-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        
+        /* Differentiator Section */
+        .differentiator {
+            background: var(--bg-white);
+        }
+        
+        .differentiator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .differentiator-item {
+            padding: 2rem;
+            border-left: 4px solid var(--primary-color);
+            background: var(--bg-light);
+            border-radius: 0.5rem;
+        }
+        
+        .differentiator-item h3 {
+            font-size: 1.25rem;
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .differentiator-item p {
+            color: var(--text-medium);
+            line-height: 1.7;
+        }
+        
+        /* Engagement Steps */
+        .engagement-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .step-card {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 1rem 1rem 0 0;
+        }
+        
+        .step-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+        }
+        
+        .step-card h3 {
+            font-size: 1.35rem;
+            font-family: 'Poppins', sans-serif;
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .step-card p {
+            color: var(--text-medium);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        
         /* Benefits */
         .benefits-list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
             margin-top: 3rem;
         }
         
         .benefit-item {
             display: flex;
-            align-items: flex-start;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
             gap: 1rem;
-            padding: 1.75rem;
+            padding: 2.5rem;
             background: var(--bg-white);
-            border-radius: 1rem;
+            border-radius: 1.25rem;
             border: 1px solid var(--border-color);
             transition: all 0.3s;
+            box-shadow: var(--shadow-md);
         }
         
         .benefit-item:hover {
-            transform: translateX(5px);
-            box-shadow: var(--shadow-md);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
             border-color: var(--accent-color);
         }
         
         .benefit-icon {
             flex-shrink: 0;
-            width: 28px;
-            height: 28px;
+            width: 48px;
+            height: 48px;
             color: var(--accent-color);
-            font-size: 1.75rem;
+            font-size: 2.5rem;
             font-weight: bold;
         }
         
         .benefit-text {
-            font-size: 1.05rem;
-            color: var(--text-medium);
-            font-weight: 500;
-            line-height: 1.6;
+            font-size: 1.125rem;
+            color: var(--text-dark);
+            font-weight: 600;
+            line-height: 1.5;
         }
         
         /* About Section */
@@ -794,6 +1060,37 @@
             .hero-logo-img {
                 height: 80px;
             }
+            
+            .cta-row {
+                flex-direction: column;
+            }
+            
+            .trust-badges {
+                font-size: 0.85rem;
+            }
+            
+            .differentiator-grid,
+            .engagement-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .scheduler-embed iframe {
+                min-height: 600px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.25rem;
+            }
+            
+            .section h2 {
+                font-size: 2rem;
+            }
         }
         
         /* Animations */
@@ -831,11 +1128,14 @@
     </style>
 </head>
 <body>
+    <!-- Skip to Content Link -->
+    <a href="#main" class="sr-only sr-only-focusable">Skip to content</a>
+    
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-container">
             <a href="#" class="logo">
-                <img src="https://mapmycurriculum.com/wp-content/uploads/2025/10/Screenshot-2025-10-13-at-4.46.13-AM.png" alt="Map My Curriculum" class="logo-icon">
+                <img src="https://mapmycurriculum.com/wp-content/uploads/2025/10/Screenshot-2025-10-13-at-4.46.13-AM.png" alt="Map My Curriculum" class="logo-icon" width="32" height="32" loading="eager">
                 <span class="logo-text">Map My Curriculum</span>
             </a>
             <ul class="nav-links">
@@ -847,19 +1147,48 @@
         </div>
     </nav>
 
+    <!-- Main Content -->
+    <main id="main" tabindex="-1">
+    
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-container fade-in-up">
             <div class="hero-logo">
-                <img src="https://mapmycurriculum.com/wp-content/uploads/2025/10/ChatGPT-Image-Oct-13-2025-04_24_29-AM.png" alt="Map My Curriculum Logo" class="hero-logo-img">
+                <img src="https://mapmycurriculum.com/wp-content/uploads/2025/10/ChatGPT-Image-Oct-13-2025-04_24_29-AM.png" alt="Map My Curriculum Logo" class="hero-logo-img" width="400" height="333" loading="eager">
             </div>
-            <h1>Transform Curriculum Management with Intelligence</h1>
+            <h1>Policy-Aware Curriculum Intelligence—Tailored to Your Institution</h1>
             <p class="subtitle">Policy-Aware Curriculum Mapping & Compliance Platform</p>
+            <p class="subhead">
+                The platform is built. We configure the rules, mappings, and reporting to your policies, accreditors, and data sources—so you're evidence-ready fast.
+            </p>
             <p class="description">
                 Automate accreditation compliance, streamline curriculum mapping, and make data-driven decisions 
                 with our intelligent platform backed by 20 years of higher education expertise.
             </p>
-            <a href="#contact" class="cta-button">Get a Custom Solution</a>
+            
+            <div class="cta-row">
+                <a href="#contact" class="cta-button">Get a Custom Solution</a>
+                <a href="https://calendly.com/jeremyestrella/30min" target="_blank" rel="noopener" class="cta-secondary">Book a 20-min Briefing</a>
+            </div>
+            
+            <details class="scheduler-details">
+                <summary>Open inline scheduler</summary>
+                <div class="scheduler-embed">
+                    <iframe src="https://calendly.com/jeremyestrella/30min" title="Schedule with Jeremy Estrella" loading="lazy"></iframe>
+                </div>
+            </details>
+            
+            <div class="container trust-badges">
+                <span>SACSCOC / HLC Mapping</span>
+                <span>•</span>
+                <span>State Rule Packs</span>
+                <span>•</span>
+                <span>ABET/CCNE Ready</span>
+                <span>•</span>
+                <span>LMS/SIS Integrations</span>
+                <span>•</span>
+                <span>Evidence Binder Exports</span>
+            </div>
         </div>
     </section>
 
@@ -1033,36 +1362,103 @@
             
             <div class="benefits-list">
                 <div class="benefit-item">
-                    <span class="benefit-icon">✓</span>
-                    <span class="benefit-text">Reduce accreditation preparation time by 75%</span>
+                    <span class="benefit-icon">75%</span>
+                    <span class="benefit-text">Reduce accreditation preparation time</span>
                 </div>
                 <div class="benefit-item">
-                    <span class="benefit-icon">✓</span>
+                    <span class="benefit-icon">100%</span>
                     <span class="benefit-text">Eliminate manual compliance tracking errors</span>
                 </div>
                 <div class="benefit-item">
-                    <span class="benefit-icon">✓</span>
-                    <span class="benefit-text">Generate comprehensive reports in minutes, not weeks</span>
+                    <span class="benefit-icon">⚡</span>
+                    <span class="benefit-text">Generate reports in minutes, not weeks</span>
                 </div>
                 <div class="benefit-item">
-                    <span class="benefit-icon">✓</span>
-                    <span class="benefit-text">Make data-driven curriculum decisions with confidence</span>
+                    <span class="benefit-icon">📊</span>
+                    <span class="benefit-text">Make data-driven curriculum decisions</span>
                 </div>
                 <div class="benefit-item">
                     <span class="benefit-icon">✓</span>
                     <span class="benefit-text">Maintain continuous accreditation readiness</span>
                 </div>
                 <div class="benefit-item">
-                    <span class="benefit-icon">✓</span>
+                    <span class="benefit-icon">🎯</span>
                     <span class="benefit-text">Identify and address outcome gaps proactively</span>
                 </div>
                 <div class="benefit-item">
-                    <span class="benefit-icon">✓</span>
-                    <span class="benefit-text">Test curriculum changes risk-free with scenario modeling</span>
+                    <span class="benefit-icon">🔮</span>
+                    <span class="benefit-text">Test curriculum changes risk-free</span>
                 </div>
                 <div class="benefit-item">
-                    <span class="benefit-icon">✓</span>
-                    <span class="benefit-text">Streamline faculty collaboration on curriculum</span>
+                    <span class="benefit-icon">🤝</span>
+                    <span class="benefit-text">Streamline faculty collaboration</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Differentiator Section -->
+    <section class="section differentiator" aria-labelledby="customize-title">
+        <div class="container">
+            <h2 id="customize-title" class="section-title">What We Customize for You</h2>
+            <p class="section-subtitle">
+                We configure every aspect to match your institution's unique requirements and workflows.
+            </p>
+            
+            <div class="differentiator-grid">
+                <div class="differentiator-item">
+                    <h3>Policies & Rule Packs</h3>
+                    <p>State regulations, accreditor standards, and program-level compliance rules tailored to your requirements.</p>
+                </div>
+                
+                <div class="differentiator-item">
+                    <h3>Mappings</h3>
+                    <p>Courses to CLO/PLO/ILO alignment, rubrics, credit hour rules, and prerequisite chains specific to your programs.</p>
+                </div>
+                
+                <div class="differentiator-item">
+                    <h3>Data Sources</h3>
+                    <p>Seamless connections to your LMS, SIS, assessment systems, and existing spreadsheets.</p>
+                </div>
+                
+                <div class="differentiator-item">
+                    <h3>Roles & Approvals</h3>
+                    <p>Governance workflows, proposal processes, and approval chains that match your institutional structure.</p>
+                </div>
+                
+                <div class="differentiator-item">
+                    <h3>Reporting</h3>
+                    <p>Custom templates for accreditor submissions and board-ready evidence binders with your branding.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Engagement Steps Section -->
+    <section class="section" style="background: var(--bg-light);" aria-labelledby="engage-title">
+        <div class="container">
+            <h2 id="engage-title" class="section-title">How Engagement Works</h2>
+            <p class="section-subtitle">Fast path to an evidence-ready deployment.</p>
+            
+            <div class="engagement-steps">
+                <div class="step-card">
+                    <h3>1. Discover</h3>
+                    <p>Scope goals, accreditors, rule packs, and existing systems to understand your needs.</p>
+                </div>
+                
+                <div class="step-card">
+                    <h3>2. Configure</h3>
+                    <p>Connect LMS/SIS, import policies, map outcomes, and set up your custom rule packs.</p>
+                </div>
+                
+                <div class="step-card">
+                    <h3>3. Validate</h3>
+                    <p>Run sample compliance checks, gap analysis, and report previews to verify accuracy.</p>
+                </div>
+                
+                <div class="step-card">
+                    <h3>4. Operate</h3>
+                    <p>Go live with continuous monitoring and automated evidence generation.</p>
                 </div>
             </div>
         </div>
@@ -1136,7 +1532,10 @@
             <div class="about-content">
                 <img src="https://mapmycurriculum.com/wp-content/uploads/2025/10/IMG_3158.jpg" 
                      alt="Jeremy Estrella - Educational Technology Consultant" 
-                     class="about-image">
+                     class="about-image"
+                     width="400"
+                     height="400"
+                     loading="lazy">
                 <div class="about-text">
                     <h3>Jeremy Estrella</h3>
                     <h4>Educational Technology Consultant | North Path Strategies</h4>
@@ -1178,6 +1577,14 @@
                 Tell me about your institution's challenges, and I'll show you how we can build 
                 a custom solution that works for you.
             </p>
+            
+            <!-- Calendly CTA Before Form -->
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <a href="https://calendly.com/jeremyestrella/30min" target="_blank" rel="noopener" class="cta-button" style="display: inline-block;">
+                    Book a 20-min Briefing
+                </a>
+                <p style="margin-top: 1rem; color: var(--text-light); font-size: 0.95rem;">Or fill out the form below and I'll reach out within 24 hours</p>
+            </div>
             
             <div class="contact-container">
                 <form id="contactForm">
@@ -1264,6 +1671,9 @@
             </div>
         </div>
     </section>
+    
+    </main>
+    <!-- End Main Content -->
 
     <!-- Footer -->
     <footer class="footer">
