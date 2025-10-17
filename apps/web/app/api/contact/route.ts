@@ -6,6 +6,13 @@ const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY
 const TO_EMAIL = 'info@northpathstrategies.org'
 const FROM_EMAIL = process.env.FROM_EMAIL || 'noreply@mapmycurriculum.com'
 
+// CORS headers for cross-origin requests
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type',
+}
+
 if (SENDGRID_API_KEY) {
   sgMail.setApiKey(SENDGRID_API_KEY)
 }
@@ -39,7 +46,7 @@ export async function POST(request: NextRequest) {
     if (missingFields.length > 0) {
       return NextResponse.json(
         { error: `Missing required fields: ${missingFields.join(', ')}` },
-        { status: 400 }
+        { status: 400, headers: corsHeaders }
       )
     }
 
@@ -48,7 +55,7 @@ export async function POST(request: NextRequest) {
     if (!emailRegex.test(data.email)) {
       return NextResponse.json(
         { error: 'Invalid email address' },
-        { status: 400 }
+        { status: 400, headers: corsHeaders }
       )
     }
 
@@ -64,7 +71,7 @@ export async function POST(request: NextRequest) {
       
       return NextResponse.json(
         { error: 'Email service not configured. Please contact info@northpathstrategies.org directly.' },
-        { status: 503 }
+        { status: 503, headers: corsHeaders }
       )
     }
 
@@ -253,7 +260,7 @@ info@northpathstrategies.org
     return NextResponse.json({
       success: true,
       message: 'Thank you for your message. We\'ll be in touch soon!',
-    })
+    }, { headers: corsHeaders })
 
   } catch (error: any) {
     console.error('Error processing contact form:', error)
@@ -268,9 +275,17 @@ info@northpathstrategies.org
         error: 'Failed to send message. Please try again or email info@northpathstrategies.org directly.',
         details: error.message,
       },
-      { status: 500 }
+      { status: 500, headers: corsHeaders }
     )
   }
+}
+
+/**
+ * OPTIONS /api/contact
+ * Handle preflight CORS requests
+ */
+export async function OPTIONS() {
+  return NextResponse.json({}, { headers: corsHeaders })
 }
 
 /**
@@ -284,5 +299,5 @@ export async function GET() {
     status: configured ? 'ready' : 'not_configured',
     service: 'contact-form',
     sendgrid: configured ? 'configured' : 'missing_api_key',
-  })
+  }, { headers: corsHeaders })
 }
