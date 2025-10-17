@@ -125,9 +125,9 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            font-size: 1.5rem;
-            font-weight: 700;
+            gap: 0.5rem;
+            font-size: 1.125rem;
+            font-weight: 600;
             font-family: 'Poppins', sans-serif;
             color: var(--text-dark);
             text-decoration: none;
@@ -138,16 +138,28 @@
             opacity: 0.8;
         }
         
-        .logo-img {
-            height: 45px;
-            width: auto;
+        .logo-icon {
+            height: 32px;
+            width: 32px;
+            object-fit: contain;
         }
         
         .logo-text {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--text-dark);
+        }
+        
+        .hero-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.25rem;
+            margin-bottom: 2.5rem;
+        }
+        
+        .hero-logo-img {
+            height: 120px;
+            width: auto;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.2));
         }
         
         .nav-links {
@@ -774,8 +786,13 @@
                 padding: 2rem;
             }
             
-            .logo-img {
-                height: 38px;
+            .logo-icon {
+                height: 28px;
+                width: 28px;
+            }
+            
+            .hero-logo-img {
+                height: 80px;
             }
         }
         
@@ -818,7 +835,7 @@
     <nav class="nav">
         <div class="nav-container">
             <a href="#" class="logo">
-                <img src="https://mapmycurriculum.com/wp-content/uploads/2025/10/ChatGPT-Image-Oct-13-2025-04_24_29-AM.png" alt="Map My Curriculum Logo" class="logo-img">
+                <img src="https://mapmycurriculum.com/wp-content/uploads/2025/10/Screenshot-2025-10-13-at-4.46.13-AM.png" alt="Map My Curriculum" class="logo-icon">
                 <span class="logo-text">Map My Curriculum</span>
             </a>
             <ul class="nav-links">
@@ -833,6 +850,9 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-container fade-in-up">
+            <div class="hero-logo">
+                <img src="https://mapmycurriculum.com/wp-content/uploads/2025/10/ChatGPT-Image-Oct-13-2025-04_24_29-AM.png" alt="Map My Curriculum Logo" class="hero-logo-img">
+            </div>
             <h1>Transform Curriculum Management with Intelligence</h1>
             <p class="subtitle">Policy-Aware Curriculum Mapping & Compliance Platform</p>
             <p class="description">
