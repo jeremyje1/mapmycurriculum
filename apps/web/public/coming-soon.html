@@ -1124,8 +1124,8 @@
             };
             
             try {
-                // Send to webhook endpoint (use absolute URL for cross-domain)
-                const response = await fetch('https://mapmycurriculum-j0cm8bb2w-jeremys-projects-73929cad.vercel.app/api/contact', {
+                // Send to webhook endpoint (use custom domain)
+                const response = await fetch('https://platform.mapmycurriculum.com/api/contact', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
